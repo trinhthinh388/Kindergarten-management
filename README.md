@@ -13,5 +13,3 @@ My team is working on a seminar project that makes a window app using WPF and MV
 - Nguyen Hoai Vi - 17521257@gm.uit.edu.vn
 - Nguyen Tri Truong - 17521187@gm.uit.edu.vn
 
-
-![alt text](https://github.com/trinhthinh388/Kindergarten-management/blob/master/logo.png)
