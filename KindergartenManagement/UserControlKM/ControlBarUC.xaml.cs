@@ -27,5 +27,22 @@ namespace KindergartenManagement.UserControlKM
             InitializeComponent();
             this.DataContext = ViewModel = new ControlBarVM();
         }
+
+        private void MaximizeBtn_Click(object sender, RoutedEventArgs e)
+        {
+            maximizeBtn.Visibility = Visibility.Collapsed;
+            restoreBtn.Visibility = Visibility.Visible;
+        }
+
+        private void RestoreBtn_Click(object sender, RoutedEventArgs e)
+        {
+            maximizeBtn.Visibility = Visibility.Visible;
+            restoreBtn.Visibility = Visibility.Collapsed;
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }

@@ -29,18 +29,7 @@ namespace ViewModel
                 }
             });
 
-            MaximizeWindowCommand = new RelayCommand<UserControl>((p) => { return true; }, (p)=>
-            {
-                FrameworkElement window = GetWindowParent(p);
-                var w = window as Window;
-                if(w != null)
-                {
-                    if (w.WindowState == System.Windows.WindowState.Normal)
-                        w.WindowState = System.Windows.WindowState.Maximized;
-                    else if (w.WindowState == System.Windows.WindowState.Maximized)
-                        w.WindowState = System.Windows.WindowState.Normal;
-                }
-            });
+            MaximizeWindowCommand = new RelayCommand<UserControl>((p) => { return true; },p => CloseWindow(p));
 
             MinimizeWindowCommand = new RelayCommand<UserControl>((p) => { return true; }, (p) =>
             {
@@ -52,6 +41,19 @@ namespace ViewModel
                         w.WindowState = System.Windows.WindowState.Minimized;
                 }
             });
+        }
+
+        void CloseWindow(UserControl p)
+        {
+            FrameworkElement window = GetWindowParent(p);
+            var w = window as Window;
+            if (w != null)
+            {
+                if (w.WindowState == System.Windows.WindowState.Normal)
+                    w.WindowState = System.Windows.WindowState.Maximized;
+                else if (w.WindowState == System.Windows.WindowState.Maximized)
+                    w.WindowState = System.Windows.WindowState.Normal;
+            }
         }
 
         FrameworkElement GetWindowParent(UserControl p)

@@ -18,14 +18,14 @@
                     <materialDesign:PackIcon Kind="WindowMinimize" BorderThickness="0" Margin="10 10 10 0"/>
                 </Button>
                 <StackPanel>
-                    <Button Name="maximizeBtn" Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Visibility="Visible" Command="{Binding MaximizeWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}">
+                    <Button Name="maximizeBtn" Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Visibility="Visible" Command="{Binding MaximizeWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}" Click="MaximizeBtn_Click">
                         <materialDesign:PackIcon Kind="WindowMaximize"  BorderThickness="0" Margin="10 10 10 0"/>
                     </Button>
-                    <Button Name="restoreBtn" Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Visibility="Collapsed" Command="{Binding MaximizeWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}">
+                    <Button Name="restoreBtn" Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Visibility="Collapsed" Command="{Binding MaximizeWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}" Click="RestoreBtn_Click">
                         <materialDesign:PackIcon Kind="WindowRestore" BorderThickness="0" Margin="10 10 10 0"/>
                     </Button>
                 </StackPanel>
-                <Button Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}">
+                <Button Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Command="{Binding CloseWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}" Click="Button_Click">
                     <materialDesign:PackIcon Kind="WindowClose" BorderThickness="0" Margin="10 10 10 0"/>
                 </Button>
             </StackPanel>
