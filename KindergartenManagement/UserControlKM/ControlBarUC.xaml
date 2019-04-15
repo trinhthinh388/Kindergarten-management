@@ -10,8 +10,10 @@
              d:DesignHeight="100" d:DesignWidth="50000" MinHeight="100" MinWidth="1400">
     <Grid>
         <DockPanel Height="100" Width="auto" VerticalAlignment="Top" Background="#F2F2F0">
-            <StackPanel Width="300" HorizontalAlignment="Left" Background="#FF5E3A"/>
-            <Label Content="KINMA" Margin="20 0 0 0" FontFamily="Calibri" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" BorderThickness="0" Padding="10 0 10 0"/>
+            <DockPanel Width="300" HorizontalAlignment="Left" Background="#FF5E3A">
+                <Label Content="TEAM35" Foreground="WhiteSmoke" FontFamily="Righteous" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
+            </DockPanel>
+            <Label Content="KINMA" Margin="20 0 0 0" FontFamily="Calibri" FontWeight="Bold" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center" BorderThickness="0" Padding="10 0 10 0"/>
             <Label Content="Where your children thrive" Margin="0 10 0 0" FontFamily="Dosis" FontWeight="DemiBold" FontSize="13" VerticalAlignment="Center" BorderThickness="0" Foreground="#C0C0C0"/>
             <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Background="{x:Null}" BorderThickness="0" Foreground="Gray" VerticalAlignment="Top" Command="{Binding MinimizeWindowCommand}" CommandParameter="{Binding ElementName=ucControlBar}">
