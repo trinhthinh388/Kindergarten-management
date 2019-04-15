@@ -1,0 +1,42 @@
+﻿<UserControl x:Class="KindergartenManagement.UserControlKM.NavigationBarUC"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:KindergartenManagement.UserControlKM"
+             mc:Ignorable="d"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             d:DesignHeight="10000" d:DesignWidth="10000">
+    <Grid>
+        <StackPanel Width="300" Height="auto" Background="#F2F2F0" HorizontalAlignment="Left">
+            <StackPanel x:Name="loginSection">
+                <Label Content="Account" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0"/>
+                <materialDesign:PackIcon Kind="AccountCircle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="100" Foreground="#FF5E3A"/>
+            </StackPanel>
+            <StackPanel x:Name="navigationSection" Orientation="Vertical">
+                <Label Content="Navigation" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0"/>
+                <StackPanel x:Name="ManageChildrenDM" Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="HumanChild" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
+                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage children" Background="Transparent" Foreground="Black" Width="220">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+                <StackPanel x:Name="ManageClassDM" Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Class" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
+                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage classes" Background="Transparent" Foreground="Black" Width="220">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+                <StackPanel x:Name="ManageSystemDM" Orientation="Horizontal">
+                    <materialDesign:PackIcon Kind="Ruler" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
+                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage system" Background="Transparent" Foreground="Black" Width="220">
+                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                        </StackPanel>
+                    </Expander>
+                </StackPanel>
+            </StackPanel>
+        </StackPanel>
+    </Grid>
+</UserControl>

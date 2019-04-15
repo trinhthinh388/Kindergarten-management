@@ -11,6 +11,11 @@
         ResizeMode="NoResize"
         Title="MainWindow" Height="800" Width="1400" WindowStartupLocation="CenterScreen" MinWidth="1400" MinHeight="800">
     <Grid>
-        <uc:ControlBarUC Width="auto"></uc:ControlBarUC>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <uc:ControlBarUC Width="auto" VerticalAlignment="Top" Grid.Row="0"></uc:ControlBarUC>
+        <uc:NavigationBarUC Grid.Row="1"></uc:NavigationBarUC>
     </Grid>
 </Window>
