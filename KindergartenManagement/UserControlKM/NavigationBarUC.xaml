@@ -6,19 +6,27 @@
              xmlns:local="clr-namespace:KindergartenManagement.UserControlKM"
              mc:Ignorable="d"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
-             d:DesignHeight="10000" d:DesignWidth="10000">
+             d:DesignHeight="1000000" d:DesignWidth="1000000">
     <Grid>
         <StackPanel Width="300" Height="auto" Background="#F2F2F0" HorizontalAlignment="Left">
             <StackPanel x:Name="loginSection">
-                <Label Content="Account" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0"/>
-                <materialDesign:PackIcon Kind="AccountCircle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="100" Foreground="#FF5E3A"/>
+                <Label Content="Account" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
+                <StackPanel Height="auto">
+                    <materialDesign:PackIcon Kind="AccountCircle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="100" Foreground="#FF5E3A"/>
+                    <Label Content="Hi, guest" HorizontalAlignment="Center" FontFamily="Dosis" FontWeight="DemiBold" FontSize="20"></Label>
+                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 15 0 0" Content="Log In" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A"/>
+                </StackPanel>
             </StackPanel>
-            <StackPanel x:Name="navigationSection" Orientation="Vertical">
-                <Label Content="Navigation" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0"/>
+            <StackPanel x:Name="navigationSection" Orientation="Vertical" Height="500">
+                <Label Content="Navigation" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
                 <StackPanel x:Name="ManageChildrenDM" Orientation="Horizontal">
                     <materialDesign:PackIcon Kind="HumanChild" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
                     <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage children" Background="Transparent" Foreground="Black" Width="220">
                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
+                                <TextBlock>Receive new child</TextBlock>
+                                <TextBlock>Update child's information</TextBlock>
+                            </ListBox>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
@@ -26,6 +34,9 @@
                     <materialDesign:PackIcon Kind="Class" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
                     <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage classes" Background="Transparent" Foreground="Black" Width="220">
                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
+                                <TextBlock>Arrange classes</TextBlock>
+                            </ListBox>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
@@ -33,6 +44,10 @@
                     <materialDesign:PackIcon Kind="Ruler" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
                     <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage system" Background="Transparent" Foreground="Black" Width="220">
                         <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
+                            <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
+                                <TextBlock>Generate reports</TextBlock>
+                                <TextBlock>Update regulations</TextBlock>
+                            </ListBox>
                         </StackPanel>
                     </Expander>
                 </StackPanel>
