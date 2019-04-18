@@ -34,9 +34,9 @@
                     </Grid.ColumnDefinitions>
                     <Viewbox Grid.Column="0" Margin="40" HorizontalAlignment="Center">
                         <StackPanel HorizontalAlignment="Center" Orientation="Vertical" Width="auto" Height="auto">
-                            <Label HorizontalAlignment="Center" Content="WELCOME TO" FontFamily="Dosis" FontSize="50" FontWeight="Bold" Foreground="#0099BC" VerticalAlignment="Center"/>
-                            <Label HorizontalAlignment="Center" Content="KINMA" FontFamily="Dosis" FontSize="50" FontWeight="Bold" Foreground="#0099BC" VerticalAlignment="Center"/>
-                            <Label HorizontalAlignment="Center" Content="NURSERY" FontFamily="Dosis" FontSize="50" FontWeight="Bold" Foreground="#0099BC" VerticalAlignment="Center"/>
+                            <Label HorizontalAlignment="Center" Content="WELCOME TO" FontFamily="Dosis" FontSize="50" FontWeight="ExtraBold" Foreground="#0099BC" VerticalAlignment="Center"/>
+                            <Label HorizontalAlignment="Center" Content="KINMA" FontFamily="Dosis" FontSize="50" FontWeight="ExtraBold" Foreground="#0099BC" VerticalAlignment="Center"/>
+                            <Label HorizontalAlignment="Center" Content="NURSERY" FontFamily="Dosis" FontSize="50" FontWeight="ExtraBold" Foreground="#0099BC" VerticalAlignment="Center"/>
                             <StackPanel HorizontalAlignment="Center" Margin="0 10 0 0" Width="auto">
                                 <TextBlock Foreground="Gray" Text="We aim to create a learning" FontFamily="Dosis" FontWeight="SemiBold" FontSize="20"/>
                                 <TextBlock Foreground="Gray" Text="environment where" FontFamily="Dosis" FontWeight="SemiBold" FontSize="20"/>
@@ -57,8 +57,37 @@
                         <ColumnDefinition></ColumnDefinition>
                         <ColumnDefinition></ColumnDefinition>
                     </Grid.ColumnDefinitions>
+                    <Grid Grid.Column="0" Margin="40" Background="#9ECE9A">
+                        <Viewbox>
+                            <StackPanel  Orientation="Vertical" >
+                                <TextBlock Margin="0 10 0 10" Text="Children" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="25"/>
+                                <TextBlock x:Name="numberOfChildren" HorizontalAlignment="Center" Text="300 children" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
+                                <materialDesign:PackIcon Margin="0 10 0 10" HorizontalAlignment="Center" Kind="HumanChild" Foreground="White" Height="150" Width="200"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Column="1" Background="#E85D75" Margin="40">
+                        <Viewbox>
+                            <StackPanel  Orientation="Vertical" >
+                                <TextBlock Margin="0 10 0 10" Text="Teacher" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="25"/>
+                                <TextBlock x:Name="numberOfTeachers" HorizontalAlignment="Center" Text="30 teachers" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
+                                <materialDesign:PackIcon Margin="0 10 0 10" HorizontalAlignment="Center" Kind="Teacher" Foreground="White" Height="150" Width="200"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </Grid>
+                    <Grid Grid.Column="2" Background="#FFBF00" Margin="40">
+                        <Viewbox>
+                            <StackPanel  Orientation="Vertical" >
+                                <TextBlock Margin="0 10 0 10" Text="Classes" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="25"/>
+                                <TextBlock x:Name="numberOfClasses" HorizontalAlignment="Center" Text="40 classes" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
+                                <materialDesign:PackIcon Margin="0 10 0 10" HorizontalAlignment="Center" Kind="Class" Foreground="White" Height="150" Width="200"/>
+                            </StackPanel>
+                        </Viewbox>
+                    </Grid>
                 </Grid>
             </Grid>
         </Grid>
     </Grid>
 </Window>
+
+    
