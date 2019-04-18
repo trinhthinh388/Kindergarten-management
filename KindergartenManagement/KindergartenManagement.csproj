@@ -61,12 +61,19 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="LogInWindow.xaml.cs">
+      <DependentUpon>LogInWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControlKM\ControlBarUC.xaml.cs">
       <DependentUpon>ControlBarUC.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControlKM\NavigationBarUC.xaml.cs">
       <DependentUpon>NavigationBarUC.xaml</DependentUpon>
     </Compile>
+    <Page Include="LogInWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -79,6 +86,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="ResourcesXAML\MainResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="UserControlKM\ControlBarUC.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -116,20 +127,19 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Model\Model.csproj">
-      <Project>{91f2285e-f1c4-4fb6-b942-0504f3a986e0}</Project>
-      <Name>Model</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
-      <Project>{b60d0373-4b92-4033-aeeb-f993478360f2}</Project>
-      <Name>ViewModel</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Images\garden13.jpg" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\Baby.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\ViewModel\ViewModel.csproj">
+      <Project>{b60d0373-4b92-4033-aeeb-f993478360f2}</Project>
+      <Name>ViewModel</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

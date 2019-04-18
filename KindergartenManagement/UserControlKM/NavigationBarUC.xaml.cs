@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel;
 
 namespace KindergartenManagement.UserControlKM
 {
@@ -23,6 +24,18 @@ namespace KindergartenManagement.UserControlKM
         public NavigationBarUC()
         {
             InitializeComponent();
+            this.DataContext = new NavigationBarVM();
+        }
+
+        public void OpenLoginWindow()
+        {
+            LogInWindow logInWindow = new LogInWindow();
+            logInWindow.ShowDialog();
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            OpenLoginWindow();
         }
     }
 }

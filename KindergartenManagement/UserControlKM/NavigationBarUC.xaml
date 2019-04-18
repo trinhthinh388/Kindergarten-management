@@ -5,6 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:KindergartenManagement.UserControlKM"
              mc:Ignorable="d"
+             Name="ucNavigationBar"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1000000" d:DesignWidth="1000000">
     <Grid>
@@ -14,7 +15,7 @@
                 <StackPanel Height="auto">
                     <materialDesign:PackIcon Kind="AccountCircle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="100" Foreground="#FF5E3A"/>
                     <Label Content="Hi, guest" HorizontalAlignment="Center" FontFamily="Dosis" FontWeight="DemiBold" FontSize="20"></Label>
-                    <Button HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 15 0 0" Content="Log In" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A"/>
+                    <Button Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=ucNavigationBar}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 15 0 0" Content="Log In" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A" Click="Button_Click"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="navigationSection" Orientation="Vertical" Height="500">
