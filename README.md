@@ -10,6 +10,5 @@ My team is working on a seminar project that makes a window app using WPF and MV
 
 ## Get in touch with us
 - Trinh Duc Thinh(Leader) - 17521092@gm.uit.edu.vn
-- Nguyen Hoai Vi - 17521257@gm.uit.edu.vn
 - Nguyen Tri Truong - 17521187@gm.uit.edu.vn
 
