@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="kindergartenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="kindergartenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="children">
           <Key>
             <PropertyRef Name="id" />
@@ -196,8 +196,7 @@
             <End Role="teaching" EntitySet="teaching" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="kindergartenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -368,7 +367,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="kindergartenEntities1" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="kindergartenEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="children" EntityType="Self.child" />
           <EntitySet Name="classes" EntityType="Self.class" />
           <EntitySet Name="conditions" EntityType="Self.condition" />
@@ -411,7 +410,7 @@
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="kindergartenModelStoreContainer" CdmEntityContainer="kindergartenEntities1">
+        <EntityContainerMapping StorageEntityContainer="kindergartenModelStoreContainer" CdmEntityContainer="kindergartenEntities">
           <EntitySetMapping Name="children">
             <EntityTypeMapping TypeName="kindergartenModel.child">
               <MappingFragment StoreEntitySet="children">

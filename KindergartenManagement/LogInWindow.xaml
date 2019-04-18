@@ -5,11 +5,13 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:KindergartenManagement"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStyle="None"
         WindowStartupLocation="CenterScreen"
         Name="logInWindow"
+        DataContext="{StaticResource LogInVM}"
         Title="LogInWindow" Height="450" Width="450">
     <Grid Background="GhostWhite" Opacity="0.955">
         <Grid.RowDefinitions>
@@ -22,13 +24,24 @@
             <Label Content="TEAM35" Foreground="WhiteSmoke" FontFamily="Righteous" FontSize="40" VerticalAlignment="Center" HorizontalAlignment="Center"></Label>
         </DockPanel>
         <StackPanel Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Center" Width="450">
-            <TextBox Margin="10 0 10 0" Height="80" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextFieldTextBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Username" />
+            <TextBox Text="{Binding Username}" Margin="10 0 10 0" Height="80" Style="{StaticResource MaterialDesignFilledTextFieldTextBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledTextFieldTextBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Username" />
         </StackPanel>
         <StackPanel Grid.Row="2" VerticalAlignment="Center" HorizontalAlignment="Center" Width="450">
-            <PasswordBox Margin="10 0 10 0" Height="80" Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Password" />
+            <PasswordBox Name="FloatingPasswordBox" Margin="10 0 10 0" Height="80" Style="{StaticResource MaterialDesignFilledPasswordFieldPasswordBox}" VerticalAlignment="Top" IsEnabled="{Binding Path=IsChecked, ElementName=MaterialDesignFilledPasswordFieldPasswordBoxEnabledComboBox}" materialDesign:HintAssist.Hint="Password">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="PasswordChanged">
+                        <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                                   CommandParameter="{Binding ElementName=FloatingPasswordBox}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+
+            </PasswordBox>
         </StackPanel>
         <StackPanel Orientation="Horizontal" Grid.Row="3" HorizontalAlignment="Center" VerticalAlignment="Center">
             <Button
+                IsDefault="True"
+                Command="{Binding LogInCommand}"
+                CommandParameter="{Binding ElementName=logInWindow}"
                 Foreground="WhiteSmoke"
                 Margin="0 0 10 0"
             Content="Log In"

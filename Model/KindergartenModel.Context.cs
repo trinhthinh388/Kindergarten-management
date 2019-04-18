@@ -13,10 +13,10 @@ namespace Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class kindergartenEntities1 : DbContext
+    public partial class kindergartenEntities : DbContext
     {
-        public kindergartenEntities1()
-            : base("name=kindergartenEntities1")
+        public kindergartenEntities()
+            : base("name=kindergartenEntities")
         {
         }
     

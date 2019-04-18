@@ -23,7 +23,6 @@ namespace KindergartenManagement
         public LogInWindow()
         {
             InitializeComponent();
-            this.DataContext = new LogInVM();
         }
     }
 }

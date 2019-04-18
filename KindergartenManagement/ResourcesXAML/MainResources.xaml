@@ -3,4 +3,5 @@
                     xmlns:local="clr-namespace:KindergartenManagement.ResourcesXAML"
                     xmlns:viewmodel="clr-namespace:ViewModel;assembly=ViewModel">
     <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
+    <viewmodel:LogInVM x:Key="LogInVM"></viewmodel:LogInVM>
 </ResourceDictionary>

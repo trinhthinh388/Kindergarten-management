@@ -24,7 +24,7 @@ namespace KindergartenManagement.UserControlKM
         public NavigationBarUC()
         {
             InitializeComponent();
-            this.DataContext = new NavigationBarVM();
+            this.DataContext = NavigationBarVM.Ins;
         }
 
         public void OpenLoginWindow()
@@ -35,7 +35,20 @@ namespace KindergartenManagement.UserControlKM
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            OpenLoginWindow();
+            LogInVM logInVM = new LogInVM();
+            if (logInVM.IsLogIn == false)
+            {
+                OpenLoginWindow();
+                logInButton.Visibility = Visibility.Collapsed;
+                logOutButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                logInVM.IsLogIn = false;
+                NavigationBarVM.Ins.resetWelcomeText();
+                logInButton.Visibility = Visibility.Visible;
+                logOutButton.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

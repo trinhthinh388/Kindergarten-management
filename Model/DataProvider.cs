@@ -9,7 +9,8 @@ namespace Model
     public class DataProvider
     {
         private static DataProvider _ins;
-        public static DataProvider Ins {
+        public static DataProvider Ins
+        {
             get
             {
                 if (_ins == null)
@@ -25,12 +26,12 @@ namespace Model
             }
         }
 
-        public kindergartenEntities1 DB { get; set; }
+        public kindergartenEntities DB { get; set; }
 
 
         private DataProvider()
         {
-            DB = new kindergartenEntities1();
+            DB = new kindergartenEntities();
         }
 
     }
