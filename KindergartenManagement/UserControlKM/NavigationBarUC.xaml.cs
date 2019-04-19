@@ -39,8 +39,11 @@ namespace KindergartenManagement.UserControlKM
             if (logInVM.IsLogIn == false)
             {
                 OpenLoginWindow();
-                logInButton.Visibility = Visibility.Collapsed;
-                logOutButton.Visibility = Visibility.Visible;
+                if (logInVM.IsLogIn == true)
+                {
+                    logInButton.Visibility = Visibility.Collapsed;
+                    logOutButton.Visibility = Visibility.Visible;
+                }
             }
             else
             {
@@ -49,6 +52,7 @@ namespace KindergartenManagement.UserControlKM
                 logInButton.Visibility = Visibility.Visible;
                 logOutButton.Visibility = Visibility.Collapsed;
             }
+            
         }
     }
 }

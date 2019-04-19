@@ -24,5 +24,10 @@ namespace KindergartenManagement
         {
             InitializeComponent();
         }
+
+        private void Button_ToolTipClosing(object sender, ToolTipEventArgs e)
+        {
+
+        }
     }
 }

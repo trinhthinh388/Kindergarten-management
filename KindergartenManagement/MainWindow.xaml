@@ -62,7 +62,7 @@
                         <Viewbox>
                             <StackPanel  Orientation="Vertical" >
                                 <TextBlock Margin="0 10 0 10" Text="Children" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="25"/>
-                                <TextBlock x:Name="numberOfChildren" HorizontalAlignment="Center" Text="300 children" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
+                                <TextBlock x:Name="numberOfChildren"  HorizontalAlignment="Center" Text="{Binding NumberOfChildren, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
                                 <materialDesign:PackIcon Margin="0 10 0 10" HorizontalAlignment="Center" Kind="HumanChild" Foreground="White" Height="150" Width="200"/>
                             </StackPanel>
                         </Viewbox>
@@ -71,7 +71,7 @@
                         <Viewbox>
                             <StackPanel  Orientation="Vertical" >
                                 <TextBlock Margin="0 10 0 10" Text="Teacher" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="25"/>
-                                <TextBlock x:Name="numberOfTeachers" HorizontalAlignment="Center" Text="30 teachers" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
+                                <TextBlock x:Name="numberOfTeachers" HorizontalAlignment="Center" Text="{Binding NumberOfTeacher, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
                                 <materialDesign:PackIcon Margin="0 10 0 10" HorizontalAlignment="Center" Kind="Teacher" Foreground="White" Height="150" Width="200"/>
                             </StackPanel>
                         </Viewbox>
@@ -80,7 +80,7 @@
                         <Viewbox>
                             <StackPanel  Orientation="Vertical" >
                                 <TextBlock Margin="0 10 0 10" Text="Classes" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="25"/>
-                                <TextBlock x:Name="numberOfClasses" HorizontalAlignment="Center" Text="40 classes" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
+                                <TextBlock x:Name="numberOfClasses" HorizontalAlignment="Center" Text="{Binding NumberOfClass, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Dosis" FontWeight="DemiBold" Foreground="White" FontSize="40"/>
                                 <materialDesign:PackIcon Margin="0 10 0 10" HorizontalAlignment="Center" Kind="Class" Foreground="White" Height="150" Width="200"/>
                             </StackPanel>
                         </Viewbox>

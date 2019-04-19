@@ -46,7 +46,7 @@ namespace ViewModel
 
             LogInCommand = new RelayCommand<Window>((p) =>
             {
-                return true;
+                return !IsLogIn;
             },
             (p) =>
             {
