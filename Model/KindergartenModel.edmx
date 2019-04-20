@@ -9,11 +9,12 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="1000" />
           <Property Name="nickname" Type="nvarchar" MaxLength="1000" />
           <Property Name="birthdate" Type="datetime" />
           <Property Name="enrolldate" Type="datetime" />
+          <Property Name="sex" Type="bit" />
           <Property Name="id_condition" Type="int" />
           <Property Name="id_parent" Type="int" />
           <Property Name="id_class" Type="int" />
@@ -22,7 +23,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_grade" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="1000" />
         </EntityType>
@@ -30,21 +31,21 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="1000" />
         </EntityType>
         <EntityType Name="grade">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="parent">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="name" Type="nvarchar" MaxLength="1000" />
           <Property Name="address" Type="nvarchar" MaxLength="1000" />
           <Property Name="phone_number" Type="varchar" MaxLength="20" />
@@ -53,7 +54,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_user" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="1000" />
           <Property Name="position" Type="nvarchar" MaxLength="1000" />
@@ -62,7 +63,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_teacher" Type="int" />
           <Property Name="id_class" Type="int" />
         </EntityType>
@@ -70,7 +71,7 @@
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="int" Nullable="false" />
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="username" Type="varchar" MaxLength="100" />
           <Property Name="password" Type="varchar" MaxLength="1000" />
         </EntityType>
@@ -200,128 +201,167 @@
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="kindergartenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="kindergartenEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="children" EntityType="kindergartenModel.child" />
+          <EntitySet Name="classes" EntityType="kindergartenModel.class" />
+          <EntitySet Name="conditions" EntityType="kindergartenModel.condition" />
+          <EntitySet Name="grades" EntityType="kindergartenModel.grade" />
+          <EntitySet Name="parents" EntityType="kindergartenModel.parent" />
+          <EntitySet Name="teachers" EntityType="kindergartenModel.teacher" />
+          <EntitySet Name="teachings" EntityType="kindergartenModel.teaching" />
+          <EntitySet Name="users" EntityType="kindergartenModel.user" />
+          <AssociationSet Name="FK__children__id_cla__4222D4EF" Association="kindergartenModel.FK__children__id_cla__4222D4EF">
+            <End Role="class" EntitySet="classes" />
+            <End Role="child" EntitySet="children" />
+          </AssociationSet>
+          <AssociationSet Name="FK__children__id_con__403A8C7D" Association="kindergartenModel.FK__children__id_con__403A8C7D">
+            <End Role="condition" EntitySet="conditions" />
+            <End Role="child" EntitySet="children" />
+          </AssociationSet>
+          <AssociationSet Name="FK__children__id_par__412EB0B6" Association="kindergartenModel.FK__children__id_par__412EB0B6">
+            <End Role="parent" EntitySet="parents" />
+            <End Role="child" EntitySet="children" />
+          </AssociationSet>
+          <AssociationSet Name="FK__class__id_grade__3D5E1FD2" Association="kindergartenModel.FK__class__id_grade__3D5E1FD2">
+            <End Role="grade" EntitySet="grades" />
+            <End Role="class" EntitySet="classes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teaching__id_cla__4AB81AF0" Association="kindergartenModel.FK__teaching__id_cla__4AB81AF0">
+            <End Role="class" EntitySet="classes" />
+            <End Role="teaching" EntitySet="teachings" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teacher__id_user__46E78A0C" Association="kindergartenModel.FK__teacher__id_user__46E78A0C">
+            <End Role="user" EntitySet="users" />
+            <End Role="teacher" EntitySet="teachers" />
+          </AssociationSet>
+          <AssociationSet Name="FK__teaching__id_tea__49C3F6B7" Association="kindergartenModel.FK__teaching__id_tea__49C3F6B7">
+            <End Role="teacher" EntitySet="teachers" />
+            <End Role="teaching" EntitySet="teachings" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="child">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="nickname" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="birthdate" Type="DateTime" Precision="3" />
           <Property Name="enrolldate" Type="DateTime" Precision="3" />
+          <Property Name="sex" Type="Boolean" />
           <Property Name="id_condition" Type="Int32" />
           <Property Name="id_parent" Type="Int32" />
           <Property Name="id_class" Type="Int32" />
-          <NavigationProperty Name="class" Relationship="Self.FK__children__id_cla__4222D4EF" FromRole="children" ToRole="class" />
-          <NavigationProperty Name="condition" Relationship="Self.FK__children__id_con__403A8C7D" FromRole="children" ToRole="condition" />
-          <NavigationProperty Name="parent" Relationship="Self.FK__children__id_par__412EB0B6" FromRole="children" ToRole="parent" />
+          <NavigationProperty Name="class" Relationship="kindergartenModel.FK__children__id_cla__4222D4EF" FromRole="child" ToRole="class" />
+          <NavigationProperty Name="condition" Relationship="kindergartenModel.FK__children__id_con__403A8C7D" FromRole="child" ToRole="condition" />
+          <NavigationProperty Name="parent" Relationship="kindergartenModel.FK__children__id_par__412EB0B6" FromRole="child" ToRole="parent" />
         </EntityType>
         <EntityType Name="class">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_grade" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="children" Relationship="Self.FK__children__id_cla__4222D4EF" FromRole="class" ToRole="children" />
-          <NavigationProperty Name="grade" Relationship="Self.FK__class__id_grade__3D5E1FD2" FromRole="class" ToRole="grade" />
-          <NavigationProperty Name="teachings" Relationship="Self.FK__teaching__id_cla__4AB81AF0" FromRole="class" ToRole="teaching" />
+          <NavigationProperty Name="children" Relationship="kindergartenModel.FK__children__id_cla__4222D4EF" FromRole="class" ToRole="child" />
+          <NavigationProperty Name="grade" Relationship="kindergartenModel.FK__class__id_grade__3D5E1FD2" FromRole="class" ToRole="grade" />
+          <NavigationProperty Name="teachings" Relationship="kindergartenModel.FK__teaching__id_cla__4AB81AF0" FromRole="class" ToRole="teaching" />
         </EntityType>
         <EntityType Name="condition">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="children" Relationship="Self.FK__children__id_con__403A8C7D" FromRole="condition" ToRole="children" />
+          <NavigationProperty Name="children" Relationship="kindergartenModel.FK__children__id_con__403A8C7D" FromRole="condition" ToRole="child" />
         </EntityType>
         <EntityType Name="grade">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="classes" Relationship="Self.FK__class__id_grade__3D5E1FD2" FromRole="grade" ToRole="class" />
+          <NavigationProperty Name="classes" Relationship="kindergartenModel.FK__class__id_grade__3D5E1FD2" FromRole="grade" ToRole="class" />
         </EntityType>
         <EntityType Name="parent">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="address" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="children" Relationship="Self.FK__children__id_par__412EB0B6" FromRole="parent" ToRole="children" />
+          <NavigationProperty Name="children" Relationship="kindergartenModel.FK__children__id_par__412EB0B6" FromRole="parent" ToRole="child" />
         </EntityType>
         <EntityType Name="teacher">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_user" Type="Int32" />
           <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
           <Property Name="position" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="user" Relationship="Self.FK__teacher__id_user__46E78A0C" FromRole="teacher" ToRole="users" />
-          <NavigationProperty Name="teachings" Relationship="Self.FK__teaching__id_tea__49C3F6B7" FromRole="teacher" ToRole="teaching" />
+          <NavigationProperty Name="user" Relationship="kindergartenModel.FK__teacher__id_user__46E78A0C" FromRole="teacher" ToRole="user" />
+          <NavigationProperty Name="teachings" Relationship="kindergartenModel.FK__teaching__id_tea__49C3F6B7" FromRole="teacher" ToRole="teaching" />
         </EntityType>
         <EntityType Name="teaching">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="id_teacher" Type="Int32" />
           <Property Name="id_class" Type="Int32" />
-          <NavigationProperty Name="class" Relationship="Self.FK__teaching__id_cla__4AB81AF0" FromRole="teaching" ToRole="class" />
-          <NavigationProperty Name="teacher" Relationship="Self.FK__teaching__id_tea__49C3F6B7" FromRole="teaching" ToRole="teacher" />
+          <NavigationProperty Name="class" Relationship="kindergartenModel.FK__teaching__id_cla__4AB81AF0" FromRole="teaching" ToRole="class" />
+          <NavigationProperty Name="teacher" Relationship="kindergartenModel.FK__teaching__id_tea__49C3F6B7" FromRole="teaching" ToRole="teacher" />
         </EntityType>
         <EntityType Name="user">
           <Key>
             <PropertyRef Name="id" />
           </Key>
-          <Property Name="id" Type="Int32" Nullable="false" />
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="username" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
           <Property Name="password" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="teachers" Relationship="Self.FK__teacher__id_user__46E78A0C" FromRole="users" ToRole="teacher" />
+          <NavigationProperty Name="teachers" Relationship="kindergartenModel.FK__teacher__id_user__46E78A0C" FromRole="user" ToRole="teacher" />
         </EntityType>
         <Association Name="FK__children__id_cla__4222D4EF">
-          <End Role="class" Type="Self.class" Multiplicity="0..1" />
-          <End Role="children" Type="Self.child" Multiplicity="*" />
+          <End Type="kindergartenModel.class" Role="class" Multiplicity="0..1" />
+          <End Type="kindergartenModel.child" Role="child" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="class">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="children">
+            <Dependent Role="child">
               <PropertyRef Name="id_class" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__children__id_con__403A8C7D">
-          <End Role="condition" Type="Self.condition" Multiplicity="0..1" />
-          <End Role="children" Type="Self.child" Multiplicity="*" />
+          <End Type="kindergartenModel.condition" Role="condition" Multiplicity="0..1" />
+          <End Type="kindergartenModel.child" Role="child" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="condition">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="children">
+            <Dependent Role="child">
               <PropertyRef Name="id_condition" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__children__id_par__412EB0B6">
-          <End Role="parent" Type="Self.parent" Multiplicity="0..1" />
-          <End Role="children" Type="Self.child" Multiplicity="*" />
+          <End Type="kindergartenModel.parent" Role="parent" Multiplicity="0..1" />
+          <End Type="kindergartenModel.child" Role="child" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="parent">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="children">
+            <Dependent Role="child">
               <PropertyRef Name="id_parent" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__class__id_grade__3D5E1FD2">
-          <End Role="grade" Type="Self.grade" Multiplicity="0..1" />
-          <End Role="class" Type="Self.class" Multiplicity="*" />
+          <End Type="kindergartenModel.grade" Role="grade" Multiplicity="0..1" />
+          <End Type="kindergartenModel.class" Role="class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="grade">
               <PropertyRef Name="id" />
@@ -332,8 +372,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__teaching__id_cla__4AB81AF0">
-          <End Role="class" Type="Self.class" Multiplicity="0..1" />
-          <End Role="teaching" Type="Self.teaching" Multiplicity="*" />
+          <End Type="kindergartenModel.class" Role="class" Multiplicity="0..1" />
+          <End Type="kindergartenModel.teaching" Role="teaching" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="class">
               <PropertyRef Name="id" />
@@ -344,10 +384,10 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__teacher__id_user__46E78A0C">
-          <End Role="users" Type="Self.user" Multiplicity="0..1" />
-          <End Role="teacher" Type="Self.teacher" Multiplicity="*" />
+          <End Type="kindergartenModel.user" Role="user" Multiplicity="0..1" />
+          <End Type="kindergartenModel.teacher" Role="teacher" Multiplicity="*" />
           <ReferentialConstraint>
-            <Principal Role="users">
+            <Principal Role="user">
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="teacher">
@@ -356,8 +396,8 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__teaching__id_tea__49C3F6B7">
-          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
-          <End Role="teaching" Type="Self.teaching" Multiplicity="*" />
+          <End Type="kindergartenModel.teacher" Role="teacher" Multiplicity="0..1" />
+          <End Type="kindergartenModel.teaching" Role="teaching" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="teacher">
               <PropertyRef Name="id" />
@@ -367,44 +407,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="kindergartenEntities" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="children" EntityType="Self.child" />
-          <EntitySet Name="classes" EntityType="Self.class" />
-          <EntitySet Name="conditions" EntityType="Self.condition" />
-          <EntitySet Name="grades" EntityType="Self.grade" />
-          <EntitySet Name="parents" EntityType="Self.parent" />
-          <EntitySet Name="teachers" EntityType="Self.teacher" />
-          <EntitySet Name="teachings" EntityType="Self.teaching" />
-          <EntitySet Name="users" EntityType="Self.user" />
-          <AssociationSet Name="FK__children__id_cla__4222D4EF" Association="Self.FK__children__id_cla__4222D4EF">
-            <End Role="class" EntitySet="classes" />
-            <End Role="children" EntitySet="children" />
-          </AssociationSet>
-          <AssociationSet Name="FK__children__id_con__403A8C7D" Association="Self.FK__children__id_con__403A8C7D">
-            <End Role="condition" EntitySet="conditions" />
-            <End Role="children" EntitySet="children" />
-          </AssociationSet>
-          <AssociationSet Name="FK__children__id_par__412EB0B6" Association="Self.FK__children__id_par__412EB0B6">
-            <End Role="parent" EntitySet="parents" />
-            <End Role="children" EntitySet="children" />
-          </AssociationSet>
-          <AssociationSet Name="FK__class__id_grade__3D5E1FD2" Association="Self.FK__class__id_grade__3D5E1FD2">
-            <End Role="grade" EntitySet="grades" />
-            <End Role="class" EntitySet="classes" />
-          </AssociationSet>
-          <AssociationSet Name="FK__teaching__id_cla__4AB81AF0" Association="Self.FK__teaching__id_cla__4AB81AF0">
-            <End Role="class" EntitySet="classes" />
-            <End Role="teaching" EntitySet="teachings" />
-          </AssociationSet>
-          <AssociationSet Name="FK__teacher__id_user__46E78A0C" Association="Self.FK__teacher__id_user__46E78A0C">
-            <End Role="users" EntitySet="users" />
-            <End Role="teacher" EntitySet="teachers" />
-          </AssociationSet>
-          <AssociationSet Name="FK__teaching__id_tea__49C3F6B7" Association="Self.FK__teaching__id_tea__49C3F6B7">
-            <End Role="teacher" EntitySet="teachers" />
-            <End Role="teaching" EntitySet="teachings" />
-          </AssociationSet>
-        </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -414,77 +416,78 @@
           <EntitySetMapping Name="children">
             <EntityTypeMapping TypeName="kindergartenModel.child">
               <MappingFragment StoreEntitySet="children">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="nickname" ColumnName="nickname" />
-                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
-                <ScalarProperty Name="enrolldate" ColumnName="enrolldate" />
-                <ScalarProperty Name="id_condition" ColumnName="id_condition" />
-                <ScalarProperty Name="id_parent" ColumnName="id_parent" />
                 <ScalarProperty Name="id_class" ColumnName="id_class" />
+                <ScalarProperty Name="id_parent" ColumnName="id_parent" />
+                <ScalarProperty Name="id_condition" ColumnName="id_condition" />
+                <ScalarProperty Name="sex" ColumnName="sex" />
+                <ScalarProperty Name="enrolldate" ColumnName="enrolldate" />
+                <ScalarProperty Name="birthdate" ColumnName="birthdate" />
+                <ScalarProperty Name="nickname" ColumnName="nickname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="classes">
             <EntityTypeMapping TypeName="kindergartenModel.class">
               <MappingFragment StoreEntitySet="class">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_grade" ColumnName="id_grade" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_grade" ColumnName="id_grade" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="conditions">
             <EntityTypeMapping TypeName="kindergartenModel.condition">
               <MappingFragment StoreEntitySet="condition">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="grades">
             <EntityTypeMapping TypeName="kindergartenModel.grade">
               <MappingFragment StoreEntitySet="grade">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="parents">
             <EntityTypeMapping TypeName="kindergartenModel.parent">
               <MappingFragment StoreEntitySet="parent">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="address" ColumnName="address" />
                 <ScalarProperty Name="phone_number" ColumnName="phone_number" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="teachers">
             <EntityTypeMapping TypeName="kindergartenModel.teacher">
               <MappingFragment StoreEntitySet="teacher">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_user" ColumnName="id_user" />
-                <ScalarProperty Name="name" ColumnName="name" />
                 <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id_user" ColumnName="id_user" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="teachings">
             <EntityTypeMapping TypeName="kindergartenModel.teaching">
               <MappingFragment StoreEntitySet="teaching">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_teacher" ColumnName="id_teacher" />
                 <ScalarProperty Name="id_class" ColumnName="id_class" />
+                <ScalarProperty Name="id_teacher" ColumnName="id_teacher" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="users">
             <EntityTypeMapping TypeName="kindergartenModel.user">
               <MappingFragment StoreEntitySet="users">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="username" ColumnName="username" />
                 <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

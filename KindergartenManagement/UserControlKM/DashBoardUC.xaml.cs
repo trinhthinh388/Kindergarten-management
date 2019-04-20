@@ -12,18 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel;
 
-namespace KindergartenManagement
+namespace KindergartenManagement.UserControlKM
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DashBoardUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DashBoardUC : UserControl
     {
-        public MainWindow()
+        public DashBoardUC()
         {
             InitializeComponent();
+            this.DataContext = new DashBoardVM();
         }
-
     }
 }

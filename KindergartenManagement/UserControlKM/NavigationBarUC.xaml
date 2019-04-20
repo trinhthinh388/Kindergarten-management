@@ -9,51 +9,68 @@
              xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              d:DesignHeight="1000000" d:DesignWidth="1000000">
+    <UserControl.Resources>
+        <Style TargetType="ListBox">
+            <Setter Property="BorderThickness" Value="0"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Setter Property="FontFamily" Value="Dosis"/>
+            <Setter Property="FontWeight" Value="Medium"/>
+            <Setter Property="FontSize" Value="20"/>
+            <Setter Property="Foreground" Value="Black"/>
+        </Style>
+    </UserControl.Resources>
     <Grid>
         <StackPanel Width="300" Height="auto" Background="#F2F2F0" HorizontalAlignment="Left">
             <StackPanel>
-                <Label Content="Account" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
+                <Label Content="Account" FontFamily="Dosis" FontWeight="SemiBold" FontSize="18" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
                 <StackPanel Height="auto">
                     <materialDesign:PackIcon Kind="AccountCircle" HorizontalAlignment="Center" VerticalAlignment="Center" Width="auto" Height="100" Foreground="#FF5E3A"/>
-                    <TextBlock Name="welcomeText" Text="{Binding WelcomeText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" FontFamily="Dosis" FontWeight="DemiBold" FontSize="20"></TextBlock>
+                    <TextBlock Name="welcomeText" Text="{Binding WelcomeText, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" HorizontalAlignment="Center" FontFamily="Dosis" FontWeight="DemiBold" FontSize="25"></TextBlock>
                     <Button Name="logInButton"  HorizontalAlignment="Center" VerticalAlignment="Center" Visibility="Visible" Margin="0 15 0 0" Content="Log in" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A" Click="Button_Click"/>
-                    <Button Name="logOutButton" Command="{Binding LogOutCommand}" Visibility="Collapsed" CommandParameter="{Binding ElementName=LogInButtonSection}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 15 0 0" Content="Log out" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A" Click="Button_Click"/>
+                    <Button Name="logOutButton" Command="{Binding DashBoardCommand}" Visibility="Collapsed" CommandParameter="{Binding ElementName=ucNavigationBar}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 15 0 0" Content="Log out" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A" Click="Button_Click"/>
                 </StackPanel>
             </StackPanel>
             <StackPanel x:Name="navigationSection" Orientation="Vertical" Height="500">
-                <Label Content="Navigation" FontFamily="Dosis" FontWeight="SemiBold" FontSize="15" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
-                <StackPanel x:Name="ManageChildrenDM" Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="HumanChild" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
-                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage children" Background="Transparent" Foreground="Black" Width="220">
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                                <TextBlock Cursor="Hand">Receive new child</TextBlock>
-                                <TextBlock Cursor="Hand">Update child's information</TextBlock>
-                            </ListBox>
+                <Label Content="Navigation" FontFamily="Dosis" FontWeight="SemiBold" FontSize="18" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
+                <DockPanel x:Name="DashBoard" Margin="5">
+                    <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Home" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
+                    <Button Margin="8 0 0 0" Content="Dashboard" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" Command="{Binding DashBoardCommand}" CommandParameter="{Binding ElementName=ucNavigationBar}"/>
+                </DockPanel>
+                <DockPanel x:Name="ManageChildren" Margin="5">
+                    <materialDesign:PackIcon DockPanel.Dock="Left" Kind="HumanChild" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
+                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right">
+                        <Expander.Header>
+                            <TextBlock Text="Manage children" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
+                        </Expander.Header>
+                        <StackPanel>
+                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Receive new child" Command="{Binding ReceiveChildCommand}" CommandParameter="{Binding ElementName=ucNavigationBar}"/>
+                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Content="Update information" Width="200" />
                         </StackPanel>
                     </Expander>
-                </StackPanel>
-                <StackPanel x:Name="ManageClassDM" Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Class" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
-                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage classes" Background="Transparent" Foreground="Black" Width="220">
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                                <TextBlock Cursor="Hand">Arrange classes</TextBlock>
-                            </ListBox>
-                        </StackPanel>
+                </DockPanel>
+                <DockPanel x:Name="ManageClasses" Margin="5">
+                    <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Class" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
+                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" >
+                        <Expander.Header>
+                            <TextBlock Text="Manage classes" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
+                        </Expander.Header>
+                        <ListBox>
+                            <ListBoxItem Width="200" Content="Arrange class"></ListBoxItem>
+                        </ListBox>
                     </Expander>
-                </StackPanel>
-                <StackPanel x:Name="ManageSystemDM" Orientation="Horizontal">
-                    <materialDesign:PackIcon Kind="Ruler" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="50" Height="35" Margin="30 5 0 0"/>
-                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Header="Manage system" Background="Transparent" Foreground="Black" Width="220">
-                        <StackPanel Orientation="Vertical" TextBlock.Foreground="{DynamicResource MaterialDesignBody}" Margin="24,8,24,16">
-                            <ListBox IsEnabled="{Binding IsChecked, ElementName=EnableListBox}">
-                                <TextBlock Cursor="Hand">Generate reports</TextBlock>
-                                <TextBlock Cursor="Hand">Update regulations</TextBlock>
-                            </ListBox>
-                        </StackPanel>
+                </DockPanel>
+                <DockPanel x:Name="ManageSystem" Margin="5">
+                    <materialDesign:PackIcon DockPanel.Dock="Left" Kind="AlphaSBox" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
+                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" >
+                        <Expander.Header>
+                            <TextBlock Text="Manage system" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
+                        </Expander.Header>
+                        <ListBox>
+                            <ListBoxItem Width="200" Content="Generate report"></ListBoxItem>
+                            <ListBoxItem Width="200" Content="Update regulations"></ListBoxItem>
+                        </ListBox>
                     </Expander>
-                </StackPanel>
+                </DockPanel>
             </StackPanel>
         </StackPanel>
     </Grid>

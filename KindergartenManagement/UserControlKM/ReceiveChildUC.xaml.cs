@@ -12,18 +12,19 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using ViewModel;
 
-namespace KindergartenManagement
+namespace KindergartenManagement.UserControlKM
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for ReceiveChildUC.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class ReceiveChildUC : UserControl
     {
-        public MainWindow()
+        public ReceiveChildUC()
         {
             InitializeComponent();
+            this.DataContext = new ReceiveChildVM();
         }
-
     }
 }

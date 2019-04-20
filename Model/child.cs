@@ -19,6 +19,7 @@ namespace Model
         public string nickname { get; set; }
         public Nullable<System.DateTime> birthdate { get; set; }
         public Nullable<System.DateTime> enrolldate { get; set; }
+        public Nullable<bool> sex { get; set; }
         public Nullable<int> id_condition { get; set; }
         public Nullable<int> id_parent { get; set; }
         public Nullable<int> id_class { get; set; }

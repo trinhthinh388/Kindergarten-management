@@ -62,8 +62,10 @@
     </Compile>
     <Compile Include="BaseViewModel.cs" />
     <Compile Include="ControlBarVM.cs" />
+    <Compile Include="DashBoardVM.cs" />
     <Compile Include="LogInVM.cs" />
     <Compile Include="MainViewModel.cs" />
+    <Compile Include="ReceiveChildVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="NavigationBarVM.cs" />
