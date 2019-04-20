@@ -14,6 +14,15 @@ namespace Model
     
     public partial class child
     {
+        public child(string _name, string nickName, DateTime _birthdate, DateTime _enrolldate, bool _sex, int _idParent)
+        {
+            this.name = _name;
+            this.nickname = nickName;
+            this.birthdate = _birthdate;
+            this.enrolldate = _enrolldate;
+            this.sex = _sex;
+            this.id_parent = _idParent;
+        }
         public int id { get; set; }
         public string name { get; set; }
         public string nickname { get; set; }
@@ -21,7 +30,7 @@ namespace Model
         public Nullable<System.DateTime> enrolldate { get; set; }
         public Nullable<bool> sex { get; set; }
         public Nullable<int> id_condition { get; set; }
-        public Nullable<int> id_parent { get; set; }
+        public int id_parent { get; set; }
         public Nullable<int> id_class { get; set; }
     
         public virtual @class @class { get; set; }

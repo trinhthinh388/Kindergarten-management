@@ -19,6 +19,13 @@ namespace Model
         {
             this.children = new HashSet<child>();
         }
+
+        public parent(string _name, string _address, string phoneNumber)
+        {
+            this.name = _name;
+            this.address = _address;
+            this.phone_number = phoneNumber;
+        }
     
         public int id { get; set; }
         public string name { get; set; }

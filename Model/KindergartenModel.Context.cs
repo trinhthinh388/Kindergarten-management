@@ -30,6 +30,7 @@ namespace Model
         public virtual DbSet<condition> conditions { get; set; }
         public virtual DbSet<grade> grades { get; set; }
         public virtual DbSet<parent> parents { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
         public virtual DbSet<teacher> teachers { get; set; }
         public virtual DbSet<teaching> teachings { get; set; }
         public virtual DbSet<user> users { get; set; }

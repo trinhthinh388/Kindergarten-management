@@ -7,9 +7,10 @@
       <Diagram DiagramId="ae5835c0a6814c8cab93a867370c1467" Name="Diagram1">
         <EntityTypeShape EntityType="kindergartenModel.child" Width="1.5" PointX="8.25" PointY="3.25" />
         <EntityTypeShape EntityType="kindergartenModel.class" Width="1.5" PointX="3" PointY="3.875" />
-        <EntityTypeShape EntityType="kindergartenModel.condition" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="kindergartenModel.condition" Width="1.5" PointX="6" PointY="7.5" />
         <EntityTypeShape EntityType="kindergartenModel.grade" Width="1.5" PointX="0.75" PointY="4.125" />
-        <EntityTypeShape EntityType="kindergartenModel.parent" Width="1.5" PointX="6" PointY="7.125" />
+        <EntityTypeShape EntityType="kindergartenModel.parent" Width="1.5" PointX="6" PointY="0.75" />
+        <EntityTypeShape EntityType="kindergartenModel.sysdiagram" Width="1.5" PointX="0.75" PointY="7.5" />
         <EntityTypeShape EntityType="kindergartenModel.teacher" Width="1.5" PointX="3" PointY="0.875" />
         <EntityTypeShape EntityType="kindergartenModel.teaching" Width="1.5" PointX="5.25" PointY="3.875" />
         <EntityTypeShape EntityType="kindergartenModel.user" Width="1.5" PointX="0.75" PointY="1.5" />

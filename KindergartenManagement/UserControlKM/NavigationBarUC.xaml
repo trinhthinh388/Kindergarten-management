@@ -30,7 +30,7 @@
                     <Button Name="logOutButton" Command="{Binding DashBoardCommand}" Visibility="Collapsed" CommandParameter="{Binding ElementName=ucNavigationBar}" HorizontalAlignment="Center" VerticalAlignment="Center" Margin="0 15 0 0" Content="Log out" FontFamily="Dosis" FontWeight="DemiBold" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton" Background="#FF5E3A" BorderBrush="#FF5E3A" Click="Button_Click"/>
                 </StackPanel>
             </StackPanel>
-            <StackPanel x:Name="navigationSection" Orientation="Vertical" Height="500">
+            <StackPanel x:Name="navigationSection" Orientation="Vertical" Height="800">
                 <Label Content="Navigation" FontFamily="Dosis" FontWeight="SemiBold" FontSize="18" Foreground="Gray" Margin="10 10 10 0" Padding="0 20 20 20"/>
                 <DockPanel x:Name="DashBoard" Margin="5">
                     <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Home" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
@@ -54,9 +54,9 @@
                         <Expander.Header>
                             <TextBlock Text="Manage classes" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
                         </Expander.Header>
-                        <ListBox>
-                            <ListBoxItem Width="200" Content="Arrange class"></ListBoxItem>
-                        </ListBox>
+                        <StackPanel>
+                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Arrange class"/>
+                        </StackPanel>
                     </Expander>
                 </DockPanel>
                 <DockPanel x:Name="ManageSystem" Margin="5">
@@ -65,10 +65,10 @@
                         <Expander.Header>
                             <TextBlock Text="Manage system" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
                         </Expander.Header>
-                        <ListBox>
-                            <ListBoxItem Width="200" Content="Generate report"></ListBoxItem>
-                            <ListBoxItem Width="200" Content="Update regulations"></ListBoxItem>
-                        </ListBox>
+                        <StackPanel>
+                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Generate Report"/>
+                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Content="Update Regulations" Width="200" />
+                        </StackPanel>
                     </Expander>
                 </DockPanel>
             </StackPanel>

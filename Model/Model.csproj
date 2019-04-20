@@ -83,6 +83,9 @@
     <Compile Include="parent.cs">
       <DependentUpon>KindergartenModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="sysdiagram.cs">
+      <DependentUpon>KindergartenModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="teacher.cs">
       <DependentUpon>KindergartenModel.tt</DependentUpon>
     </Compile>
