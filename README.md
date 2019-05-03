@@ -6,7 +6,7 @@ Our software will make daily kindergarten agenda easier to do and increase the e
 
 ## Project introduction 
 
-My team is working on a seminar project that makes a window app using WPF and MVVM pattern.
+My team is working on a project that makes a window app using WPF and MVVM pattern.
 
 ## Get in touch with us
 - Trinh Duc Thinh(Leader) - 17521092@gm.uit.edu.vn
