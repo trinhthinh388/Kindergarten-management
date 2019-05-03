@@ -47,12 +47,45 @@ namespace KindergartenManagement.UserControlKM
             }
             else
             {
+                MessageBoxResult mr = MessageBox.Show("Do you really want to log out?", "", MessageBoxButton.YesNo);
+                if (mr == MessageBoxResult.No)
+                    return;
                 logInVM.IsLogIn = false;
-                NavigationBarVM.Ins.resetWelcomeText();
+                NavigationBarVM.Ins.ResetWelcomeText();
                 logInButton.Visibility = Visibility.Visible;
                 logOutButton.Visibility = Visibility.Collapsed;
             }
             
+        }
+
+        private void ManageChildren_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ManageChildren.IsExpanded = true;
+        }
+
+        private void ManageChildren_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ManageChildren.IsExpanded = false;
+        }
+
+        private void ManageClasses_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ManageClasses.IsExpanded = true;
+        }
+
+        private void ManageClasses_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ManageClasses.IsExpanded = false;
+        }
+
+        private void ManageSystem_MouseEnter(object sender, MouseEventArgs e)
+        {
+            ManageSystem.IsExpanded = true;
+        }
+
+        private void ManageSystem_MouseLeave(object sender, MouseEventArgs e)
+        {
+            ManageSystem.IsExpanded = false;
         }
     }
 }

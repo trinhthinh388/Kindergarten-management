@@ -27,8 +27,14 @@ namespace ViewModel
 
         public ReceiveChildVM()
         {
-            AddCommand = new RelayCommand<UserControl>((p)=> { return checkEmpty(); }, (p)=>
+            AddCommand = new RelayCommand<UserControl>((p)=> { return true; }, (p)=>
             {
+
+                if (ChildName == null || ParentName == null || Address == null || PhoneNumber == null || BirthDate == null || Sex == null || NickName == null || ChildName == "" || ParentName == "" || Address == "" || PhoneNumber == "" || BirthDate == "" || Sex == "" || NickName == "")
+                {
+                    MessageBox.Show("All the blanks must be filled.");
+                    return;
+                }
                 string phonePattern = @"[0-9]";
                 string commit = "Child Name: " + ChildName + "\n" + "Birthdate: " + BirthDate + "\n" + "Nickname: " + NickName + "\n" + "Parent Name: " + ParentName + "\n" + "Address: " + Address + "\n" + "Phone Number: " + PhoneNumber;
                 MessageBoxResult mr = MessageBox.Show(commit, "Check the information", MessageBoxButton.YesNo,MessageBoxImage.Question);
@@ -51,13 +57,14 @@ namespace ViewModel
                     if (Model.DataProvider.Ins.DB.parents.Where(x => x.name == ParentName && x.address == Address && x.phone_number == PhoneNumber).Count() == 0)
                     {
                         Model.DataProvider.Ins.DB.parents.Add(Parent);
+                        Model.DataProvider.Ins.DB.SaveChanges();
                     }
 
                     int idParent = Model.DataProvider.Ins.DB.parents.Where(x => x.name == ParentName && x.address == Address && x.phone_number == PhoneNumber).ToArray()[0].id;
 
                     if (Model.DataProvider.Ins.DB.children.Where(x => x.name == ChildName && x.nickname == NickName && x.birthdate == birthDate && x.sex == sex && x.id_parent == idParent).Count() > 0)
                     {
-                        MessageBox.Show("This child has been enrolled");
+                        MessageBox.Show("This child is already enrolled at school");
                         return;
                     }
 
@@ -67,7 +74,8 @@ namespace ViewModel
 
                     Model.DataProvider.Ins.DB.SaveChanges();
 
-                    MessageBox.Show("The enrollment is success!", "", MessageBoxButton.OK, MessageBoxImage.None);
+                    MessageBox.Show("Enroll succeed", "", MessageBoxButton.OK, MessageBoxImage.None);
+                    DashBoardVM.Ins.UpdateDashboard();
                 }
             });
         }
@@ -86,8 +94,7 @@ namespace ViewModel
 
         private bool checkEmpty()
         {
-            if (ChildName != "" && ParentName != "" && BirthDate != "" && Address != "" && PhoneNumber != "" && BirthDate != null && Sex != null)
-                return true;
+            
             return false;
         }
     }

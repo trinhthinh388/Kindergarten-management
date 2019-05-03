@@ -9,6 +9,22 @@ namespace ViewModel
 {
     public class DashBoardVM: BaseViewModel
     {
+        public static DashBoardVM Ins
+        {
+            get
+            {
+                if (_ins == null)
+                    _ins = new DashBoardVM();
+                return _ins;
+            }
+
+            set
+            {
+                _ins = value;
+            }
+        }
+        private static DashBoardVM _ins;
+
         public string NumberOfChildren
         {
             get
@@ -60,7 +76,7 @@ namespace ViewModel
             UpdateDashboard();
         }
 
-        private void UpdateDashboard()
+        public void UpdateDashboard()
         {
             int a = DataProvider.Ins.DB.children.Count();
             int b = DataProvider.Ins.DB.teachers.Count();

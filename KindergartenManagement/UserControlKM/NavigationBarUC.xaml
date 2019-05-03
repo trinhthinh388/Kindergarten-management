@@ -36,38 +36,38 @@
                     <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Home" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
                     <Button Margin="8 0 0 0" Content="Dashboard" BorderThickness="0" HorizontalAlignment="Left" VerticalAlignment="Center" FontSize="20" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" Command="{Binding DashBoardCommand}" CommandParameter="{Binding ElementName=ucNavigationBar}"/>
                 </DockPanel>
-                <DockPanel x:Name="ManageChildren" Margin="5">
+                <DockPanel Margin="5">
                     <materialDesign:PackIcon DockPanel.Dock="Left" Kind="HumanChild" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
-                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right">
+                    <Expander x:Name="ManageChildren" HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" MouseEnter="ManageChildren_MouseEnter" MouseLeave="ManageChildren_MouseLeave">
                         <Expander.Header>
                             <TextBlock Text="Manage children" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel>
-                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Receive new child" Command="{Binding ReceiveChildCommand}" CommandParameter="{Binding ElementName=ucNavigationBar}"/>
-                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Content="Update information" Width="200" />
+                            <RadioButton Cursor="Hand" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Receive new child" Command="{Binding ReceiveChildCommand}" CommandParameter="{Binding ElementName=ucNavigationBar}"/>
+                            <RadioButton Cursor="Hand" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Content="Update information" Width="200" />
                         </StackPanel>
                     </Expander>
                 </DockPanel>
-                <DockPanel x:Name="ManageClasses" Margin="5">
+                <DockPanel  Margin="5">
                     <materialDesign:PackIcon DockPanel.Dock="Left" Kind="Class" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
-                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" >
+                    <Expander x:Name="ManageClasses" HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" SnapsToDevicePixels="True" MouseEnter="ManageClasses_MouseEnter" MouseLeave="ManageClasses_MouseLeave" >
                         <Expander.Header>
                             <TextBlock Text="Manage classes" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel>
-                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Arrange class"/>
+                            <RadioButton Cursor="Hand" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Arrange class"/>
                         </StackPanel>
                     </Expander>
                 </DockPanel>
-                <DockPanel x:Name="ManageSystem" Margin="5">
+                <DockPanel  Margin="5">
                     <materialDesign:PackIcon DockPanel.Dock="Left" Kind="AlphaSBox" Foreground="#FF5E3A" HorizontalAlignment="Left" VerticalAlignment="Top" Width="40" Height="auto" Margin="10 5 0 0"/>
-                    <Expander HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" >
+                    <Expander x:Name="ManageSystem" HorizontalAlignment="Stretch" FontFamily="Dosis" FontWeight="Bold" Background="Transparent" Foreground="Black" DockPanel.Dock="Right" MouseEnter="ManageSystem_MouseEnter" MouseLeave="ManageSystem_MouseLeave" >
                         <Expander.Header>
                             <TextBlock Text="Manage system" FontFamily="Dosis" FontSize="20" FontWeight="Bold"/>
                         </Expander.Header>
                         <StackPanel>
-                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Generate Report"/>
-                            <RadioButton Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Content="Update Regulations" Width="200" />
+                            <RadioButton Cursor="Hand" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Width="200" Content="Generate Report"/>
+                            <RadioButton Cursor="Hand" Margin="10" HorizontalAlignment="Left" Style="{StaticResource MaterialDesignTabRadioButton}" Content="Update Regulations" Width="200" />
                         </StackPanel>
                     </Expander>
                 </DockPanel>

@@ -78,10 +78,11 @@ namespace ViewModel
             else
             {
                 IsLogIn = false;
-                MessageBox.Show("Username or password is wrong!!");
+                MessageBox.Show("Invalid username or password!!");
             }
 
         }
+
 
         private static string CreateMD5(string input)
         {

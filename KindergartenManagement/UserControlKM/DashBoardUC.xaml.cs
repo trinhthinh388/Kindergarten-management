@@ -24,7 +24,7 @@ namespace KindergartenManagement.UserControlKM
         public DashBoardUC()
         {
             InitializeComponent();
-            this.DataContext = new DashBoardVM();
+            this.DataContext = DashBoardVM.Ins;
         }
     }
 }

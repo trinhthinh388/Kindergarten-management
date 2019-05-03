@@ -107,7 +107,7 @@ namespace ViewModel
                 });
         }
 
-        public void resetWelcomeText()
+        public void ResetWelcomeText()
         {
             WelcomeText = "Hi, guest"; ;
         }

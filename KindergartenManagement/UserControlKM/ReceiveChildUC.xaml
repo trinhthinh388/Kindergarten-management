@@ -27,36 +27,36 @@
             <StackPanel Grid.Row="1" Margin="15 0 0 0">
                 <Label x:Name="KidLabel" Content="KID" FontFamily="Dosis" FontWeight="DemiBold" FontSize="15"/>
                 <DockPanel HorizontalAlignment="Left" Width="500" Margin="30 10 0 10">
-                    <TextBlock Text="Full Name*" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
-                    <TextBox Text="{Binding ChildName, Mode=OneWayToSource}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Full name"/>
+                    <TextBlock Text="Full Name" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
+                    <TextBox Text="{Binding ChildName}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Full name"/>
                 </DockPanel>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Left" Width="500" Margin="30 10 0 10">
-                    <TextBlock Text="Birthday*" VerticalAlignment="Center" Margin="0 0 20 0"/>
-                    <DatePicker SelectedDate="{Binding BirthDate, Mode=OneWayToSource}" Name="BirthDatePicker" materialDesign:HintAssist.Hint="Birthdate" VerticalAlignment="Center" Margin="7 0 20 0" />
+                    <TextBlock Text="Birthday" VerticalAlignment="Center" Margin="0 0 20 0"/>
+                    <DatePicker SelectedDate="{Binding BirthDate}" Name="BirthDatePicker" materialDesign:HintAssist.Hint="Birthdate" VerticalAlignment="Center" Margin="7 0 20 0" />
                     <TextBlock Text="Gender" VerticalAlignment="Center" Margin="0 0 20 0"/>
-                    <ComboBox Text="{Binding Sex, Mode=OneWayToSource}" materialDesign:HintAssist.Hint=" Gender" VerticalAlignment="Center" Margin="0 0 20 0" Width="80">
+                    <ComboBox Text="{Binding Sex}" materialDesign:HintAssist.Hint=" Gender" VerticalAlignment="Center" Margin="0 0 20 0" Width="80">
                         <ComboBoxItem Content="Male" Width="auto"/>
                         <ComboBoxItem Content="Female" Width="auto"/>
                     </ComboBox>
                 </StackPanel>
                 <DockPanel HorizontalAlignment="Left" Width="500" Margin="30 10 0 10">
                     <TextBlock Text="Nickname" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
-                    <TextBox Text="{Binding NickName, Mode=OneWayToSource}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Nickname"/>
+                    <TextBox Text="{Binding NickName}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Nickname"/>
                 </DockPanel>
             </StackPanel>
 
             <StackPanel Grid.Row="2" Margin="15 0 0 0">
                 <Label x:Name="ParentLabel" Content="PARENT" FontFamily="Dosis" FontWeight="DemiBold" FontSize="15"/>
                 <DockPanel HorizontalAlignment="Left" Width="500" Margin="30 10 0 10">
-                    <TextBlock Text="Full Name*" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
+                    <TextBlock Text="Full Name" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
                     <TextBox Text="{Binding ParentName}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Full name"/>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Left" Width="500" Margin="30 10 0 10">
-                    <TextBlock Text="Address*" VerticalAlignment="Center" Margin="0 0 30 0" DockPanel.Dock="Left"/>
+                    <TextBlock Text="Address" VerticalAlignment="Center" Margin="0 0 30 0" DockPanel.Dock="Left"/>
                     <TextBox Text="{Binding Address}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Address"/>
                 </DockPanel>
                 <DockPanel HorizontalAlignment="Left" Width="500" Margin="30 10 0 10">
-                    <TextBlock Text="Phone Number*" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
+                    <TextBlock Text="Phone Number" VerticalAlignment="Center" Margin="0 0 20 0" DockPanel.Dock="Left"/>
                     <TextBox Text="{Binding PhoneNumber}" DockPanel.Dock="Right" TextWrapping="Wrap" VerticalAlignment="Stretch" materialDesign:HintAssist.Hint="Phone number"/>
                 </DockPanel>
                 <Button Command="{Binding AddCommand}" CommandParameter="{Binding ElementName=ucReceiveChild}" HorizontalAlignment="Right" Margin="0 10 0 0" Style="{StaticResource MaterialDesignRaisedButton}" Width="100" ToolTip="Resource name: MaterialDesignRaisedButton">
