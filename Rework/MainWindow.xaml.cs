@@ -17,6 +17,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Threading;
 using Rework.ViewModels;
+using MahApps.Metro.Controls.Dialogs;
 
 namespace Rework
 {
@@ -28,17 +29,20 @@ namespace Rework
         public MainWindow()
         {
             InitializeComponent();
-            this.DataContext = new MainViewModel();
+            this.DataContext = MainViewModel.Ins;
+            MainViewModel.Ins.dialogCoordinator = DialogCoordinator.Instance;
+            
         }
 
-        private void HomeButtonClick(object sender, RoutedEventArgs e)
+        private async void HomeButtonClick(object sender, RoutedEventArgs e)
         {
             MainTabControl.SelectedIndex = 0;
         }
 
         private void MainTabControl_LayoutUpdated(object sender, EventArgs e)
         {
-            if(MainTabControl.SelectedIndex != 0)
+
+            if (MainTabControl.SelectedIndex != 0)
             {
                 this.HomeButton.Visibility = Visibility.Visible;
                 this.TitlebarHeight = 50;

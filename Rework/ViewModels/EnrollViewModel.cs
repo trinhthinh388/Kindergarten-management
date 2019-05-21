@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Rework.Models;
 
 namespace Rework.ViewModels
@@ -152,11 +155,20 @@ namespace Rework.ViewModels
         }
         #endregion 
 
+
         public EnrollViewModel()
         {
             EnrollCommand = new RelayCommand<UserControl>((p) => { return true; },
                 async (p) =>
                 {
+                    var CurrentWindow = Application.Current.MainWindow as MetroWindow;
+                    var mySettings = new MetroDialogSettings()
+                    {
+                        AffirmativeButtonText = "Ok",
+                        NegativeButtonText = "Go away!",
+                        FirstAuxiliaryButtonText = "Cancel",
+                        ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
+                    };
                     parent addingParent = new parent();
                     addingParent.Mothername = this._motherName;
                     addingParent.FatherName = this._fatherName;
@@ -169,27 +181,47 @@ namespace Rework.ViewModels
                     addingChild.sex = this._sex;
                     addingChild.birthdate = this._birthDate;
                     addingChild.enrolldate = DateTime.Now;
-                    
-                    if(DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).Count() == 0)
+
+                    if(ChildrenName == "" || NickName == "" || BirthDate == "1/1/0001 12:00:00 AM" || MotherName == "" || FatherName == "" || Address == "" || PhoneNumber == "")
+                    {
+                        await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
+
+                    var controller = await MainViewModel.Ins.dialogCoordinator.ShowProgressAsync(MainViewModel.Ins, "Processing", "Progressing all the things, please wait.");
+                    controller.SetIndeterminate();
+
+                    await Task.Delay(2000);
+
+                    if (DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).Count() == 0)
                     {
                         DataProvider.Ins.DB.parents.Add(addingParent);
                         await DataProvider.Ins.DB.SaveChangesAsync();
                     }
 
+                    await controller.CloseAsync();
+
                     addingChild.id_parent = DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).ToArray()[0].id;
 
-                    if (DataProvider.Ins.DB.children.Where(x=> x.name == addingChild.name && x.id_parent == addingChild.id_parent && x.birthdate == addingChild.birthdate && x.sex == addingChild.sex && x.nickname == addingChild.nickname).Count() > 0)
+                    if (DataProvider.Ins.DB.children.Where(x => x.name == addingChild.name && x.id_parent == addingChild.id_parent && x.birthdate == addingChild.birthdate && x.sex == addingChild.sex && x.nickname == addingChild.nickname).Count() > 0)
                     {
-                        MessageBox.Show("This child already enrolled.");
+                        await CurrentWindow.ShowMessageAsync("Hello!", "This child has already enrolled at school.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
                     }
                     else
                     {
                         DataProvider.Ins.DB.children.Add(addingChild);
                         await DataProvider.Ins.DB.SaveChangesAsync();
+                        await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled Successfully.", MessageDialogStyle.Affirmative, mySettings);
                     }
-
-                    MessageBox.Show("Enroll successfully.");
                 });
+        }
+
+        private async void RunProgess()
+        {
+            
+            
+
         }
 
 
