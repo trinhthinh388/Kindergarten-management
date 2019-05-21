@@ -1,7 +1,0 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:KindergartenManagement.ResourcesXAML"
-                    xmlns:viewmodel="clr-namespace:ViewModel;assembly=ViewModel">
-    <viewmodel:MainViewModel x:Key="MainVM"></viewmodel:MainViewModel>
-    <viewmodel:LogInVM x:Key="LogInVM"></viewmodel:LogInVM>
-</ResourceDictionary>
