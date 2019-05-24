@@ -52,7 +52,7 @@
                 <content:Home x:Name="HomeContent"/>
             </TabItem>
             <TabItem>
-                <content:ManageChildren/>
+                <content:Children/>
             </TabItem>
         </Controls:MetroAnimatedTabControl>
 

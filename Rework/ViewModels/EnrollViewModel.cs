@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Rework.Models;
@@ -182,46 +184,50 @@ namespace Rework.ViewModels
                     addingChild.birthdate = this._birthDate;
                     addingChild.enrolldate = DateTime.Now;
 
-                    if(ChildrenName == "" || NickName == "" || BirthDate == "1/1/0001 12:00:00 AM" || MotherName == "" || FatherName == "" || Address == "" || PhoneNumber == "")
+                    if (ChildrenName == "" || NickName == "" || BirthDate == "1/1/0001 12:00:00 AM" || MotherName == "" || FatherName == "" || Address == "" || PhoneNumber == "")
                     {
                         await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
                         return;
                     }
 
-                    var controller = await MainViewModel.Ins.dialogCoordinator.ShowProgressAsync(MainViewModel.Ins, "Processing", "Progressing all the things, please wait.");
-                    controller.SetIndeterminate();
-
-                    await Task.Delay(2000);
-
-                    if (DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).Count() == 0)
-                    {
-                        DataProvider.Ins.DB.parents.Add(addingParent);
-                        await DataProvider.Ins.DB.SaveChangesAsync();
-                    }
-
-                    await controller.CloseAsync();
-
-                    addingChild.id_parent = DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).ToArray()[0].id;
-
-                    if (DataProvider.Ins.DB.children.Where(x => x.name == addingChild.name && x.id_parent == addingChild.id_parent && x.birthdate == addingChild.birthdate && x.sex == addingChild.sex && x.nickname == addingChild.nickname).Count() > 0)
-                    {
-                        await CurrentWindow.ShowMessageAsync("Hello!", "This child has already enrolled at school.", MessageDialogStyle.Affirmative, mySettings);
-                        return;
-                    }
-                    else
-                    {
-                        DataProvider.Ins.DB.children.Add(addingChild);
-                        await DataProvider.Ins.DB.SaveChangesAsync();
-                        await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled Successfully.", MessageDialogStyle.Affirmative, mySettings);
-                    }
+                    await Task.Factory.StartNew(()=>CheckingAndAdding(addingParent, addingChild, CurrentWindow, mySettings));
                 });
         }
 
-        private async void RunProgess()
-        {
-            
-            
 
+        private async void CheckingAndAdding(parent addingParent, child addingChild, MetroWindow CurrentWindow, MetroDialogSettings mySettings)
+        {
+
+            var controller = await MainViewModel.Ins.dialogCoordinator.ShowProgressAsync(MainViewModel.Ins, "Processing", "Proceessing all the things, please wait.");
+            controller.SetIndeterminate();
+            if (DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).Count() == 0)
+            {
+                DataProvider.Ins.DB.parents.Add(addingParent);
+                DataProvider.Ins.DB.SaveChanges();
+            }
+
+            addingChild.id_parent = DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).ToArray()[0].id;
+
+            if (DataProvider.Ins.DB.children.Where(x => x.name == addingChild.name && x.id_parent == addingChild.id_parent && x.birthdate == addingChild.birthdate && x.sex == addingChild.sex && x.nickname == addingChild.nickname).Count() > 0)
+            {
+                await Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    await controller.CloseAsync();
+                    await CurrentWindow.ShowMessageAsync("Hello!", "This child has already enrolled at school.", MessageDialogStyle.Affirmative, mySettings);
+                });
+                return;
+            }
+            else
+            {
+                DataProvider.Ins.DB.children.Add(addingChild);
+                DataProvider.Ins.DB.SaveChanges();
+                await Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    await controller.CloseAsync();
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled Successfully.", MessageDialogStyle.Affirmative, mySettings);
+                    ManageChildrenViewModel.Ins.LoadData();
+                });
+            }
         }
 
 

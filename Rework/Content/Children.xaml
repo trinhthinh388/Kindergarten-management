@@ -1,0 +1,31 @@
+﻿<UserControl x:Class="Rework.Content.Children"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Rework.Content"
+             xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+        <ResourceDictionary>
+            <Style x:Key="AppThemeMenuItemStyle"
+                   BasedOn="{StaticResource MetroMenuItem}"
+                   TargetType="{x:Type MenuItem}">
+                <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
+                <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
+            </Style>
+            
+        </ResourceDictionary>
+    </UserControl.Resources>
+    <Grid>
+        <Controls:MetroAnimatedSingleRowTabControl>
+            <Controls:MetroTabItem Header="Enroll">
+                <local:Enroll/>
+            </Controls:MetroTabItem>
+            <Controls:MetroTabItem Header="Manage">
+                <local:ManageChildren/>
+            </Controls:MetroTabItem>
+        </Controls:MetroAnimatedSingleRowTabControl>
+    </Grid>
+</UserControl>

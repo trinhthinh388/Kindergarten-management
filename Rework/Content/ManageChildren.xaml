@@ -3,28 +3,164 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:local="clr-namespace:Rework.Content"
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
+             xmlns:viewmodel="clr-namespace:Rework.ViewModels"
+             Dialog:DialogParticipation.Register="{Binding}"
+             xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+             xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
+             xmlns:local="clr-namespace:Rework.Content"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
     <UserControl.Resources>
         <ResourceDictionary>
-            <Style x:Key="AppThemeMenuItemStyle"
-                   BasedOn="{StaticResource MetroMenuItem}"
-                   TargetType="{x:Type MenuItem}">
-                <Setter Property="Command" Value="{Binding ChangeAccentCommand}" />
-                <Setter Property="Header" Value="{Binding Name, Mode=OneWay}" />
-            </Style>
-            
+            <ControlTemplate x:Key="ConfigDataTemplate">
+                <Grid d:DataContext="{d:DesignInstance DataGrid}" Grid.IsSharedSizeScope="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="labels" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <TextBlock Grid.Row="0"
+                               Grid.Column="0"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="IsEnabled" />
+                    <CheckBox Grid.Row="0"
+                              Grid.Column="1"
+                              Margin="2"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Center"
+                              IsChecked="{Binding IsEnabled}" />
+
+                    <TextBlock Grid.Row="1"
+                               Grid.Column="0"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="CellEditAssist" />
+
+                    <TextBlock Grid.Row="2"
+                               Grid.Column="0"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="SelectionUnit" />
+                    <ComboBox Grid.Row="2"
+                              Grid.Column="1"
+                              Width="100"
+                              Margin="2"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding Source={StaticResource DataGridSelectionUnitArray}}"
+                              SelectedValue="{Binding SelectionUnit}" />
+
+                    <TextBlock Grid.Row="3"
+                               Grid.Column="0"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="GridLines" />
+                    <ComboBox Grid.Row="3"
+                              Grid.Column="1"
+                              Width="100"
+                              Margin="2"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding Source={StaticResource DataGridGridLinesVisibilityArray}}"
+                              SelectedValue="{Binding GridLinesVisibility}" />
+
+                    <TextBlock Grid.Row="4"
+                               Grid.Column="0"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="Headers" />
+                    <ComboBox Grid.Row="4"
+                              Grid.Column="1"
+                              Width="100"
+                              Margin="2"
+                              VerticalAlignment="Center"
+                              ItemsSource="{Binding Source={StaticResource DataGridHeadersVisibilityArray}}"
+                              SelectedValue="{Binding HeadersVisibility}" />
+
+                    <TextBlock Grid.Row="5"
+                               Grid.Column="0"
+                               Margin="2"
+                               VerticalAlignment="Center"
+                               Text="RowHeaderWidth" />
+                </Grid>
+            </ControlTemplate>
         </ResourceDictionary>
     </UserControl.Resources>
+    
     <Grid>
-        <Controls:MetroAnimatedSingleRowTabControl>
-            <Controls:MetroTabItem Header="Enroll">
-                <local:Enroll/>
-            </Controls:MetroTabItem>
-            <Controls:MetroTabItem Header="Manage">
-            </Controls:MetroTabItem>
-        </Controls:MetroAnimatedSingleRowTabControl>
+        <Border Margin="10 10 10 10"
+                BorderBrush="{DynamicResource GrayBrush7}"
+                BorderThickness="1">
+            <StackPanel Orientation="Vertical">
+                <TextBlock Text="Manage Children" HorizontalAlignment="Left" FontSize="35" Margin="10 0 0 0" FontWeight="Light"/>
+                <TextBox Margin="0 20 0 20"
+                         Width="500"
+                         FontSize="18"
+                         HorizontalAlignment="Center"
+                         Controls:TextBoxHelper.ClearTextButton="True"
+                         Controls:TextBoxHelper.UseFloatingWatermark="True"
+                         Controls:TextBoxHelper.Watermark="Search...">
+                    <TextBox.InputBindings>
+                        <KeyBinding Key="Return"
+                                    Command="{Binding SearchCommand, Mode=OneWay}"
+                                    CommandParameter="{Binding RelativeSource={RelativeSource FindAncestor, AncestorType=TextBox}, Path=Text, Mode=OneWay}" />
+                    </TextBox.InputBindings>
+                    <TextBox.Style>
+                        <Style BasedOn="{StaticResource SearchMetroTextBox}" TargetType="{x:Type TextBox}">
+                            <Style.Triggers>
+                                <Trigger Property="Controls:TextBoxHelper.HasText" Value="True">
+                                    <Setter Property="Controls:TextBoxHelper.ButtonContent" Value="r" />
+                                    <Setter Property="Controls:TextBoxHelper.ButtonContentTemplate" Value="{x:Null}" />
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
+
+                <DataGrid x:Name="MetroDataGrid"
+                          Width="550"
+                          FontSize="15"
+                          HeadersVisibility="Column"
+                          CanUserAddRows="False"
+                          CanUserDeleteRows="False"
+                          GridLinesVisibility="Horizontal"
+                          CanUserResizeColumns="False"
+                          CanUserResizeRows="False"
+                          HorizontalAlignment="Center"
+                          AutoGeneratedColumns="MetroDataGrid_AutoGeneratedColumns"
+                          Style="{DynamicResource AzureDataGrid}"
+                          RowHeaderWidth="0"
+                          ItemsSource="{Binding ListChildren}">
+                    <DataGrid.Columns>
+                        <DataGridTemplateColumn x:Name="ColumnTemplate" Width="200">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                        <StackPanel.Resources>
+                                            <ResourceDictionary>
+                                                <ResourceDictionary.MergedDictionaries>
+                                                    <ResourceDictionary Source="pack://application:,,,/MahApps.Metro;component/Styles/FlatButton.xaml" />
+                                                </ResourceDictionary.MergedDictionaries>
+                                            </ResourceDictionary>
+                                        </StackPanel.Resources>
+                                        <Button Content="Edit" Margin="10 5 10 5" Click="Button_Click" Tag="{Binding id}"/>
+                                        <Button Content="Delete" Background="#FFEB2F2F" Margin="10 5 10 5" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding id}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </StackPanel>
+        </Border>
     </Grid>
 </UserControl>

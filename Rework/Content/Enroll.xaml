@@ -6,6 +6,7 @@
              xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
              xmlns:Dialog="clr-namespace:MahApps.Metro.Controls.Dialogs;assembly=MahApps.Metro"
              xmlns:viewmodel="clr-namespace:Rework.ViewModels"
+             xmlns:sys="clr-namespace:System;assembly=mscorlib"
              Dialog:DialogParticipation.Register="{Binding}"
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              xmlns:materialDesignConverters="clr-namespace:MaterialDesignThemes.Wpf.Converters;assembly=MaterialDesignThemes.Wpf"
@@ -178,7 +179,7 @@
                                             <TextBlock Text="Nickname: " Width="80" FontSize="16" VerticalAlignment="Center"/>
                                             <TextBox x:Name="NickNameTxtB" Text="{Binding NickName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Birthdate: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                            <DatePicker x:Name="BirthDatePicker" Text="{Binding BirthDate, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <DatePicker x:Name="BirthDatePicker" Focusable="False" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding BirthDate, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Sex: " Width="80" FontSize="16" VerticalAlignment="Center"/>
                                             <ComboBox Text="{Binding Sex, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0">
                                                 <ComboBoxItem Content="Male"/>

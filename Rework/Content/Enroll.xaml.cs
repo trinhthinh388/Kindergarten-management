@@ -57,7 +57,7 @@ namespace Rework.Content
             }
             else if(cButton.Uid == "2")
             {
-                string regexString = "[0-9]";
+                string regexString = "^\\+?\\d{1,3}?[- .]?\\(?(?:\\d{2,3})\\)?[- .]?\\d\\d\\d[- .]?\\d\\d\\d\\d$";
                 if (Mothertxb.Text == "" || Fathertxb.Text == "" || Phonetxb.Text == "" || Addresstxb.Text == "")
                 {
                     await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, MySettings);
