@@ -13,6 +13,7 @@ namespace Rework.ViewModels
     public class HomeViewModel:BaseViewModel
     {
         public ICommand ManageChildrenCommand { get; set; }
+        public ICommand ManageParentCommand { get; set; }
 
         public HomeViewModel()
         {
@@ -23,6 +24,16 @@ namespace Rework.ViewModels
                     if (w == null)
                         return;
                     w.SelectedIndex = 1;
+                });
+
+            ManageParentCommand = new RelayCommand<UserControl>((p)=> { return true; },
+                (p)=> 
+                {
+                    MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
+                    if (w == null)
+                        return;
+                    w.SelectedIndex = 2;
+
                 });
         }
 

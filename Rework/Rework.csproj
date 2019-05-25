@@ -93,6 +93,9 @@
     <Compile Include="Content\ManageChildren.xaml.cs">
       <DependentUpon>ManageChildren.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Parent.xaml.cs">
+      <DependentUpon>Parent.xaml</DependentUpon>
+    </Compile>
     <Compile Include="EditChildren.xaml.cs">
       <DependentUpon>EditChildren.xaml</DependentUpon>
     </Compile>
@@ -139,6 +142,7 @@
     <Compile Include="ViewModels\HomeViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ManageChildrenViewModel.cs" />
+    <Compile Include="ViewModels\ParentViewModel.cs" />
     <Page Include="Content\Enroll.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -152,6 +156,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\ManageChildren.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Parent.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

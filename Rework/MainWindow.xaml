@@ -54,6 +54,9 @@
             <TabItem>
                 <content:Children/>
             </TabItem>
+            <TabItem>
+                <content:Parent/>
+            </TabItem>
         </Controls:MetroAnimatedTabControl>
 
         <StatusBar Grid.Row="1">

@@ -3,4 +3,5 @@
                     xmlns:viewmodels="clr-namespace:Rework.ViewModels"
                     xmlns:local="clr-namespace:Rework">
     <viewmodels:EnrollViewModel x:Key="EnrollVM"/>
+    <viewmodels:ParentViewModel x:Key="ParentVM"/>
 </ResourceDictionary>

@@ -91,7 +91,7 @@
                     <materialDesign:PackIcon Kind="AlphaGBox" Foreground="GhostWhite" VerticalAlignment="Center" Height="60" Width="60"/>
                 </StackPanel>
             </Controls:Tile>
-            <Controls:Tile x:Name="ParentCountTile" Style="{StaticResource LargeTileStyle}"  Background="Teal" Title="Parent" HorizontalTitleAlignment="Right" Foreground="GhostWhite" >
+            <Controls:Tile x:Name="ParentCountTile" Style="{StaticResource LargeTileStyle}"  Background="Teal" Title="Parent" HorizontalTitleAlignment="Right" Foreground="GhostWhite" Command="{Binding ManageParentCommand}" CommandParameter="{Binding ElementName=HomeUC}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontSize="50" VerticalAlignment="Center" Background="Transparent" Foreground="GhostWhite" Text="{Binding numberOfParent}"/>
                     <materialDesign:PackIcon Kind="HumanMaleFemale" VerticalAlignment="Center" Height="60" Width="60"/>
