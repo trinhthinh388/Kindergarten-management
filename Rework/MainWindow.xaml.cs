@@ -45,7 +45,6 @@ namespace Rework
             if (MainTabControl.SelectedIndex != 0)
             {
                 this.HomeButton.Visibility = Visibility.Visible;
-                this.TitlebarHeight = 50;
             }
             else
             {

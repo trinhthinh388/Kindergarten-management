@@ -1,0 +1,41 @@
+﻿<Controls:MetroWindow x:Class="Rework.Windows.EditClass"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Rework.Windows"
+        xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        BorderBrush="{DynamicResource AccentColorBrush}"
+        mc:Ignorable="d"
+        x:Name="EditClassWindow"
+                      LayoutUpdated="EditClassWindow_LayoutUpdated"
+        WindowStartupLocation="CenterScreen"
+        ResizeMode="NoResize"
+        Title="EditClass" Height="250" Width="500">
+    <Controls:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <materialDesign:PackIcon Width="{TemplateBinding Width}"
+                                      Height="{TemplateBinding Height}"
+                                      Margin="4"
+                                      Foreground="{DynamicResource IdealForegroundColorBrush}"
+                                      Kind="Edit" />
+        </DataTemplate>
+    </Controls:MetroWindow.IconTemplate>
+    <Grid Margin="20" HorizontalAlignment="Center">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBlock Text="Children" FontWeight="DemiBold" FontSize="20"/>
+            <WrapPanel Width="500" HorizontalAlignment="Left">
+                <TextBlock Text="Class's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
+                <TextBox x:Name="ClassNameTxtB" Text="{Binding ClassName, Mode=TwoWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                <TextBlock Text="Grade: " Width="120" FontSize="16" VerticalAlignment="Center"/>
+                <ComboBox x:Name="CbGrade" Text="{Binding GradeName, Mode=TwoWay}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0"/>
+                <Button IsDefault="False" Width="100" Height="30" Margin="320 30 0 0" Content="Save" Style="{DynamicResource AccentedSquareButtonStyle}" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=EditClassWindow}"/>
+            </WrapPanel>
+        </StackPanel>
+    </Grid>
+</Controls:MetroWindow>

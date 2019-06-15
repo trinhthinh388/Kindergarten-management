@@ -81,8 +81,14 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Content\Class.xaml.cs">
+      <DependentUpon>Class.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\Enroll.xaml.cs">
       <DependentUpon>Enroll.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Content\Grade.xaml.cs">
+      <DependentUpon>Grade.xaml</DependentUpon>
     </Compile>
     <Compile Include="Content\Home.xaml.cs">
       <DependentUpon>Home.xaml</DependentUpon>
@@ -96,7 +102,9 @@
     <Compile Include="Content\Parent.xaml.cs">
       <DependentUpon>Parent.xaml</DependentUpon>
     </Compile>
-    <Compile Include="EditChildren.xaml.cs">
+    <Compile Include="ViewModels\ClassViewModel.cs" />
+    <Compile Include="ViewModels\GradeViewModel.cs" />
+    <Compile Include="Windows\EditChildren.xaml.cs">
       <DependentUpon>EditChildren.xaml</DependentUpon>
     </Compile>
     <Compile Include="Models\child.cs">
@@ -143,7 +151,24 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\ManageChildrenViewModel.cs" />
     <Compile Include="ViewModels\ParentViewModel.cs" />
+    <Compile Include="Windows\EditClass.xaml.cs">
+      <DependentUpon>EditClass.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditGrade.xaml.cs">
+      <DependentUpon>EditGrade.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Windows\EditParent.xaml.cs">
+      <DependentUpon>EditParent.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Content\Class.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Content\Enroll.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Grade.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -163,7 +188,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="EditChildren.xaml">
+    <Page Include="Windows\EditChildren.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -183,6 +208,18 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Windows\EditClass.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditGrade.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\EditParent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

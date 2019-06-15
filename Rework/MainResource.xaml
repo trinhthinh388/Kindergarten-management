@@ -4,4 +4,6 @@
                     xmlns:local="clr-namespace:Rework">
     <viewmodels:EnrollViewModel x:Key="EnrollVM"/>
     <viewmodels:ParentViewModel x:Key="ParentVM"/>
+    <viewmodels:ClassViewModel x:Key="ClassVM"/>
+    <viewmodels:GradeViewModel x:Key="GradeVM"/>
 </ResourceDictionary>

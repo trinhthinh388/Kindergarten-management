@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Height="350" Width="500">
+        Height="400" Width="500">
     <Controls:MetroWindow.IconTemplate>
         <DataTemplate>
             <materialDesign:PackIcon Width="{TemplateBinding Width}"
@@ -42,7 +42,10 @@
                     <ComboBoxItem Content="Male"/>
                     <ComboBoxItem Content="Female"/>
                 </ComboBox>
-
+                <TextBlock Text="Father's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock x:Name="FatherName" Text="{Binding FatherName, Mode=OneTime}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                <TextBlock Text="Mother's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
+                <TextBlock x:Name="MotherName" Text="{Binding MotherName, Mode=TwoWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                 <Button IsDefault="True" Width="100" Height="30" Margin="320 30 0 0" Content="Save" Style="{DynamicResource AccentedSquareButtonStyle}" Command="{Binding SaveCommand}" CommandParameter="{Binding ElementName=EditChildrenWindow}"/>
             </WrapPanel>
         </StackPanel>

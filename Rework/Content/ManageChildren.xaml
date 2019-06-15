@@ -127,8 +127,9 @@
                 </TextBox>
 
                 <DataGrid x:Name="MetroDataGrid"
-                          Width="550"
+                          Width="800"
                           FontSize="15"
+                          IsReadOnly="True"
                           HeadersVisibility="Column"
                           CanUserAddRows="False"
                           CanUserDeleteRows="False"

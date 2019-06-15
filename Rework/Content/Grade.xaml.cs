@@ -1,5 +1,4 @@
 ﻿using MahApps.Metro.Controls;
-using Rework.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,16 +17,14 @@ using System.Windows.Shapes;
 namespace Rework.Content
 {
     /// <summary>
-    /// Interaction logic for Parent.xaml
+    /// Interaction logic for Grade.xaml
     /// </summary>
-    public partial class Parent : UserControl
+    public partial class Grade : UserControl
     {
-        public Parent()
+        public Grade()
         {
             InitializeComponent();
-            this.DataContext = new ParentViewModel();
         }
-
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)
         {
@@ -38,11 +35,7 @@ namespace Rework.Content
         {
             var grid = (DataGrid)sender;
             ColumnTemplate.DisplayIndex = grid.Columns.Count - 1;
-            grid.Columns[2].Header = "Father's name";
-            grid.Columns[3].Header = "Mother's name";
-            grid.Columns[4].Visibility = Visibility.Collapsed;
-            grid.Columns[5].Visibility = Visibility.Collapsed;
-            grid.Columns[6].Visibility = Visibility.Collapsed;
+            grid.Columns[3].Visibility = Visibility.Collapsed;
         }
     }
 }

@@ -14,6 +14,9 @@ namespace Rework.ViewModels
     {
         public ICommand ManageChildrenCommand { get; set; }
         public ICommand ManageParentCommand { get; set; }
+        public ICommand ManageClassCommand { get; set; }
+        public ICommand ManageGradeCommand { get; set; }
+        public ICommand ManageTeacherCommand { get; set; }
 
         public HomeViewModel()
         {
@@ -34,6 +37,23 @@ namespace Rework.ViewModels
                         return;
                     w.SelectedIndex = 2;
 
+                });
+            ManageClassCommand = new RelayCommand<UserControl>((p) => { return true; },
+                (p) => 
+                {
+                    MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
+                    if (w == null)
+                        return;
+                    w.SelectedIndex = 3;
+                });
+
+            ManageGradeCommand = new RelayCommand<UserControl>((p)=> { return true; },
+                (p)=> 
+                {
+                    MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
+                    if (w == null)
+                        return;
+                    w.SelectedIndex = 4;
                 });
         }
 

@@ -184,7 +184,7 @@ namespace Rework.ViewModels
                     addingChild.birthdate = this._birthDate;
                     addingChild.enrolldate = DateTime.Now;
 
-                    if (ChildrenName == "" || NickName == "" || BirthDate == "1/1/0001 12:00:00 AM" || MotherName == "" || FatherName == "" || Address == "" || PhoneNumber == "")
+                    if (ChildrenName == null || NickName == null || MotherName == null || FatherName == null || Address == null || PhoneNumber == null)
                     {
                         await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
                         return;

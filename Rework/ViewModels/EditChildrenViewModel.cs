@@ -187,12 +187,18 @@ namespace Rework.ViewModels
                     break;
                 }
             }
-
-            Child = DataProvider.Ins.DB.children.Where(x => x.id == Window.id).ToArray()[0];
+            Child = DataProvider.Ins.DB.children.Where(x => x.id == Window.id).Join(
+                    DataProvider.Ins.DB.parents,
+                        d => d.id_parent,
+                        f => f.id,
+                        (d, f) => d
+                    ).ToArray()[0];
             this._childrenName = Child.name;
             this._nickName = Child.nickname;
             this._birthDate = Child.birthdate;
             this._sex = Child.sex;
+            this._motherName = Child.parent.Mothername;
+            this._fatherName = Child.parent.FatherName;
         }
     }
 }

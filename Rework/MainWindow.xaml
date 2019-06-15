@@ -10,7 +10,6 @@
         xmlns:local="clr-namespace:Rework"
         xmlns:content="clr-namespace:Rework.Content"
         mc:Ignorable="d"
-        TitlebarHeight="50"
         x:Name="MainWD"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
@@ -35,7 +34,7 @@
     
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands ShowSeparators="False">
-            <Button Margin="10 0 0 0 " Foreground="GhostWhite" x:Name="HomeButton" Visibility="Collapsed" Style="{StaticResource AccentCircleButtonStyle}" Height="40" Width="40" Click="HomeButtonClick">
+            <Button Margin="10 0 0 0 " Foreground="GhostWhite" x:Name="HomeButton" Cursor="Hand" Visibility="Collapsed" Style="{StaticResource AccentCircleButtonStyle}" Height="25" Width="25" Click="HomeButtonClick">
                 <materialDesign:PackIcon Kind="HomeOutline" Height="20" Width="20" Foreground="GhostWhite"/>
             </Button>
         </Controls:WindowCommands>
@@ -56,6 +55,12 @@
             </TabItem>
             <TabItem>
                 <content:Parent/>
+            </TabItem>
+            <TabItem>
+                <content:Class/>
+            </TabItem>
+            <TabItem>
+                <content:Grade/>
             </TabItem>
         </Controls:MetroAnimatedTabControl>
 

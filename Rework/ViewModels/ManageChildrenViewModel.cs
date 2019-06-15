@@ -58,7 +58,12 @@ namespace Rework.ViewModels
                 {
                     if (p == null)
                         return;
-                    List<child> SearchedChildren = DataProvider.Ins.DB.children.Where<child>(x => x.name.Contains(p)).ToList();
+                    List<child> SearchedChildren = DataProvider.Ins.DB.children.Where<child> (x => x.name.Contains(p)).Join(
+                    DataProvider.Ins.DB.parents,
+                        d => d.id_parent,
+                        f => f.id,
+                        (d, f) => d
+                    ).ToList();
                     LoadData(SearchedChildren);
                 });
 
@@ -82,7 +87,7 @@ namespace Rework.ViewModels
                         FirstAuxiliaryButtonText = "Ok",
                         ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
                     };
-                    MessageDialogResult mR = await CurrentWindow.ShowMessageAsync("Hello!", "Do you really want to delete this child ?", MessageDialogStyle.AffirmativeAndNegative, mySettings);
+                    MessageDialogResult mR = await CurrentWindow.ShowMessageAsync("Hello!", "Do you really want to delete this child information ?", MessageDialogStyle.AffirmativeAndNegative, mySettings);
                     if(mR == MessageDialogResult.Affirmative)
                     {
                         child DeleteChild = DataProvider.Ins.DB.children.Where(x => x.id == p).ToArray()[0];
@@ -107,14 +112,21 @@ namespace Rework.ViewModels
             {
                 this._listChildren.Clear();
             }
-            List<child> listOfChildren = DataProvider.Ins.DB.children.ToList();
-            foreach(child kid in listOfChildren)
+            List<child> listOfChildren = DataProvider.Ins.DB.children.Join(
+                DataProvider.Ins.DB.parents,
+                d => d.id_parent,
+                f => f.id,
+                (d, f) => d
+                ).ToList();
+            foreach (child kid in listOfChildren)
             {
                 ChildrenData x = new ChildrenData();
                 x.id = kid.id;
                 x.Name = kid.name;
                 x.Sex = (kid.sex == true) ? "Male" : "Female";
                 x.ClassName = "HHH";
+                x.FatherName = kid.parent.FatherName;
+                x.MotherName = kid.parent.Mothername;
                 this._listChildren.Add(x);
             }
         }
@@ -129,6 +141,8 @@ namespace Rework.ViewModels
                 x.Name = kid.name;
                 x.Sex = (kid.sex == true) ? "Male" : "Female";
                 x.ClassName = "HHH";
+                x.FatherName = kid.parent.FatherName;
+                x.MotherName = kid.parent.Mothername;
                 this._listChildren.Add(x);
             }
         }
@@ -140,6 +154,9 @@ namespace Rework.ViewModels
             private String _name;
             private String _sex;
             private String _className;
+
+            private String _fatherName;
+            private String _motherName;
 
             public int id
             {
@@ -187,6 +204,30 @@ namespace Rework.ViewModels
                 {
                     _className = value;
                     OnPropertyChange("ClassName");
+                }
+            }
+            public String FatherName
+            {
+                get
+                {
+                    return _fatherName;
+                }
+                set
+                {
+                    _fatherName = value;
+                    OnPropertyChange("FatherName");
+                }
+            }
+            public String MotherName
+            {
+                get
+                {
+                    return _motherName;
+                }
+                set
+                {
+                    _motherName = value;
+                    OnPropertyChange("MotherName");
                 }
             }
             public ChildrenData()
