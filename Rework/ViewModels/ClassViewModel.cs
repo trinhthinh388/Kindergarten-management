@@ -22,10 +22,23 @@ namespace Rework.ViewModels
         public ICommand SearchCommand { get; set; }
         public ICommand SaveCommand { get; set; }
         private static ObservableCollection<ClassData> _listClass;
+        private static ObservableCollection<string> _grades;
         private string _className;
         private string _gradeName;
 
 
+
+        public static ObservableCollection<string> Grades
+        {
+            get
+            {
+                return _grades;
+            }
+            set
+            {
+                _grades = value;
+            }
+        }
         public static ObservableCollection<ClassData> ListClass
         {
             get
@@ -60,6 +73,7 @@ namespace Rework.ViewModels
 
         public ClassViewModel(int _id)
         {
+            LoadGrades();
             _className = DataProvider.Ins.DB.classes.Where(x => x.id == _id).ToArray()[0].name;
             int IdGrade = DataProvider.Ins.DB.classes.Where(x => x.id == _id).ToArray()[0].id_grade;
             GradeName = DataProvider.Ins.DB.grades.Where(x => x.id == IdGrade).ToArray()[0].name;
@@ -78,12 +92,14 @@ namespace Rework.ViewModels
                     DataProvider.Ins.DB.SaveChanges();
                     await w.ShowMessageAsync("Hello!", "Saved successfully.", MessageDialogStyle.Affirmative, mySettings);
                     LoadData();
+                    EnrollViewModel.LoadClasses();
                     w.Close();
                 });
         }
 
         public ClassViewModel()
         {
+            LoadGrades();
             AddClassCommand = new RelayCommand<UserControl>((p)=> { return true; },
                 async (p)=> 
                 {
@@ -94,9 +110,37 @@ namespace Rework.ViewModels
                         ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
                     };
 
+                    var mySettings2 = new MetroDialogSettings()
+                    {
+                        AffirmativeButtonText = "Yes",
+                        NegativeButtonText = "No",
+                        ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
+                    };
+
+                    if (_className == null || _className == "")
+                    {
+                        await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
+
+                    if (_gradeName == null || _gradeName == "")
+                    {
+                        await CurrentWindow.ShowMessageAsync("Hello!", "This grade doesn't exist.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
+
+                    if(DataProvider.Ins.DB.grades.Where(x => x.name == _gradeName).Count() == 0)
+                    {
+                        await CurrentWindow.ShowMessageAsync("Hello!", "This grade doesn't exist.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
+
+                    MessageDialogResult mr = await CurrentWindow.ShowMessageAsync("Hello!", "Do you want to add class " + _className + " ?", MessageDialogStyle.AffirmativeAndNegative, mySettings2);
+                    if (mr == MessageDialogResult.Negative)
+                        return;
                     if (DataProvider.Ins.DB.classes.Where(x => x.name == this._className).Count() > 0)
                     {
-                        await CurrentWindow.ShowMessageAsync("Hello!", "This class is existed.", MessageDialogStyle.Affirmative, mySettings);
+                        await CurrentWindow.ShowMessageAsync("Hello!", "This class existed.", MessageDialogStyle.Affirmative, mySettings);
                     }
                     else
                     {
@@ -105,9 +149,10 @@ namespace Rework.ViewModels
                         AddingClass.id_grade = DataProvider.Ins.DB.grades.Where(x => x.name == _gradeName).ToArray()[0].id;
                         DataProvider.Ins.DB.classes.Add(AddingClass);
                         DataProvider.Ins.DB.SaveChanges();
-                        await CurrentWindow.ShowMessageAsync("Hello!", "Adding successfully.", MessageDialogStyle.Affirmative, mySettings);
+                        await CurrentWindow.ShowMessageAsync("Hello!", "Added successfully.", MessageDialogStyle.Affirmative, mySettings);
                     }
-                    LoadData(); 
+                    LoadData();
+                    EnrollViewModel.LoadClasses();
                 });
 
             
@@ -144,6 +189,7 @@ namespace Rework.ViewModels
                         DataProvider.Ins.DB.SaveChanges();
                         await CurrentWindow.ShowMessageAsync("Hello!", "Deleted successfully.", MessageDialogStyle.Affirmative, mySettings);
                         LoadData();
+                        EnrollViewModel.LoadClasses();
                     }
                 });
             SearchCommand = new RelayCommand<String>((p) => { return true; },
@@ -160,6 +206,24 @@ namespace Rework.ViewModels
         LoadData(SearchedClass);
     });
             LoadData();
+        }
+
+        public static void LoadGrades()
+        {
+            if(_grades == null)
+            {
+                _grades = new ObservableCollection<string>();
+            }
+            else
+            {
+                _grades.Clear();
+            }
+
+            List<grade> ListGrades = DataProvider.Ins.DB.grades.ToList();
+            foreach(grade g in ListGrades)
+            {
+                _grades.Add(g.name);
+            }
         }
 
         public void LoadData()

@@ -38,7 +38,6 @@ namespace Rework.Windows
         public EditClass()
         {
             InitializeComponent();
-            ListGrade = new List<string>();
             this.DataContext = new ClassViewModel(id);
         }
         
@@ -47,24 +46,8 @@ namespace Rework.Windows
         {
             InitializeComponent();
             this.id = _id;
-            ListGrade = new List<string>();
             this.DataContext = new ClassViewModel(id);
         }
 
-        void UpdateGradeList()
-        {
-            ListGrade.Clear();
-            List<grade> Grades = DataProvider.Ins.DB.grades.ToList();
-            foreach (grade g in Grades)
-            {
-                ListGrade.Add(g.name);
-            }
-            CbGrade.ItemsSource = ListGrade;
-        }
-
-        private void EditClassWindow_LayoutUpdated(object sender, EventArgs e)
-        {
-            UpdateGradeList();
-        }
     }
 }

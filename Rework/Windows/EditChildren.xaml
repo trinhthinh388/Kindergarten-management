@@ -42,6 +42,8 @@
                     <ComboBoxItem Content="Male"/>
                     <ComboBoxItem Content="Female"/>
                 </ComboBox>
+                <TextBlock Text="Class: " Width="120" FontSize="16" VerticalAlignment="Center"/>
+                <ComboBox ItemsSource="{Binding AvailableClasses}" Text="{Binding Sex, Mode=TwoWay}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0"/>
                 <TextBlock Text="Father's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
                 <TextBlock x:Name="FatherName" Text="{Binding FatherName, Mode=OneTime}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                 <TextBlock Text="Mother's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>

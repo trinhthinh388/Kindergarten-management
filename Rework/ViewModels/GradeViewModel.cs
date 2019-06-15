@@ -65,6 +65,7 @@ namespace Rework.ViewModels
                     await p.ShowMessageAsync("Hello!", "Saved successfully.", MessageDialogStyle.Affirmative, mySettings);
                     p.Close();
                     LoadData();
+                    ClassViewModel.LoadGrades();
                 });
         }
 
@@ -86,12 +87,18 @@ namespace Rework.ViewModels
                         NegativeButtonText = "No",
                         ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
                     };
-                    MessageDialogResult mr = await CurrentWindow.ShowMessageAsync("Hello!", "Do you want to add grade" + gradeName + "?", MessageDialogStyle.AffirmativeAndNegative, mySettings2);
+                    if (gradeName == null || gradeName == "")
+                    {
+                        await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
+
+                    MessageDialogResult mr = await CurrentWindow.ShowMessageAsync("Hello!", "Do you want to add grade " + gradeName + " ?", MessageDialogStyle.AffirmativeAndNegative, mySettings2);
                     if(mr == MessageDialogResult.Affirmative)
                     {
                         if(DataProvider.Ins.DB.grades.Where(x=>x.name == gradeName).Count() > 0)
                         {
-                            await CurrentWindow.ShowMessageAsync("Hello!", "This grade is already existed.", MessageDialogStyle.Affirmative, mySettings);
+                            await CurrentWindow.ShowMessageAsync("Hello!", "This grade existed.", MessageDialogStyle.Affirmative, mySettings);
                             return;
                         }
                         else
@@ -100,8 +107,9 @@ namespace Rework.ViewModels
                             AddingGrade.name = gradeName;
                             DataProvider.Ins.DB.grades.Add(AddingGrade);
                             DataProvider.Ins.DB.SaveChanges();
-                            await CurrentWindow.ShowMessageAsync("Hello!", "Saved successfully.", MessageDialogStyle.Affirmative, mySettings);
+                            await CurrentWindow.ShowMessageAsync("Hello!", "Added successfully.", MessageDialogStyle.Affirmative, mySettings);
                             LoadData();
+                            ClassViewModel.LoadGrades();
                         }
                     }
                 });
@@ -135,6 +143,7 @@ namespace Rework.ViewModels
                         DataProvider.Ins.DB.SaveChanges();
                         await CurrentWindow.ShowMessageAsync("Hello!", "Deleted successfully.", MessageDialogStyle.Affirmative, mySettings);
                         LoadData();
+                        ClassViewModel.LoadGrades();
                     }
                 });
 

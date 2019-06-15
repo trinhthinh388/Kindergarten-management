@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -19,7 +20,20 @@ namespace Rework.ViewModels
     public class EnrollViewModel : BaseViewModel
     {
         public ICommand EnrollCommand { get; set; }
+        private static ObservableCollection<string> _classes;
 
+
+        public static ObservableCollection<string> AvailableClasses
+        {
+            get
+            {
+                return _classes;
+            }
+            set
+            {
+                _classes = value;
+            }
+        }
         #region Children fields
         private string _childrenName;
         private string _nickName;
@@ -102,6 +116,7 @@ namespace Rework.ViewModels
         private string _fatherName;
         private string _address;
         private string _phoneNumber;
+        private string _className;
 
         public String MotherName
         {
@@ -155,11 +170,24 @@ namespace Rework.ViewModels
                 OnPropertyChange("PhoneNumber");
             }
         }
+
+        public string ClassName
+        {
+            get
+            {
+                return _className;
+            }
+            set
+            {
+                _className = value;
+            }
+        }
         #endregion 
 
 
         public EnrollViewModel()
         {
+            LoadClasses();
             EnrollCommand = new RelayCommand<UserControl>((p) => { return true; },
                 async (p) =>
                 {
@@ -167,7 +195,6 @@ namespace Rework.ViewModels
                     var mySettings = new MetroDialogSettings()
                     {
                         AffirmativeButtonText = "Ok",
-                        NegativeButtonText = "Go away!",
                         FirstAuxiliaryButtonText = "Cancel",
                         ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
                     };
@@ -184,7 +211,13 @@ namespace Rework.ViewModels
                     addingChild.birthdate = this._birthDate;
                     addingChild.enrolldate = DateTime.Now;
 
-                    if (ChildrenName == null || NickName == null || MotherName == null || FatherName == null || Address == null || PhoneNumber == null)
+                    if (ChildrenName == null || NickName == null || MotherName == null || FatherName == null || Address == null || PhoneNumber == null || _className == null)
+                    {
+                        await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
+
+                    if (_className == "")
                     {
                         await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
                         return;
@@ -219,6 +252,7 @@ namespace Rework.ViewModels
             }
             else
             {
+                addingChild.id_class = DataProvider.Ins.DB.classes.Where(x => x.name == _className).ToArray()[0].id;
                 DataProvider.Ins.DB.children.Add(addingChild);
                 DataProvider.Ins.DB.SaveChanges();
                 await Application.Current.Dispatcher.Invoke(async () =>
@@ -230,6 +264,23 @@ namespace Rework.ViewModels
             }
         }
 
+        public static void LoadClasses()
+        {
+            if(_classes == null)
+            {
+                _classes = new ObservableCollection<string>();
+            }
+            else
+            {
+                _classes.Clear();
+            }
+
+            List<@class> classes = DataProvider.Ins.DB.classes.ToList();
+            foreach(@class c in classes)
+            {
+                _classes.Add(c.name);
+            }
+        }
 
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {

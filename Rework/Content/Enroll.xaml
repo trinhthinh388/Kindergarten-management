@@ -185,6 +185,8 @@
                                                 <ComboBoxItem Content="Male"/>
                                                 <ComboBoxItem Content="Female"/>
                                             </ComboBox>
+                                            <TextBlock Text="Class: " Width="80" FontSize="16" VerticalAlignment="Center"/>
+                                            <ComboBox ItemsSource="{Binding AvailableClasses}" x:Name="ClassCb" Text="{Binding ClassName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0"/>
                                             <Button Command="" x:Uid="1" IsDefault="True" Width="100" Height="30" Margin="280 30 0 0" Content="Next" Style="{DynamicResource AccentedSquareButtonStyle}" Click="Button_Click"/>
                                         </WrapPanel>
                                     </Grid>

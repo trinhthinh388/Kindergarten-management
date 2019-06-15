@@ -1,5 +1,6 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Rework.Models;
 using Rework.ViewModels;
 using System;
 using System.Collections.Generic;
