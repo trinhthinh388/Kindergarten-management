@@ -15,10 +15,21 @@ namespace Rework.ViewModels
 {
     class EditChildrenViewModel:BaseViewModel
     {
-
+        private static ObservableCollection<string> _conditions;
         private static ObservableCollection<string> _classes;
 
+        public static ObservableCollection<string> Conditions
+        {
+            get
+            {
+                return _conditions;
+            }
+            set
+            {
+                _conditions = value;
 
+            }
+        }
         public static ObservableCollection<string> AvailableClasses
         {
             get
@@ -39,6 +50,7 @@ namespace Rework.ViewModels
         private DateTime _enrollDate;
         private bool _sex;
         private string selectedClass;
+        private string selectedCondition;
 
         public string SelectedClass
         {
@@ -52,7 +64,17 @@ namespace Rework.ViewModels
             }
         }
 
-
+        public string SelectedCondition
+        {
+            get
+            {
+                return selectedCondition;
+            }
+            set
+            {
+                selectedCondition = value;
+            }
+        }
         public String ChildrenName
         {
             get
@@ -189,6 +211,7 @@ namespace Rework.ViewModels
         public EditChildrenViewModel()
         {
             LoadClasses();
+            LoadConditions();
             SaveCommand = new RelayCommand<object>((p)=> { return true; },
                 async (p)=> 
                 {
@@ -204,6 +227,7 @@ namespace Rework.ViewModels
                     Child.birthdate = this._birthDate;
                     Child.nickname = this._nickName;
                     Child.id_class = DataProvider.Ins.DB.classes.Where(x => x.name == selectedClass).ToArray()[0].id;
+                    Child.id_condition = DataProvider.Ins.DB.conditions.Where(x => x.name == selectedCondition).ToArray()[0].id;
                     DataProvider.Ins.DB.SaveChanges();
                     ManageChildrenViewModel.Ins.LoadData();
                     await Window.ShowMessageAsync("Hello!", "Saved changes successfully.", MessageDialogStyle.Affirmative, mySettings);
@@ -231,7 +255,8 @@ namespace Rework.ViewModels
             this._sex = Child.sex;
             this._motherName = Child.parent.Mothername;
             this._fatherName = Child.parent.FatherName;
-            
+            if(DataProvider.Ins.DB.conditions.Where(x => x.id == Child.id_condition).Count() > 0)
+                this.selectedCondition = DataProvider.Ins.DB.conditions.Where(x => x.id == Child.id_condition).ToArray()[0].name;
         }
 
         public static void LoadClasses()
@@ -249,6 +274,23 @@ namespace Rework.ViewModels
             foreach (@class c in classes)
             {
                 _classes.Add(c.name);
+            }
+        }
+
+        public static void LoadConditions()
+        {
+            if(_conditions == null)
+            {
+                _conditions = new ObservableCollection<string>();
+            }
+            else
+            {
+                _conditions.Clear();
+            }
+            List<condition> conditions = DataProvider.Ins.DB.conditions.ToList();
+            foreach(condition c in conditions)
+            {
+                Conditions.Add(c.name);
             }
         }
     }
