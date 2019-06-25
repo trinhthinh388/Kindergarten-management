@@ -112,19 +112,14 @@ namespace Rework.ViewModels
             {
                 this._listChildren.Clear();
             }
-            List<child> listOfChildren = DataProvider.Ins.DB.children.Join(
-                DataProvider.Ins.DB.parents,
-                d => d.id_parent,
-                f => f.id,
-                (d, f) => d
-                ).ToList();
+            List<child> listOfChildren = (from o in DataProvider.Ins.DB.children join d in DataProvider.Ins.DB.parents on o.id_parent equals d.id join f in DataProvider.Ins.DB.classes on o.id_class equals f.id select o).ToList(); 
             foreach (child kid in listOfChildren)
             {
                 ChildrenData x = new ChildrenData();
                 x.id = kid.id;
                 x.Name = kid.name;
                 x.Sex = (kid.sex == true) ? "Male" : "Female";
-                x.ClassName = "HHH";
+                x.ClassName = kid.@class.name;
                 x.FatherName = kid.parent.FatherName;
                 x.MotherName = kid.parent.Mothername;
                 this._listChildren.Add(x);

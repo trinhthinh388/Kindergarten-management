@@ -3,6 +3,7 @@ using MahApps.Metro.Controls.Dialogs;
 using Rework.Models;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,6 +15,21 @@ namespace Rework.ViewModels
 {
     class EditChildrenViewModel:BaseViewModel
     {
+
+        private static ObservableCollection<string> _classes;
+
+
+        public static ObservableCollection<string> AvailableClasses
+        {
+            get
+            {
+                return _classes;
+            }
+            set
+            {
+                _classes = value;
+            }
+        }
         private child Child;
         private parent Parent;
         #region Children fields
@@ -22,6 +38,19 @@ namespace Rework.ViewModels
         private DateTime _birthDate;
         private DateTime _enrollDate;
         private bool _sex;
+        private string selectedClass;
+
+        public string SelectedClass
+        {
+            get
+            {
+                return selectedClass;
+            }
+            set
+            {
+                selectedClass = value;
+            }
+        }
 
 
         public String ChildrenName
@@ -159,6 +188,7 @@ namespace Rework.ViewModels
 
         public EditChildrenViewModel()
         {
+            LoadClasses();
             SaveCommand = new RelayCommand<object>((p)=> { return true; },
                 async (p)=> 
                 {
@@ -173,6 +203,7 @@ namespace Rework.ViewModels
                     Child.sex = this._sex;
                     Child.birthdate = this._birthDate;
                     Child.nickname = this._nickName;
+                    Child.id_class = DataProvider.Ins.DB.classes.Where(x => x.name == selectedClass).ToArray()[0].id;
                     DataProvider.Ins.DB.SaveChanges();
                     ManageChildrenViewModel.Ins.LoadData();
                     await Window.ShowMessageAsync("Hello!", "Saved changes successfully.", MessageDialogStyle.Affirmative, mySettings);
@@ -193,12 +224,32 @@ namespace Rework.ViewModels
                         f => f.id,
                         (d, f) => d
                     ).ToArray()[0];
+            this.selectedClass = DataProvider.Ins.DB.classes.Where(x => x.id == Child.id_class).ToArray()[0].name;
             this._childrenName = Child.name;
             this._nickName = Child.nickname;
             this._birthDate = Child.birthdate;
             this._sex = Child.sex;
             this._motherName = Child.parent.Mothername;
             this._fatherName = Child.parent.FatherName;
+            
+        }
+
+        public static void LoadClasses()
+        {
+            if (_classes == null)
+            {
+                _classes = new ObservableCollection<string>();
+            }
+            else
+            {
+                _classes.Clear();
+            }
+
+            List<@class> classes = DataProvider.Ins.DB.classes.ToList();
+            foreach (@class c in classes)
+            {
+                _classes.Add(c.name);
+            }
         }
     }
 }

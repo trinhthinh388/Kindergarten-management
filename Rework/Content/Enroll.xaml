@@ -232,6 +232,8 @@
                                                 <TextBlock Text="{Binding BirthDate, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Sex: " Width="80" FontSize="16" VerticalAlignment="Center"/>
                                                 <TextBlock Text="{Binding Sex, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="Class: " Width="80" FontSize="16" VerticalAlignment="Center"/>
+                                                <TextBlock Text="{Binding ClassName, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             </WrapPanel>
                                         </StackPanel>
                                         <StackPanel Grid.Row="1">

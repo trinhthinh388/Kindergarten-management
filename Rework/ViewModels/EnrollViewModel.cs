@@ -118,7 +118,7 @@ namespace Rework.ViewModels
         private string _phoneNumber;
         private string _className;
 
-        public String MotherName
+        public string MotherName
         {
             get
             {
@@ -131,7 +131,7 @@ namespace Rework.ViewModels
                 OnPropertyChange("MotherName");
             }
         }
-        public String FatherName
+        public string FatherName
         {
             get
             {
@@ -144,7 +144,7 @@ namespace Rework.ViewModels
                 OnPropertyChange("FatherName");
             }
         }
-        public String Address
+        public string Address
         {
             get
             {
@@ -157,7 +157,7 @@ namespace Rework.ViewModels
                 OnPropertyChange("Addresss");
             }
         }
-        public String PhoneNumber
+        public string PhoneNumber
         {
             get
             {
@@ -180,6 +180,7 @@ namespace Rework.ViewModels
             set
             {
                 _className = value;
+                OnPropertyChange("ClassName");
             }
         }
         #endregion 
