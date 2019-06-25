@@ -100,7 +100,7 @@
             <Controls:Tile x:Name="ChildrenCountTile" Style="{StaticResource HugeTileStyle}"  Background="#FF842D" Title="Children" HorizontalTitleAlignment="Right" Foreground="GhostWhite" Command="{Binding ManageChildrenCommand}" CommandParameter="{Binding ElementName=HomeUC}">
                 <materialDesign:PackIcon Kind="HumanChild" VerticalAlignment="Center" Height="60" Width="60"/>
             </Controls:Tile>
-            <Controls:Tile x:Name="ReportCountTile" Style="{StaticResource LargeTileStyle}"  Background="BlueViolet" Title="Report" HorizontalTitleAlignment="Right" Foreground="GhostWhite">
+            <Controls:Tile x:Name="ReportCountTile" Style="{StaticResource LargeTileStyle}"  Background="BlueViolet" Title="Report" HorizontalTitleAlignment="Right" Foreground="GhostWhite" Command="{Binding ReportCommand}" CommandParameter="{Binding ElementName=HomeUC}">
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center">
                     <TextBlock FontSize="50" VerticalAlignment="Center" Background="Transparent" Foreground="GhostWhite" Text="{Binding numberOfTeacher}"/>
                     <materialDesign:PackIcon Kind="FormatListNumbered" VerticalAlignment="Center" Height="60" Width="60"/>

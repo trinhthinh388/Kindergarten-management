@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="e35a6e37759d4cc3bd47e46f5245e671" Name="Diagram1">
+        <EntityTypeShape EntityType="kindergartenModel.child" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.class" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.condition" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.grade" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.parent" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="kindergartenModel.report" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
+        <AssociationConnector Association="kindergartenModel.FK__children__id_cla__4222D4EF" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__children__id_con__403A8C7D" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__children__id_par__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__class__id_grade__3D5E1FD2" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__report__id_class__5CD6CB2B" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

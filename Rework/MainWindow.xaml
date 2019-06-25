@@ -62,6 +62,9 @@
             <TabItem>
                 <content:Grade/>
             </TabItem>
+            <TabItem>
+                <content:Report/>
+            </TabItem>
         </Controls:MetroAnimatedTabControl>
 
         <StatusBar Grid.Row="1">

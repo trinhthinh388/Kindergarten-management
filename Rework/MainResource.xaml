@@ -6,4 +6,5 @@
     <viewmodels:ParentViewModel x:Key="ParentVM"/>
     <viewmodels:ClassViewModel x:Key="ClassVM"/>
     <viewmodels:GradeViewModel x:Key="GradeVM"/>
+    <viewmodels:ReportViewModel x:Key="ReportVM"/>
 </ResourceDictionary>

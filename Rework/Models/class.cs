@@ -18,7 +18,7 @@ namespace Rework.Models
         public @class()
         {
             this.children = new HashSet<child>();
-            this.teachings = new HashSet<teaching>();
+            this.reports = new HashSet<report>();
         }
     
         public int id { get; set; }
@@ -29,6 +29,6 @@ namespace Rework.Models
         public virtual ICollection<child> children { get; set; }
         public virtual grade grade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<teaching> teachings { get; set; }
+        public virtual ICollection<report> reports { get; set; }
     }
 }

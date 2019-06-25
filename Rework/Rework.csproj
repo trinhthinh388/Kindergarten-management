@@ -55,6 +55,13 @@
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.AspNet.EntityDataSource, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.AspNet.EntityDataSource.6.0.0\lib\net40\Microsoft.AspNet.EntityDataSource.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Office.Interop.Excel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=71e9bce111e9429c, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.Office.Interop.Excel.15.0.4795.1000\lib\net20\Microsoft.Office.Interop.Excel.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
@@ -102,48 +109,49 @@
     <Compile Include="Content\Parent.xaml.cs">
       <DependentUpon>Parent.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\Report.xaml.cs">
+      <DependentUpon>Report.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\child.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\class.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\condition.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\grade.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KindergartenEntity.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KindergartenEntity.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KindergartenEntity.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\KindergartenEntity.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\parent.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\report.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ClassViewModel.cs" />
     <Compile Include="ViewModels\GradeViewModel.cs" />
+    <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="Windows\EditChildren.xaml.cs">
       <DependentUpon>EditChildren.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\child.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\class.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\condition.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\DataProvider.cs" />
-    <Compile Include="Models\grade.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KindergartenDatabase.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KindergartenDatabase.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KindergartenDatabase.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\KindergartenDatabase.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>KindergartenDatabase.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Models\parent.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\teacher.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\teaching.cs">
-      <DependentUpon>KindergartenDatabase.tt</DependentUpon>
-    </Compile>
     <Compile Include="ViewModels\BaseViewModel.cs" />
     <Compile Include="ViewModels\EditChildrenViewModel.cs" />
     <Compile Include="ViewModels\EnrollViewModel.cs" />
@@ -185,6 +193,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Parent.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\Report.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -239,12 +251,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Models\KindergartenDatabase.edmx">
+    <EntityDeploy Include="Models\KindergartenEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>KindergartenDatabase.Designer.cs</LastGenOutput>
+      <LastGenOutput>KindergartenEntity.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="Models\KindergartenDatabase.edmx.diagram">
-      <DependentUpon>KindergartenDatabase.edmx</DependentUpon>
+    <None Include="Models\KindergartenEntity.edmx.diagram">
+      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -263,19 +275,19 @@
     <Resource Include="Assets\playground.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Models\KindergartenDatabase.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KindergartenDatabase.edmx</DependentUpon>
-      <LastGenOutput>KindergartenDatabase.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\KindergartenDatabase.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KindergartenDatabase.edmx</DependentUpon>
-      <LastGenOutput>KindergartenDatabase.cs</LastGenOutput>
-    </Content>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
   <ItemGroup>
-    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+    <Content Include="Models\KindergartenEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
+      <LastGenOutput>KindergartenEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\KindergartenEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
+      <LastGenOutput>KindergartenEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

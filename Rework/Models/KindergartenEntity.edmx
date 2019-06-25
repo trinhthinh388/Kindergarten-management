@@ -51,20 +51,12 @@
           <Property Name="address" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="phonenumber" Type="nvarchar" MaxLength="30" Nullable="false" />
         </EntityType>
-        <EntityType Name="teacher">
+        <EntityType Name="report">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="name" Type="nvarchar" MaxLength="1000" Nullable="false" />
-          <Property Name="position" Type="nvarchar" MaxLength="1000" />
-        </EntityType>
-        <EntityType Name="teaching">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="id_teacher" Type="int" />
+          <Property Name="generateDate" Type="datetime" Nullable="false" />
           <Property Name="id_class" Type="int" />
         </EntityType>
         <Association Name="FK__children__id_cla__4222D4EF">
@@ -115,27 +107,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__teaching__id_cla__47DBAE45">
+        <Association Name="FK__report__id_class__5CD6CB2B">
           <End Role="class" Type="Self.class" Multiplicity="0..1" />
-          <End Role="teaching" Type="Self.teaching" Multiplicity="*" />
+          <End Role="report" Type="Self.report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="class">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="teaching">
+            <Dependent Role="report">
               <PropertyRef Name="id_class" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__teaching__id_tea__46E78A0C">
-          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
-          <End Role="teaching" Type="Self.teaching" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="teacher">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="teaching">
-              <PropertyRef Name="id_teacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -145,8 +125,7 @@
           <EntitySet Name="condition" EntityType="Self.condition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="grade" EntityType="Self.grade" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="parent" EntityType="Self.parent" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="teaching" EntityType="Self.teaching" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__children__id_cla__4222D4EF" Association="Self.FK__children__id_cla__4222D4EF">
             <End Role="class" EntitySet="class" />
             <End Role="children" EntitySet="children" />
@@ -163,13 +142,9 @@
             <End Role="grade" EntitySet="grade" />
             <End Role="class" EntitySet="class" />
           </AssociationSet>
-          <AssociationSet Name="FK__teaching__id_cla__47DBAE45" Association="Self.FK__teaching__id_cla__47DBAE45">
+          <AssociationSet Name="FK__report__id_class__5CD6CB2B" Association="Self.FK__report__id_class__5CD6CB2B">
             <End Role="class" EntitySet="class" />
-            <End Role="teaching" EntitySet="teaching" />
-          </AssociationSet>
-          <AssociationSet Name="FK__teaching__id_tea__46E78A0C" Association="Self.FK__teaching__id_tea__46E78A0C">
-            <End Role="teacher" EntitySet="teacher" />
-            <End Role="teaching" EntitySet="teaching" />
+            <End Role="report" EntitySet="report" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -203,7 +178,7 @@
           <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="children" Relationship="Self.FK__children__id_cla__4222D4EF" FromRole="class" ToRole="children" />
           <NavigationProperty Name="grade" Relationship="Self.FK__class__id_grade__3D5E1FD2" FromRole="class" ToRole="grade" />
-          <NavigationProperty Name="teachings" Relationship="Self.FK__teaching__id_cla__47DBAE45" FromRole="class" ToRole="teaching" />
+          <NavigationProperty Name="reports" Relationship="Self.FK__report__id_class__5CD6CB2B" FromRole="class" ToRole="report" />
         </EntityType>
         <EntityType Name="condition">
           <Key>
@@ -232,24 +207,14 @@
           <Property Name="phonenumber" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
           <NavigationProperty Name="children" Relationship="Self.FK__children__id_par__412EB0B6" FromRole="parent" ToRole="children" />
         </EntityType>
-        <EntityType Name="teacher">
+        <EntityType Name="report">
           <Key>
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="name" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" Nullable="false" />
-          <Property Name="position" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="teachings" Relationship="Self.FK__teaching__id_tea__46E78A0C" FromRole="teacher" ToRole="teaching" />
-        </EntityType>
-        <EntityType Name="teaching">
-          <Key>
-            <PropertyRef Name="id" />
-          </Key>
-          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="id_teacher" Type="Int32" />
+          <Property Name="generateDate" Type="DateTime" Nullable="false" Precision="3" />
           <Property Name="id_class" Type="Int32" />
-          <NavigationProperty Name="class" Relationship="Self.FK__teaching__id_cla__47DBAE45" FromRole="teaching" ToRole="class" />
-          <NavigationProperty Name="teacher" Relationship="Self.FK__teaching__id_tea__46E78A0C" FromRole="teaching" ToRole="teacher" />
+          <NavigationProperty Name="class" Relationship="Self.FK__report__id_class__5CD6CB2B" FromRole="report" ToRole="class" />
         </EntityType>
         <Association Name="FK__children__id_cla__4222D4EF">
           <End Role="class" Type="Self.class" Multiplicity="0..1" />
@@ -299,27 +264,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__teaching__id_cla__47DBAE45">
+        <Association Name="FK__report__id_class__5CD6CB2B">
           <End Role="class" Type="Self.class" Multiplicity="0..1" />
-          <End Role="teaching" Type="Self.teaching" Multiplicity="*" />
+          <End Role="report" Type="Self.report" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="class">
               <PropertyRef Name="id" />
             </Principal>
-            <Dependent Role="teaching">
+            <Dependent Role="report">
               <PropertyRef Name="id_class" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK__teaching__id_tea__46E78A0C">
-          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
-          <End Role="teaching" Type="Self.teaching" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="teacher">
-              <PropertyRef Name="id" />
-            </Principal>
-            <Dependent Role="teaching">
-              <PropertyRef Name="id_teacher" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -329,8 +282,7 @@
           <EntitySet Name="conditions" EntityType="Self.condition" />
           <EntitySet Name="grades" EntityType="Self.grade" />
           <EntitySet Name="parents" EntityType="Self.parent" />
-          <EntitySet Name="teachers" EntityType="Self.teacher" />
-          <EntitySet Name="teachings" EntityType="Self.teaching" />
+          <EntitySet Name="reports" EntityType="Self.report" />
           <AssociationSet Name="FK__children__id_cla__4222D4EF" Association="Self.FK__children__id_cla__4222D4EF">
             <End Role="class" EntitySet="classes" />
             <End Role="children" EntitySet="children" />
@@ -347,13 +299,9 @@
             <End Role="grade" EntitySet="grades" />
             <End Role="class" EntitySet="classes" />
           </AssociationSet>
-          <AssociationSet Name="FK__teaching__id_cla__47DBAE45" Association="Self.FK__teaching__id_cla__47DBAE45">
+          <AssociationSet Name="FK__report__id_class__5CD6CB2B" Association="Self.FK__report__id_class__5CD6CB2B">
             <End Role="class" EntitySet="classes" />
-            <End Role="teaching" EntitySet="teachings" />
-          </AssociationSet>
-          <AssociationSet Name="FK__teaching__id_tea__46E78A0C" Association="Self.FK__teaching__id_tea__46E78A0C">
-            <End Role="teacher" EntitySet="teachers" />
-            <End Role="teaching" EntitySet="teachings" />
+            <End Role="report" EntitySet="reports" />
           </AssociationSet>
         </EntityContainer>
       </Schema>
@@ -413,20 +361,11 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="teachers">
-            <EntityTypeMapping TypeName="kindergartenModel.teacher">
-              <MappingFragment StoreEntitySet="teacher">
+          <EntitySetMapping Name="reports">
+            <EntityTypeMapping TypeName="kindergartenModel.report">
+              <MappingFragment StoreEntitySet="report">
                 <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="name" ColumnName="name" />
-                <ScalarProperty Name="position" ColumnName="position" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="teachings">
-            <EntityTypeMapping TypeName="kindergartenModel.teaching">
-              <MappingFragment StoreEntitySet="teaching">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="id_teacher" ColumnName="id_teacher" />
+                <ScalarProperty Name="generateDate" ColumnName="generateDate" />
                 <ScalarProperty Name="id_class" ColumnName="id_class" />
               </MappingFragment>
             </EntityTypeMapping>
