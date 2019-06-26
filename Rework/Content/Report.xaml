@@ -190,7 +190,7 @@
                          HorizontalAlignment="Center"
                          Controls:TextBoxHelper.ClearTextButton="True"
                          Controls:TextBoxHelper.UseFloatingWatermark="True"
-                         Controls:TextBoxHelper.Watermark="Search...">
+                         Controls:TextBoxHelper.Watermark="Enter class name...">
                                                 <TextBox.InputBindings>
                                                     <KeyBinding Key="Return"
                                     Command="{Binding SearchCommand, Mode=OneWay}"
@@ -222,7 +222,7 @@
                                                       IsReadOnly="True"
                           Style="{DynamicResource AzureDataGrid}"
                           RowHeaderWidth="0"
-                          ItemsSource="{Binding ListClass, Mode=OneWay}">
+                          ItemsSource="{Binding ListReport, Mode=OneWay}">
                                                 <DataGrid.Columns>
                                                     <DataGridTemplateColumn x:Name="ColumnTemplate" Width="200">
                                                         <DataGridTemplateColumn.CellTemplate>
@@ -235,8 +235,6 @@
                                                                             </ResourceDictionary.MergedDictionaries>
                                                                         </ResourceDictionary>
                                                                     </StackPanel.Resources>
-                                                                    <Button x:Name="EditButton" Content="Edit" Margin="10 5 10 5" Tag="{Binding Id}" Command="{Binding Path=DataContext.EditCommand, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding ElementName=EditButton}"/>
-                                                                    <Button Content="Delete" Background="#FFEB2F2F" Margin="10 5 10 5" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding Id}"/>
                                                                 </StackPanel>
                                                             </DataTemplate>
                                                         </DataGridTemplateColumn.CellTemplate>
