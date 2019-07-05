@@ -13,7 +13,7 @@
         x:Name="MainWD"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
-        Title="MainWindow" Height="718" Width="1024">
+        Title="KINMA NURSERY" Height="718" Width="1024">
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
             <Style x:Key="AccentCircleButtonStyle"
@@ -31,7 +31,7 @@
             </Style>
         </ResourceDictionary>
     </Controls:MetroWindow.Resources>
-    
+
     <Controls:MetroWindow.LeftWindowCommands>
         <Controls:WindowCommands ShowSeparators="False">
             <Button Margin="10 0 0 0 " Foreground="GhostWhite" x:Name="HomeButton" Cursor="Hand" Visibility="Collapsed" Style="{StaticResource AccentCircleButtonStyle}" Height="25" Width="25" Click="HomeButtonClick">
@@ -39,6 +39,12 @@
             </Button>
         </Controls:WindowCommands>
     </Controls:MetroWindow.LeftWindowCommands>
+
+    <Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Content="Settings" FontSize="15" Cursor="Hand" Command="{Binding SettingsCommand}" CommandParameter="{Binding ElementName=MainTabControl}" />
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>
 
     <Grid>
         <Grid.RowDefinitions>
@@ -64,6 +70,9 @@
             </TabItem>
             <TabItem>
                 <content:Report/>
+            </TabItem>
+            <TabItem>
+                <content:Settings/>
             </TabItem>
         </Controls:MetroAnimatedTabControl>
 

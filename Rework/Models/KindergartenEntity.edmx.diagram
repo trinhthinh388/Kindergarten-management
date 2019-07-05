@@ -4,18 +4,20 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="e35a6e37759d4cc3bd47e46f5245e671" Name="Diagram1">
+      <Diagram DiagramId="efd785dd50974893b4199a936fd48e64" Name="Diagram1">
         <EntityTypeShape EntityType="kindergartenModel.child" Width="1.5" PointX="5.25" PointY="3.375" IsExpanded="true" />
         <EntityTypeShape EntityType="kindergartenModel.class" Width="1.5" PointX="3" PointY="3.875" IsExpanded="true" />
         <EntityTypeShape EntityType="kindergartenModel.condition" Width="1.5" PointX="3" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="kindergartenModel.grade" Width="1.5" PointX="0.75" PointY="4.25" IsExpanded="true" />
         <EntityTypeShape EntityType="kindergartenModel.parent" Width="1.5" PointX="3" PointY="7.125" IsExpanded="true" />
         <EntityTypeShape EntityType="kindergartenModel.report" Width="1.5" PointX="5.25" PointY="8.25" IsExpanded="true" />
-        <AssociationConnector Association="kindergartenModel.FK__children__id_cla__4222D4EF" ManuallyRouted="false" />
-        <AssociationConnector Association="kindergartenModel.FK__children__id_con__403A8C7D" ManuallyRouted="false" />
-        <AssociationConnector Association="kindergartenModel.FK__children__id_par__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__children__id_cla__787EE5A0" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__children__id_con__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="kindergartenModel.FK__children__id_par__778AC167" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.FK__class__id_grade__3D5E1FD2" ManuallyRouted="false" />
         <AssociationConnector Association="kindergartenModel.FK__report__id_class__5CD6CB2B" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="kindergartenModel.sysdiagram" Width="1.5" PointX="11.5" PointY="5.75" />
+        <EntityTypeShape EntityType="kindergartenModel.regulation" Width="1.5" PointX="8.875" PointY="2.375" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

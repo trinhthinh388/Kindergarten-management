@@ -18,7 +18,7 @@ namespace Rework.Models
         public string name { get; set; }
         public string nickname { get; set; }
         public System.DateTime birthdate { get; set; }
-        public Nullable<System.DateTime> enrolldate { get; set; }
+        public System.DateTime enrolldate { get; set; }
         public bool sex { get; set; }
         public Nullable<int> id_condition { get; set; }
         public int id_parent { get; set; }

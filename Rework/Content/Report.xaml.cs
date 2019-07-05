@@ -37,8 +37,8 @@ namespace Rework.Content
         {
             var grid = (DataGrid)sender;
             grid.Columns[0].Visibility = Visibility.Collapsed;
-            grid.Columns[1].Header = "Class";
-            grid.Columns[2].Header = "Date generated";
+            grid.Columns[1].Header = "Date generated";
+            grid.Columns[2].Header = "Class";
 
         }
     }

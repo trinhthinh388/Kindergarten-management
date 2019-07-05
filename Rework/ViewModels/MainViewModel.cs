@@ -1,10 +1,12 @@
-﻿using MahApps.Metro.Controls.Dialogs;
+﻿using MahApps.Metro.Controls;
+using MahApps.Metro.Controls.Dialogs;
 using Rework.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 
 namespace Rework.ViewModels
@@ -38,8 +40,16 @@ namespace Rework.ViewModels
             }
         }
 
+        public ICommand SettingsCommand { get; set; }
+
         private MainViewModel()
         {
+            SettingViewModel.Init();
+            SettingsCommand = new RelayCommand<MetroAnimatedTabControl>((p)=> { return true; },
+                (p)=> 
+                {
+                    p.SelectedIndex = 6;
+                });
         }
 
     }

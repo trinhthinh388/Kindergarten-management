@@ -230,6 +230,7 @@ namespace Rework.ViewModels
                     Child.id_condition = DataProvider.Ins.DB.conditions.Where(x => x.name == selectedCondition).ToArray()[0].id;
                     DataProvider.Ins.DB.SaveChanges();
                     ManageChildrenViewModel.Ins.LoadData();
+                    EnrollViewModel.LoadClasses();
                     await Window.ShowMessageAsync("Hello!", "Saved changes successfully.", MessageDialogStyle.Affirmative, mySettings);
                     Window.Close();
                 });

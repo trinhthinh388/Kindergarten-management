@@ -60,7 +60,7 @@ namespace Rework.ViewModels
 
         public void Execute(object parameter)
         {
-            _execute((T)parameter);
+           _execute((T)parameter);
         }
 
         public event EventHandler CanExecuteChanged

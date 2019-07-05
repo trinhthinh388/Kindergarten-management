@@ -7,4 +7,5 @@
     <viewmodels:ClassViewModel x:Key="ClassVM"/>
     <viewmodels:GradeViewModel x:Key="GradeVM"/>
     <viewmodels:ReportViewModel x:Key="ReportVM"/>
+    <viewmodels:SettingViewModel x:Key="SettingVM"/>
 </ResourceDictionary>

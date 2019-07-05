@@ -30,6 +30,7 @@ namespace Rework.Models
         public virtual DbSet<condition> conditions { get; set; }
         public virtual DbSet<grade> grades { get; set; }
         public virtual DbSet<parent> parents { get; set; }
+        public virtual DbSet<regulation> regulations { get; set; }
         public virtual DbSet<report> reports { get; set; }
     }
 }

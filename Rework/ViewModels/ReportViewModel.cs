@@ -102,7 +102,11 @@ namespace Rework.ViewModels
                     };
 
                     string fileName = DateTime.Now.Month.ToString() + "-" + DateTime.Now.Day.ToString() + "-" + DateTime.Now.Year.ToString() + "-" + selectedClass;
-                    filePath = "C:\\Users\\T\\Desktop\\csv\\" + fileName + ".xlsx";
+                    if(SettingViewModel.FilePath == null || SettingViewModel.FilePath == "")
+                    {
+                        await w.ShowMessageAsync("Hello!", "Invalid file path.", MessageDialogStyle.Affirmative, mySettings);
+                    }
+                    filePath = SettingViewModel.FilePath + fileName + ".xlsx";
 
                     List<ChildrenReport> db = new List<ChildrenReport>();
                     List<child> query = new List<child>();
@@ -149,14 +153,15 @@ namespace Rework.ViewModels
                             r.generateDate = DateTime.Now;
                             DataProvider.Ins.DB.reports.Add(r);
                         }
-
-                        DataProvider.Ins.DB.SaveChanges();
                         if (ExportExcelFile(db, filePath))
                         {
-                            await Application.Current.Dispatcher.Invoke(async ()=> 
+                            await Application.Current.Dispatcher.Invoke(async () =>
                             {
                                 await controller.CloseAsync();
                                 await w.ShowMessageAsync("Hello!", "Exported successfully.", MessageDialogStyle.Affirmative, mySettings);
+                                
+                                DataProvider.Ins.DB.SaveChanges();
+                                LoadReportHistory();
                             });
                         }
                     });
@@ -250,7 +255,7 @@ namespace Rework.ViewModels
 
                     ExcelWorksheet ws = p.Workbook.Worksheets[1];
 
-                    ws.Name = "ger";
+                    ws.Name = "Report class" + className + DateTime.Now.ToString();
 
                     ws.Cells.Style.Font.Size = 11;
 
@@ -260,7 +265,7 @@ namespace Rework.ViewModels
 
                     int countColHeader = columnHeader.Count();
 
-                    ws.Cells[1, 1].Value = "asdfweaf";
+                    ws.Cells[1, 1].Value = "Report class" + className + DateTime.Now.ToString();
 
                     ws.Cells[1, 1, 1, countColHeader].Merge = true;
 

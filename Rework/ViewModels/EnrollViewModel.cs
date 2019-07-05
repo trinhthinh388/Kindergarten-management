@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -21,7 +22,6 @@ namespace Rework.ViewModels
     {
         public ICommand EnrollCommand { get; set; }
         private static ObservableCollection<string> _classes;
-
 
         public static ObservableCollection<string> AvailableClasses
         {
@@ -242,6 +242,8 @@ namespace Rework.ViewModels
 
             addingChild.id_parent = DataProvider.Ins.DB.parents.Where(x => x.FatherName == addingParent.FatherName && x.Mothername == addingParent.Mothername && x.phonenumber == addingParent.phonenumber && x.address == addingParent.address).ToArray()[0].id;
 
+           
+
             if (DataProvider.Ins.DB.children.Where(x => x.name == addingChild.name && x.id_parent == addingChild.id_parent && x.birthdate == addingChild.birthdate && x.sex == addingChild.sex && x.nickname == addingChild.nickname).Count() > 0)
             {
                 await Application.Current.Dispatcher.Invoke(async () =>
@@ -261,6 +263,7 @@ namespace Rework.ViewModels
                     await controller.CloseAsync();
                     await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled Successfully.", MessageDialogStyle.Affirmative, mySettings);
                     ManageChildrenViewModel.Ins.LoadData();
+                    LoadClasses();
                 });
             }
         }
@@ -276,12 +279,28 @@ namespace Rework.ViewModels
                 _classes.Clear();
             }
 
-            List<@class> classes = DataProvider.Ins.DB.classes.ToList();
-            foreach(@class c in classes)
+            if (DataProvider.Ins.DB.regulations.Where(x => x.content == "Class size").Count() == 0)
+                return;
+
+            int classSize = DataProvider.Ins.DB.regulations.Where(x => x.content == "Class size").ToArray()[0].ValueInt;
+            
+            var classes = (from c in DataProvider.Ins.DB.classes
+                           join d in DataProvider.Ins.DB.children on c.id equals d.id_class into sums
+                           from sum in sums.DefaultIfEmpty()
+                           group sum by new { c.id, c.name } into gr
+                           select new
+                           {
+                               gr.Key.name,
+                               Total = gr.Count(x => x != null)
+                           }
+                           ).ToList();
+            foreach (var c in classes)
             {
-                _classes.Add(c.name);
+                if (c.Total < classSize)
+                    _classes.Add(c.name);
             }
         }
+
 
         private static IEnumerable<T> FindVisualChildren<T>(DependencyObject depObj) where T : DependencyObject
         {

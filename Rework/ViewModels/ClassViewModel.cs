@@ -153,6 +153,7 @@ namespace Rework.ViewModels
                     }
                     LoadData();
                     EnrollViewModel.LoadClasses();
+                    ReportViewModel.LoadClass();
                 });
 
             
