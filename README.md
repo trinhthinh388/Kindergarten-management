@@ -2,7 +2,9 @@
 
 ## Overview
 
-Our software will make daily kindergarten agenda easier to do and increase the efficiency at work.
+Our software will make daily kindergarten agenda easier to do and increase the efficiency at work
+
+
 
 ## Project introduction 
 
