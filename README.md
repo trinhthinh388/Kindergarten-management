@@ -4,7 +4,7 @@
 
 Our software will make daily kindergarten agenda easier to do and increase the efficiency at work
 
-
+![alt text](https://github.com/trinhthinh388/Kindergarten-management/blob/master/Capture.PNG)
 
 ## Project introduction 
 
