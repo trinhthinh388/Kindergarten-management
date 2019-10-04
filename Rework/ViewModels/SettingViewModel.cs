@@ -8,6 +8,7 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Data.Entity.Validation;
 using System.IO;
 using System.Linq;
 using System.Text;
@@ -79,15 +80,34 @@ namespace Rework.ViewModels
 
         public static void Init()
         {
-            regulation w = new regulation();
-            foreach(string m in regulations)
+            try
             {
-                if (DataProvider.Ins.DB.regulations.Where(x => x.content == m).Count() > 0)
-                    continue;
-                w.content = m;
-                DataProvider.Ins.DB.regulations.Add(w);
-                DataProvider.Ins.DB.SaveChanges();
+                regulation w = new regulation();
+                foreach (string m in regulations)
+                {
+                    if (DataProvider.Ins.DB.regulations.Where(x => x.content == m).Count() > 0)
+                        continue;
+                    w.content = m;
+                    DataProvider.Ins.DB.regulations.Add(w);
+                    DataProvider.Ins.DB.SaveChanges();
+
+                }
             }
+            catch (DbEntityValidationException e)
+            {
+                foreach (var eve in e.EntityValidationErrors)
+                {
+                    Console.WriteLine("Entity of type \"{0}\" in state \"{1}\" has the following validation errors:",
+                        eve.Entry.Entity.GetType().Name, eve.Entry.State);
+                    foreach (var ve in eve.ValidationErrors)
+                    {
+                        Console.WriteLine("- Property: \"{0}\", Error: \"{1}\"",
+                            ve.PropertyName, ve.ErrorMessage);
+                    }
+                }
+                throw;
+            }
+            
         }
 
         public static void LoadData()

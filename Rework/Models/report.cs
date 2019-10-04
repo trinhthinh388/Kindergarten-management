@@ -16,7 +16,7 @@ namespace Rework.Models
     {
         public int id { get; set; }
         public System.DateTime generateDate { get; set; }
-        public Nullable<int> id_class { get; set; }
+        public int id_class { get; set; }
     
         public virtual @class @class { get; set; }
     }

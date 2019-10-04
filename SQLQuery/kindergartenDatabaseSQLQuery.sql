@@ -63,6 +63,7 @@ go
 
 create table regulation(
 	id int identity(1, 1) not null primary key,
-	content nvarchar not null,
-	ValueReg int not null
+	content nvarchar(1000) not null,
+	ValueInt int not null,
+	ValueStr nvarchar(1000)
 )

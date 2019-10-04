@@ -16,7 +16,7 @@ namespace Rework.Models
     {
         public int id { get; set; }
         public string content { get; set; }
-        public string ValueStr { get; set; }
         public int ValueInt { get; set; }
+        public string ValueStr { get; set; }
     }
 }

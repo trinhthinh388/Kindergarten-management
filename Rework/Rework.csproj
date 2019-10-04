@@ -67,7 +67,7 @@
     <GenerateManifests>true</GenerateManifests>
   </PropertyGroup>
   <PropertyGroup>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ControlzEx, Version=3.0.2.4, Culture=neutral, processorArchitecture=MSIL">
@@ -108,6 +108,7 @@
     <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Data.Entity" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.Security" />
@@ -343,16 +344,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="4043250-avatar-child-girl-kid_113270.ico" />
-    <Content Include="Models\KindergartenEntity.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
-      <LastGenOutput>KindergartenEntity.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Models\KindergartenEntity.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
-      <LastGenOutput>KindergartenEntity.cs</LastGenOutput>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.7.2">
@@ -365,6 +356,18 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\KindergartenEntity.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
+      <LastGenOutput>KindergartenEntity.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\KindergartenEntity.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>KindergartenEntity.edmx</DependentUpon>
+      <LastGenOutput>KindergartenEntity.cs</LastGenOutput>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.74.0.0\build\Selenium.Chrome.WebDriver.targets')" />
