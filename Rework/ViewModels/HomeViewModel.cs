@@ -26,7 +26,7 @@ namespace Rework.ViewModels
                     MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
                     if (w == null)
                         return;
-                    w.SelectedIndex = 1;
+                    w.SelectedIndex = 2;
                 });
 
             ManageParentCommand = new RelayCommand<UserControl>((p)=> { return true; },
@@ -35,7 +35,7 @@ namespace Rework.ViewModels
                     MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
                     if (w == null)
                         return;
-                    w.SelectedIndex = 2;
+                    w.SelectedIndex = 3;
 
                 });
             ManageClassCommand = new RelayCommand<UserControl>((p) => { return true; },
@@ -44,7 +44,7 @@ namespace Rework.ViewModels
                     MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
                     if (w == null)
                         return;
-                    w.SelectedIndex = 3;
+                    w.SelectedIndex = 4;
                 });
 
             ManageGradeCommand = new RelayCommand<UserControl>((p)=> { return true; },
@@ -53,7 +53,7 @@ namespace Rework.ViewModels
                     MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
                     if (w == null)
                         return;
-                    w.SelectedIndex = 4;
+                    w.SelectedIndex = 5;
                 });
 
             ReportCommand = new RelayCommand<UserControl>((p) => { return true; },
@@ -62,7 +62,7 @@ namespace Rework.ViewModels
                     MetroAnimatedTabControl w = GetWindowParent(p, "MainTabControl") as MetroAnimatedTabControl;
                     if (w == null)
                         return;
-                    w.SelectedIndex = 5;
+                    w.SelectedIndex = 6;
                 });
         }
 

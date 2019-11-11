@@ -1,0 +1,55 @@
+﻿<UserControl
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Rework.Content"
+             xmlns:mah="http://metro.mahapps.com/winfx/xaml/controls" x:Class="Rework.Content.LogIn"
+             mc:Ignorable="d" 
+             d:DesignHeight="718" d:DesignWidth="1024"
+    x:Name="LogInUC"
+             DataContext="{StaticResource LogInVM}"
+    >
+    <Grid  RenderTransformOrigin="0.5,0.5" >
+        <Grid.Background>
+            <ImageBrush ImageSource="background.jpg" Opacity="0.765">
+                <ImageBrush.RelativeTransform>
+                    <TransformGroup>
+                        <ScaleTransform CenterY="0.5" CenterX="0.5" ScaleY="1" ScaleX="1"/>
+                        <SkewTransform AngleY="0" AngleX="0" CenterY="0.5" CenterX="0.5"/>
+                        <RotateTransform Angle="0" CenterY="0.5" CenterX="0.5"/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </ImageBrush.RelativeTransform>
+            </ImageBrush>
+        </Grid.Background>
+
+        <Grid Width="500" HorizontalAlignment="Center" VerticalAlignment="Center" Height="450" Background="#FF2B2B2B">
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+
+            <TextBlock FontWeight="SemiBold" Grid.Row="0" Text="WELCOME BACK!" FontSize="25" Foreground="WhiteSmoke" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <StackPanel Grid.Row="1" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontSize="12" FontWeight="SemiBold" Margin="10" Text="USERNAME" Foreground="WhiteSmoke"/>
+                <TextBox BorderThickness="1" Padding="5 10" FontSize="12" Foreground="White" Width="400" BorderBrush="Black" mah:TextBoxHelper.IsSpellCheckContextMenuEnabled="False" Text="{Binding Username, Mode=OneWayToSource}"/>
+            </StackPanel>
+            <StackPanel Grid.Row="2" Orientation="Vertical" HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock FontSize="12" FontWeight="SemiBold" Margin="10" Text="PASSWORD" Foreground="WhiteSmoke"/>
+                <PasswordBox x:Name="pwbox" BorderThickness="1" Padding="5 10" FontSize="12" Foreground="White" Width="400" BorderBrush="Black" mah:TextBoxHelper.UseFloatingWatermark="True">
+                    <i:Interaction.Triggers>
+                        <i:EventTrigger EventName="PasswordChanged">
+                            <i:InvokeCommandAction Command="{Binding PasswordChangedCommand}" 
+                                   CommandParameter="{Binding ElementName=pwbox}"/>
+                        </i:EventTrigger>
+                    </i:Interaction.Triggers>
+                </PasswordBox>
+            </StackPanel>
+            <Button IsDefault="True" FontSize="15" Foreground="WhiteSmoke" BorderBrush="Transparent" BorderThickness="0" Grid.Row="3" Width="400" Height="50" Background="#FFFF842D" Content="Log in" Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=LogInUC}" />
+        </Grid>
+    </Grid>
+</UserControl>

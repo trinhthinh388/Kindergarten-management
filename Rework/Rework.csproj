@@ -148,6 +148,9 @@
     <Compile Include="Content\Children.xaml.cs">
       <DependentUpon>Children.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Content\LogIn.xaml.cs">
+      <DependentUpon>LogIn.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Content\ManageChildren.xaml.cs">
       <DependentUpon>ManageChildren.xaml</DependentUpon>
     </Compile>
@@ -196,9 +199,16 @@
     <Compile Include="Models\report.cs">
       <DependentUpon>KindergartenEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\teacher.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\user.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="ViewModels\ClassViewModel.cs" />
     <Compile Include="ViewModels\EditConditionsViewModel.cs" />
     <Compile Include="ViewModels\GradeViewModel.cs" />
+    <Compile Include="ViewModels\LogInViewModel.cs" />
     <Compile Include="ViewModels\ReportViewModel.cs" />
     <Compile Include="ViewModels\SettingViewModel.cs" />
     <Compile Include="Windows\EditChildren.xaml.cs">
@@ -241,6 +251,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Content\Children.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Content\LogIn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -358,6 +372,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="Content\background.jpg" />
     <Content Include="Models\KindergartenEntity.Context.tt">
       <Generator>TextTemplatingFileGenerator</Generator>
       <DependentUpon>KindergartenEntity.edmx</DependentUpon>

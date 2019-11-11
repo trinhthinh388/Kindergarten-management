@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="kindergartenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="kindergartenModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="children">
           <Key>
             <PropertyRef Name="id" />
@@ -68,6 +68,23 @@
           <Property Name="generateDate" Type="datetime" Nullable="false" />
           <Property Name="id_class" Type="int" Nullable="false" />
         </EntityType>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
+        <EntityType Name="users">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="position" Type="int" Nullable="false" />
+          <Property Name="id_teacher" Type="int" Nullable="false" />
+          <Property Name="username" Type="nvarchar" MaxLength="1000" Nullable="false" />
+          <Property Name="password" Type="nvarchar" MaxLength="1000" Nullable="false" />
+        </EntityType>
         <Association Name="FK__children__id_cla__4222D4EF">
           <End Role="class" Type="Self.class" Multiplicity="0..1" />
           <End Role="children" Type="Self.children" Multiplicity="*" />
@@ -128,6 +145,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__users__id_teache__5CD6CB2B">
+          <End Role="teacher" Type="Self.teacher" Multiplicity="1" />
+          <End Role="users" Type="Self.users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="users">
+              <PropertyRef Name="id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="kindergartenModelStoreContainer">
           <EntitySet Name="children" EntityType="Self.children" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="class" EntityType="Self.class" Schema="dbo" store:Type="Tables" />
@@ -136,6 +165,8 @@
           <EntitySet Name="parent" EntityType="Self.parent" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="regulation" EntityType="Self.regulation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__children__id_cla__4222D4EF" Association="Self.FK__children__id_cla__4222D4EF">
             <End Role="class" EntitySet="class" />
             <End Role="children" EntitySet="children" />
@@ -156,9 +187,12 @@
             <End Role="class" EntitySet="class" />
             <End Role="report" EntitySet="report" />
           </AssociationSet>
+          <AssociationSet Name="FK__users__id_teache__5CD6CB2B" Association="Self.FK__users__id_teache__5CD6CB2B">
+            <End Role="teacher" EntitySet="teacher" />
+            <End Role="users" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="kindergartenModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -323,7 +357,44 @@
             <End Role="class" EntitySet="classes" />
             <End Role="report" EntitySet="reports" />
           </AssociationSet>
+          <EntitySet Name="teachers" EntityType="kindergartenModel.teacher" />
+          <EntitySet Name="users" EntityType="kindergartenModel.user" />
+          <AssociationSet Name="FK__users__id_teache__4BAC3F29" Association="kindergartenModel.FK__users__id_teache__4BAC3F29">
+            <End Role="teacher" EntitySet="teachers" />
+            <End Role="user" EntitySet="users" />
+          </AssociationSet>
         </EntityContainer>
+        <EntityType Name="teacher">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="users" Relationship="kindergartenModel.FK__users__id_teache__4BAC3F29" FromRole="teacher" ToRole="user" />
+        </EntityType>
+        <EntityType Name="user">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="position" Type="Int32" Nullable="false" />
+          <Property Name="id_teacher" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="teacher" Relationship="kindergartenModel.FK__users__id_teache__4BAC3F29" FromRole="user" ToRole="teacher" />
+          <Property Name="username" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+          <Property Name="password" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK__users__id_teache__4BAC3F29">
+          <End Type="kindergartenModel.teacher" Role="teacher" Multiplicity="1" />
+          <End Type="kindergartenModel.user" Role="user" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="user">
+              <PropertyRef Name="id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -397,6 +468,25 @@
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="generateDate" ColumnName="generateDate" />
                 <ScalarProperty Name="id_class" ColumnName="id_class" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="teachers">
+            <EntityTypeMapping TypeName="kindergartenModel.teacher">
+              <MappingFragment StoreEntitySet="teacher">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="users">
+            <EntityTypeMapping TypeName="kindergartenModel.user">
+              <MappingFragment StoreEntitySet="users">
+                <ScalarProperty Name="password" ColumnName="password" />
+                <ScalarProperty Name="username" ColumnName="username" />
+                <ScalarProperty Name="id_teacher" ColumnName="id_teacher" />
+                <ScalarProperty Name="position" ColumnName="position" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

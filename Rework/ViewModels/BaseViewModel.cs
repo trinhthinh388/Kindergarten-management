@@ -46,6 +46,7 @@ namespace Rework.ViewModels
             _execute = execute;
         }
 
+
         public bool CanExecute(object parameter)
         {
             try

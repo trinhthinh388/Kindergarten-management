@@ -48,9 +48,8 @@ namespace Rework.ViewModels
             SettingsCommand = new RelayCommand<MetroAnimatedTabControl>((p)=> { return true; },
                 (p)=> 
                 {
-                    p.SelectedIndex = 6;
+                    p.SelectedIndex = 7;
                 });
         }
-
     }
 }

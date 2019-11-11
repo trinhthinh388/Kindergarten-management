@@ -41,8 +41,18 @@ namespace Rework
 
         private void MainTabControl_LayoutUpdated(object sender, EventArgs e)
         {
+            if (LogInViewModel.isLogin && MainTabControl.SelectedIndex == 0)
+            {
+                MainTabControl.SelectedIndex = 1;
+                this.MainWD.ShowTitleBar = true;
+            }
 
-            if (MainTabControl.SelectedIndex != 0)
+            if(MainTabControl.SelectedIndex == 0)
+            {
+                this.MainWD.ShowTitleBar = false;
+            }
+
+            if (MainTabControl.SelectedIndex > 1)
             {
                 this.HomeButton.Visibility = Visibility.Visible;
             }

@@ -11,8 +11,10 @@
         xmlns:content="clr-namespace:Rework.Content"
         mc:Ignorable="d"
         x:Name="MainWD"
+                      BorderThickness="0"
         GlowBrush="{DynamicResource AccentColorBrush}"
         WindowStartupLocation="CenterScreen"
+                      WindowTitleBrush="Transparent"
         Title="KINMA NURSERY" Height="718" Width="1024">
     <Controls:MetroWindow.Resources>
         <ResourceDictionary>
@@ -52,7 +54,10 @@
             <RowDefinition Height="auto"/>
         </Grid.RowDefinitions>
 
-        <Controls:MetroAnimatedTabControl x:Name="MainTabControl" LayoutUpdated="MainTabControl_LayoutUpdated">
+        <Controls:MetroAnimatedTabControl x:Name="MainTabControl" LayoutUpdated="MainTabControl_LayoutUpdated" TabStripPlacement="Right" TabStripMargin="0 0 -100 0">
+            <TabItem>
+                <content:LogIn/>
+            </TabItem>
             <TabItem>
                 <content:Home x:Name="HomeContent"/>
             </TabItem>
@@ -76,12 +81,6 @@
             </TabItem>
         </Controls:MetroAnimatedTabControl>
 
-        <StatusBar Grid.Row="1">
-            <StatusBarItem>Kindergarten Management Application</StatusBarItem>
-            <Separator Style="{StaticResource MetroStatusBarSeparator}" />
-            <StatusBarItem>Where children thrive</StatusBarItem>
-            <StatusBarItem Content="{Binding ElementName=MainTabControl, Path=SelectedItem.Header, Mode=OneWay}" />
-        </StatusBar>
     </Grid>
     
 

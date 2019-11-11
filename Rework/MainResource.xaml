@@ -8,4 +8,5 @@
     <viewmodels:GradeViewModel x:Key="GradeVM"/>
     <viewmodels:ReportViewModel x:Key="ReportVM"/>
     <viewmodels:SettingViewModel x:Key="SettingVM"/>
+    <viewmodels:LogInViewModel x:Key="LogInVM"/>
 </ResourceDictionary>

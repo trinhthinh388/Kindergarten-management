@@ -67,3 +67,20 @@ create table regulation(
 	ValueInt int not null,
 	ValueStr nvarchar(1000)
 )
+
+go
+
+create table teacher(
+	id int identity(1, 1) primary key,
+	name nvarchar(1000) not null,
+)
+
+go
+
+create table users(
+	id int identity(1,1) not null primary key,
+	position int not null,
+	id_teacher int not null foreign key references teacher(id),
+	username nvarchar(1000) not null,
+	password nvarchar(1000) not null
+)
