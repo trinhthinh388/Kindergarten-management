@@ -82,8 +82,8 @@ namespace Rework.ViewModels
 
         private bool AuthUser(string username, string password)
         {
-            int logInUser = DataProvider.Ins.DB.users.Where(x => x.username == username && x.password == password).ToArray().Count();
-            if(logInUser == 0)
+            int logInUser = DataProvider.Ins.DB.users.Where(x => x.username.Equals(username) && x.password.Equals(password)).ToArray().Count();
+            if (logInUser == 0)
             {
                 return false;
             }

@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 
@@ -41,6 +42,7 @@ namespace Rework.ViewModels
         }
 
         public ICommand SettingsCommand { get; set; }
+        public ICommand LogOutCommand { get; set; }
 
         private MainViewModel()
         {
@@ -50,6 +52,11 @@ namespace Rework.ViewModels
                 {
                     p.SelectedIndex = 7;
                 });
+            LogOutCommand = new RelayCommand<MetroAnimatedTabControl>((p)=> { return true; }, (p)=>
+            {
+                LogInViewModel.isLogin = false;
+                p.SelectedIndex = 0;
+            });
         }
     }
 }

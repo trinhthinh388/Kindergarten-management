@@ -32,10 +32,21 @@
             <Storyboard x:Key="FadeOut">
                 <DoubleAnimation Duration="0:0:.5" Storyboard.TargetProperty="Opacity" To="0" />
             </Storyboard>
+            <Storyboard x:Key="OpacityDown">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(Brush.Opacity)" Storyboard.TargetName="CalendarTile">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="0.8"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="OpacityUp">
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(Panel.Background).(Brush.Opacity)" Storyboard.TargetName="CalendarTile">
+                    <EasingDoubleKeyFrame KeyTime="0" Value="0.8"/>
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.3" Value="1"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
         </ResourceDictionary>
     </UserControl.Resources>
-    
-    
+
+
     <Grid>
         <WrapPanel Margin="0 60 0 0" HorizontalAlignment="Center" VerticalAlignment="Top" Width="924" Height="512">
             <Border Margin="3" Width="456" Height="250">
@@ -85,6 +96,7 @@
                     <materialDesign:PackIcon Kind="AlphaCBox" Foreground="GhostWhite" VerticalAlignment="Center" Height="60" Width="60"/>
                 </StackPanel>
             </Controls:Tile>
+
             <Controls:Tile x:Name="TimerTile" Style="{StaticResource LargeTileStyle}"  Background="DimGray" Title="Grade" Command="{Binding ManageGradeCommand}" CommandParameter="{Binding ElementName=HomeUC}">
                 <StackPanel Orientation="Horizontal">
                     <TextBlock FontSize="50" VerticalAlignment="Center" Background="Transparent" Foreground="GhostWhite" Text="{Binding numberOfGrade}"/>
