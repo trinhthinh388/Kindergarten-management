@@ -158,7 +158,7 @@
                                     HamburgerHeight="0"
                                     HamburgerVisibility="Collapsed"
                                     IsPaneOpen="True"
-                                    
+                                    ItemInvoked="HamburgerMenuControl_OnItemInvoked"
                                     ItemTemplate="{StaticResource MenuItemTemplate}"
                                     OptionsItemTemplate="{StaticResource MenuItemTemplate}"
                                     SelectedIndex="0"
@@ -178,6 +178,59 @@
                                             <Button Content="Edit" Margin="0 5 0 5" Width="100" Style="{DynamicResource AccentedSquareButtonStyle}" Command="{Binding EditConditionsCommand}" CommandParameter="{Binding ElementName=SettingsUC}"/>
                                             <TextBlock Text="Save report as: " Width="150" FontSize="16" VerticalAlignment="Center"/>
                                             <Button Content="Edit" Margin="0 5 0 5" Width="100" Style="{DynamicResource AccentedSquareButtonStyle}" Command="{Binding EditFilePathCommand}" CommandParameter="{Binding ElementName=SettingsUC}"/>
+                                        </WrapPanel>
+                                    </Grid>
+                                </UserControl>
+                            </Controls:HamburgerMenuIconItem.Tag>
+                        </Controls:HamburgerMenuIconItem>
+
+                        <Controls:HamburgerMenuIconItem Label="Profile" x:Name="InformationSection">
+                        <Controls:HamburgerMenuIconItem.Tag>
+                            <UserControl DataContext="{StaticResource SettingVM}">
+                                <Grid>
+                                    <WrapPanel Width="600" HorizontalAlignment="Left">
+                                            <TextBlock Text="Full name: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBox Text="" Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <TextBlock Text="Username: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="thinh" Width="400" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBlock Text="New password: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <PasswordBox Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <TextBlock Text="Confirm password: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <PasswordBox Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <Button Content="Save" Margin="500 50 0 0" Width="100" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+                                        </WrapPanel>
+                                </Grid>
+                            </UserControl>
+                        </Controls:HamburgerMenuIconItem.Tag>
+                        </Controls:HamburgerMenuIconItem>
+                        <Controls:HamburgerMenuIconItem Label="Account" x:Name="AccountSection">
+                            <Controls:HamburgerMenuIconItem.Tag>
+                                <UserControl DataContext="{StaticResource SettingVM}">
+                                    <Grid>
+                                        <WrapPanel Width="600" HorizontalAlignment="Left">
+                                            <TextBlock Text="Full name: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBox Text="" Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <TextBlock Text="Position: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBox Text="" Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <TextBlock Text="Username: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBox Text="" Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <TextBlock Text="Password: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <PasswordBox Margin="0 10 0 10" Width="400" FontSize="16"/>
+                                            <Button Content="Create" Margin="500 50 0 0" Width="100" Style="{DynamicResource AccentedSquareButtonStyle}"/>
+                                        </WrapPanel>
+                                    </Grid>
+                                </UserControl>
+                            </Controls:HamburgerMenuIconItem.Tag>
+                        </Controls:HamburgerMenuIconItem>
+                        <Controls:HamburgerMenuIconItem Label="Reset password" x:Name="ResetPasswordSection">
+                            <Controls:HamburgerMenuIconItem.Tag>
+                                <UserControl DataContext="{StaticResource SettingVM}">
+                                    <Grid>
+                                        <WrapPanel Width="600" HorizontalAlignment="Left">
+                                            <TextBlock Text="Teacher name: " Width="150" FontSize="16" VerticalAlignment="Center"/>
+                                            <ComboBox Text="" Margin="0 10 0 10" Width="400" FontSize="16" SelectedIndex="0"/>
+                                            <TextBlock Text="The default password after reset is 123." Width="600" FontSize="16" VerticalAlignment="Center"/>
+                                            <Button Content="Reset" Margin="500 50 0 0" Width="100" Style="{DynamicResource AccentedSquareButtonStyle}"/>
                                         </WrapPanel>
                                     </Grid>
                                 </UserControl>

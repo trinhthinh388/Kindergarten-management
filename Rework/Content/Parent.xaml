@@ -167,25 +167,6 @@
                 <!--  Items  -->
                 <Controls:HamburgerMenu.ItemsSource>
                     <Controls:HamburgerMenuItemCollection>
-                        <Controls:HamburgerMenuIconItem Label="Add Parent" x:Name="ParentSection">
-                            <Controls:HamburgerMenuIconItem.Tag>
-                                <UserControl DataContext="{StaticResource ParentVM}">
-                                    <Grid>
-                                        <WrapPanel Width="500" HorizontalAlignment="Left">
-                                            <TextBlock Text="Mother's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Mothertxb" Text="{Binding MotherName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
-                                            <TextBlock Text="Father's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Fathertxb" Text="{Binding FatherName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
-                                            <TextBlock Text="Address: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Addresstxb" Text="{Binding Address, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
-                                            <TextBlock Text="Phone number: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Phonetxb" Text="{Binding PhoneNumber, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
-                                            <Button x:Uid="2" IsDefault="True" Width="100" Height="30" Margin="320 30 0 0" Content="Add" Style="{DynamicResource AccentedSquareButtonStyle}" Command="{Binding AddParentCommand}" CommandParameter="{Binding ElementName=ParentUC}"/>
-                                        </WrapPanel>
-                                    </Grid>
-                                </UserControl>
-                            </Controls:HamburgerMenuIconItem.Tag>
-                        </Controls:HamburgerMenuIconItem>
                         <Controls:HamburgerMenuIconItem Label="Manage Parent" x:Name="FinishSection">
                             <Controls:HamburgerMenuIconItem.Tag>
                                 <UserControl DataContext="{StaticResource ParentVM}" x:Name="EnrollUC">
