@@ -90,7 +90,6 @@ namespace Rework.ViewModels
                     w.content = m;
                     DataProvider.Ins.DB.regulations.Add(w);
                     DataProvider.Ins.DB.SaveChanges();
-
                 }
             }
             catch (DbEntityValidationException e)
@@ -125,6 +124,7 @@ namespace Rework.ViewModels
             regulation g = DataProvider.Ins.DB.regulations.Where(x => x.content == "Class size").ToArray()[0];
             g.ValueInt = classSize;
             DataProvider.Ins.DB.SaveChanges();
+            EnrollViewModel.LoadClasses();
         }
     }
 }
