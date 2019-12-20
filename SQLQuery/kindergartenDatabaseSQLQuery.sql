@@ -6,6 +6,13 @@ use kindergarten;
 
 go
 
+create table teacher(
+	id int identity(1, 1) primary key,
+	name nvarchar(1000) not null,
+)
+
+go
+
 
 create table grade(
 	id int identity(1, 1) not null primary key,
@@ -32,6 +39,7 @@ go
 create table class(
 	id int identity(1, 1) not null primary key,
 	id_grade int foreign key references grade(id) not null,
+	id_teacher int foreign key references teacher(id), 
 	name nvarchar(1000) not null
 
 );
@@ -70,12 +78,7 @@ create table regulation(
 
 go
 
-create table teacher(
-	id int identity(1, 1) primary key,
-	name nvarchar(1000) not null,
-)
 
-go
 
 create table users(
 	id int identity(1,1) not null primary key,
