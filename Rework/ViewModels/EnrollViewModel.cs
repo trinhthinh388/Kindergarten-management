@@ -264,6 +264,7 @@ namespace Rework.ViewModels
                     await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled Successfully.", MessageDialogStyle.Affirmative, mySettings);
                     ManageChildrenViewModel.Ins.LoadData();
                     LoadClasses();
+                    ParentViewModel.LoadData();
                 });
             }
         }

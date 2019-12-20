@@ -123,7 +123,7 @@ namespace Rework.ViewModels
                     EditingParent.address = this._address;
                     EditingParent.phonenumber = this._phoneNumber;
                     DataProvider.Ins.DB.SaveChanges();
-                    this.LoadData();
+                    LoadData();
                     ManageChildrenViewModel.Ins.LoadData();
                     await p.ShowMessageAsync("Hello!", "Saved changes successfully.", MessageDialogStyle.Affirmative, mySettings);
                     p.Close();
@@ -212,7 +212,7 @@ namespace Rework.ViewModels
             LoadData();
         }
 
-        public void LoadData()
+        public static void LoadData()
         {
             if (_listParent == null)
             {
