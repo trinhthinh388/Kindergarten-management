@@ -18,6 +18,7 @@ namespace Rework.Models
         public teacher()
         {
             this.users = new HashSet<user>();
+            this.classes = new HashSet<@class>();
         }
     
         public int id { get; set; }
@@ -25,5 +26,7 @@ namespace Rework.Models
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<user> users { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<@class> classes { get; set; }
     }
 }

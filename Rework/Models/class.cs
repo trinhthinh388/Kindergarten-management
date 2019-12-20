@@ -24,11 +24,13 @@ namespace Rework.Models
         public int id { get; set; }
         public int id_grade { get; set; }
         public string name { get; set; }
+        public Nullable<int> id_teacher { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<child> children { get; set; }
         public virtual grade grade { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<report> reports { get; set; }
+        public virtual teacher teacher { get; set; }
     }
 }

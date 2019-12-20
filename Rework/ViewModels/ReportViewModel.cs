@@ -105,6 +105,7 @@ namespace Rework.ViewModels
                     if(SettingViewModel.FilePath == null || SettingViewModel.FilePath == "")
                     {
                         await w.ShowMessageAsync("Hello!", "Invalid file path.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
                     }
                     filePath = SettingViewModel.FilePath + fileName + ".xlsx";
 

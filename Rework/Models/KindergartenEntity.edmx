@@ -25,6 +25,7 @@
           </Key>
           <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="id_grade" Type="int" Nullable="false" />
+          <Property Name="id_teacher" Type="int" />
           <Property Name="name" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
         <EntityType Name="condition">
@@ -85,7 +86,7 @@
           <Property Name="username" Type="nvarchar" MaxLength="1000" Nullable="false" />
           <Property Name="password" Type="nvarchar" MaxLength="1000" Nullable="false" />
         </EntityType>
-        <Association Name="FK__children__id_cla__4222D4EF">
+        <Association Name="FK__children__id_cla__44FF419A">
           <End Role="class" Type="Self.class" Multiplicity="0..1" />
           <End Role="children" Type="Self.children" Multiplicity="*" />
           <ReferentialConstraint>
@@ -97,7 +98,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__children__id_con__403A8C7D">
+        <Association Name="FK__children__id_con__4316F928">
           <End Role="condition" Type="Self.condition" Multiplicity="0..1" />
           <End Role="children" Type="Self.children" Multiplicity="*" />
           <ReferentialConstraint>
@@ -109,7 +110,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__children__id_par__412EB0B6">
+        <Association Name="FK__children__id_par__440B1D61">
           <End Role="parent" Type="Self.parent" Multiplicity="1" />
           <End Role="children" Type="Self.children" Multiplicity="*" />
           <ReferentialConstraint>
@@ -121,7 +122,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__class__id_grade__3D5E1FD2">
+        <Association Name="FK__class__id_grade__3F466844">
           <End Role="grade" Type="Self.grade" Multiplicity="1" />
           <End Role="class" Type="Self.class" Multiplicity="*" />
           <ReferentialConstraint>
@@ -133,7 +134,19 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__report__id_class__44FF419A">
+        <Association Name="FK__class__id_teache__403A8C7D">
+          <End Role="teacher" Type="Self.teacher" Multiplicity="0..1" />
+          <End Role="class" Type="Self.class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="class">
+              <PropertyRef Name="id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__report__id_class__47DBAE45">
           <End Role="class" Type="Self.class" Multiplicity="1" />
           <End Role="report" Type="Self.report" Multiplicity="*" />
           <ReferentialConstraint>
@@ -145,7 +158,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__users__id_teache__5CD6CB2B">
+        <Association Name="FK__users__id_teache__4CA06362">
           <End Role="teacher" Type="Self.teacher" Multiplicity="1" />
           <End Role="users" Type="Self.users" Multiplicity="*" />
           <ReferentialConstraint>
@@ -167,27 +180,31 @@
           <EntitySet Name="report" EntityType="Self.report" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="teacher" EntityType="Self.teacher" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="users" EntityType="Self.users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK__children__id_cla__4222D4EF" Association="Self.FK__children__id_cla__4222D4EF">
+          <AssociationSet Name="FK__children__id_cla__44FF419A" Association="Self.FK__children__id_cla__44FF419A">
             <End Role="class" EntitySet="class" />
             <End Role="children" EntitySet="children" />
           </AssociationSet>
-          <AssociationSet Name="FK__children__id_con__403A8C7D" Association="Self.FK__children__id_con__403A8C7D">
+          <AssociationSet Name="FK__children__id_con__4316F928" Association="Self.FK__children__id_con__4316F928">
             <End Role="condition" EntitySet="condition" />
             <End Role="children" EntitySet="children" />
           </AssociationSet>
-          <AssociationSet Name="FK__children__id_par__412EB0B6" Association="Self.FK__children__id_par__412EB0B6">
+          <AssociationSet Name="FK__children__id_par__440B1D61" Association="Self.FK__children__id_par__440B1D61">
             <End Role="parent" EntitySet="parent" />
             <End Role="children" EntitySet="children" />
           </AssociationSet>
-          <AssociationSet Name="FK__class__id_grade__3D5E1FD2" Association="Self.FK__class__id_grade__3D5E1FD2">
+          <AssociationSet Name="FK__class__id_grade__3F466844" Association="Self.FK__class__id_grade__3F466844">
             <End Role="grade" EntitySet="grade" />
             <End Role="class" EntitySet="class" />
           </AssociationSet>
-          <AssociationSet Name="FK__report__id_class__44FF419A" Association="Self.FK__report__id_class__44FF419A">
+          <AssociationSet Name="FK__class__id_teache__403A8C7D" Association="Self.FK__class__id_teache__403A8C7D">
+            <End Role="teacher" EntitySet="teacher" />
+            <End Role="class" EntitySet="class" />
+          </AssociationSet>
+          <AssociationSet Name="FK__report__id_class__47DBAE45" Association="Self.FK__report__id_class__47DBAE45">
             <End Role="class" EntitySet="class" />
             <End Role="report" EntitySet="report" />
           </AssociationSet>
-          <AssociationSet Name="FK__users__id_teache__5CD6CB2B" Association="Self.FK__users__id_teache__5CD6CB2B">
+          <AssociationSet Name="FK__users__id_teache__4CA06362" Association="Self.FK__users__id_teache__4CA06362">
             <End Role="teacher" EntitySet="teacher" />
             <End Role="users" EntitySet="users" />
           </AssociationSet>
@@ -223,6 +240,8 @@
           <NavigationProperty Name="children" Relationship="Self.FK__children__id_cla__4222D4EF" FromRole="class" ToRole="children" />
           <NavigationProperty Name="grade" Relationship="Self.FK__class__id_grade__3D5E1FD2" FromRole="class" ToRole="grade" />
           <NavigationProperty Name="reports" Relationship="Self.FK__report__id_class__44FF419A" FromRole="class" ToRole="report" />
+          <Property Name="id_teacher" Type="Int32" />
+          <NavigationProperty Name="teacher" Relationship="kindergartenModel.FK__class__id_teache__403A8C7D" FromRole="class" ToRole="teacher" />
         </EntityType>
         <EntityType Name="condition">
           <Key>
@@ -363,6 +382,10 @@
             <End Role="teacher" EntitySet="teachers" />
             <End Role="user" EntitySet="users" />
           </AssociationSet>
+          <AssociationSet Name="FK__class__id_teache__403A8C7D" Association="kindergartenModel.FK__class__id_teache__403A8C7D">
+            <End Role="teacher" EntitySet="teachers" />
+            <End Role="class" EntitySet="classes" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="teacher">
           <Key>
@@ -371,6 +394,7 @@
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="name" Type="String" Nullable="false" MaxLength="1000" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="users" Relationship="kindergartenModel.FK__users__id_teache__4BAC3F29" FromRole="teacher" ToRole="user" />
+          <NavigationProperty Name="classes" Relationship="kindergartenModel.FK__class__id_teache__403A8C7D" FromRole="teacher" ToRole="class" />
         </EntityType>
         <EntityType Name="user">
           <Key>
@@ -391,6 +415,18 @@
               <PropertyRef Name="id" />
             </Principal>
             <Dependent Role="user">
+              <PropertyRef Name="id_teacher" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__class__id_teache__403A8C7D">
+          <End Type="kindergartenModel.teacher" Role="teacher" Multiplicity="0..1" />
+          <End Type="kindergartenModel.class" Role="class" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="teacher">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="class">
               <PropertyRef Name="id_teacher" />
             </Dependent>
           </ReferentialConstraint>
@@ -419,6 +455,7 @@
           <EntitySetMapping Name="classes">
             <EntityTypeMapping TypeName="kindergartenModel.class">
               <MappingFragment StoreEntitySet="class">
+                <ScalarProperty Name="id_teacher" ColumnName="id_teacher" />
                 <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="id_grade" ColumnName="id_grade" />
                 <ScalarProperty Name="name" ColumnName="name" />
