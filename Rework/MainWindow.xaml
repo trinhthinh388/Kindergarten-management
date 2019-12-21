@@ -8,6 +8,7 @@
         Dialog:DialogParticipation.Register="{Binding}"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:Rework"
+        xmlns:VM="clr-namespace:Rework.ViewModels"
         xmlns:content="clr-namespace:Rework.Content"
         mc:Ignorable="d"
         x:Name="MainWD"
@@ -51,8 +52,8 @@
 
     <Controls:MetroWindow.RightWindowCommands>
         <Controls:WindowCommands>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
-                <TextBlock FontSize="15" Text="Mr.Thinh"/>
+            <StackPanel  Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10">
+                <TextBlock x:Name="teacherNameTxb" FontSize="15" Text="{Binding TeacherName, UpdateSourceTrigger=PropertyChanged, Mode=OneWay}" />
             </StackPanel>
             <Button ToolTip="Settings" Cursor="Hand" Command="{Binding SettingsCommand}" CommandParameter="{Binding ElementName=MainTabControl}">
                 <materialDesign:PackIcon Kind="Settings"/>

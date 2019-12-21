@@ -24,7 +24,24 @@ namespace Rework.ViewModels
         private static string[] regulations = { "Class Size", "File Path" };
         private static string filePath;
         private static int classSize;
+        private string _fullName;
+        private string _username;
+        private static SettingViewModel _ins;
+        
 
+        public static SettingViewModel Ins
+        {
+            get
+            {
+                if (_ins == null)
+                    _ins = new SettingViewModel();
+                return _ins;
+            }
+            set
+            {
+                _ins = value;
+            }
+        }
         public static string FilePath
         {
             get
@@ -50,8 +67,10 @@ namespace Rework.ViewModels
         }
         public ICommand EditFilePathCommand { get; set; }
         public ICommand EditConditionsCommand { get; set; }
+        public string FullName { get => _fullName; set { _fullName = value; OnPropertyChange("FullName"); } }
+        public string Username { get => _username; set { _username = value; OnPropertyChange("Username"); } }
 
-        public SettingViewModel()
+        private SettingViewModel()
         {
             LoadData();
             EditConditionsCommand = new RelayCommand<UserControl>((p) => { return true; },
@@ -76,6 +95,7 @@ namespace Rework.ViewModels
                     }
 
                 });
+
         }
 
         public static void Init()
@@ -117,6 +137,13 @@ namespace Rework.ViewModels
                 return;
             classSize = DataProvider.Ins.DB.regulations.Where(x => x.content == "Class Size").ToArray()[0].ValueInt;
             filePath = DataProvider.Ins.DB.regulations.Where(x => x.content == "File Path").ToArray()[0].ValueStr;
+            user[] userCount = DataProvider.Ins.DB.users.Where(x => x.id == MainViewModel.Ins.Id).ToArray();
+            if(userCount.Length > 0)
+            {
+                int idTeacher = userCount[0].id_teacher;
+                SettingViewModel.Ins.Username = userCount[0].username;
+                SettingViewModel.Ins.FullName = DataProvider.Ins.DB.teachers.Where(x => x.id == idTeacher).ToArray()[0].name;
+            }
         }
 
         public static void SaveData()

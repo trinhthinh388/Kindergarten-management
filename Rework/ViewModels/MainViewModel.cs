@@ -15,7 +15,22 @@ namespace Rework.ViewModels
     public class MainViewModel : BaseViewModel
     {
         private static MainViewModel _ins;
+        private string _name;
+        private int _id;
         private IDialogCoordinator _dialogCoordinator;
+
+        public string TeacherName
+        {
+            get
+            {
+                return _name;
+            }
+            set
+            {
+                _name = value;
+                OnPropertyChange("TeacherName");
+            }
+        }
         public IDialogCoordinator dialogCoordinator
         {
             get
@@ -43,6 +58,7 @@ namespace Rework.ViewModels
 
         public ICommand SettingsCommand { get; set; }
         public ICommand LogOutCommand { get; set; }
+        public int Id { get => _id; set => _id = value; }
 
         private MainViewModel()
         {
@@ -57,6 +73,13 @@ namespace Rework.ViewModels
                 LogInViewModel.isLogin = false;
                 p.SelectedIndex = 0;
             });
+        }
+
+        public void LoadUserName(int idUser)
+        {
+            this.Id = idUser;
+            int idTeacher = DataProvider.Ins.DB.users.Where(x => x.id == idUser).ToArray()[0].id_teacher;
+            this.TeacherName = DataProvider.Ins.DB.teachers.Where(x => x.id == idTeacher).ToArray()[0].name;
         }
     }
 }

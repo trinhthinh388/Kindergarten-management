@@ -1,4 +1,5 @@
 ﻿using MahApps.Metro.Controls;
+using Rework.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -24,6 +25,7 @@ namespace Rework.Content
         public Settings()
         {
             InitializeComponent();
+            this.DataContext = SettingViewModel.Ins;
         }
 
         private void HamburgerMenuControl_OnItemInvoked(object sender, HamburgerMenuItemInvokedEventArgs e)

@@ -29,6 +29,7 @@ namespace Rework
         public MainWindow()
         {
             InitializeComponent();
+            
             this.DataContext = MainViewModel.Ins;
             MainViewModel.Ins.dialogCoordinator = DialogCoordinator.Instance;
             

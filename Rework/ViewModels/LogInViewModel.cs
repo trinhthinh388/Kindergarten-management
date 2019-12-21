@@ -83,12 +83,15 @@ namespace Rework.ViewModels
         private bool AuthUser(string username, string password)
         {
             int logInUser = DataProvider.Ins.DB.users.Where(x => x.username.Equals(username) && x.password.Equals(password)).ToArray().Count();
+            int idUser = DataProvider.Ins.DB.users.Where(x => x.username.Equals(username) && x.password.Equals(password)).ToArray()[0].id;
             if (logInUser == 0)
             {
                 return false;
             }
             else if(logInUser == 1)
             {
+                MainViewModel.Ins.LoadUserName(idUser);
+                SettingViewModel.LoadData();
                 return true;
             }
             else
