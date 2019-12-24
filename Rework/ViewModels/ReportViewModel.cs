@@ -43,7 +43,7 @@ namespace Rework.ViewModels
                 listReport = value;
             }
         }
-        public string FilPath
+        public string FilePath
         {
             get
             {
@@ -159,7 +159,15 @@ namespace Rework.ViewModels
                             await Application.Current.Dispatcher.Invoke(async () =>
                             {
                                 await controller.CloseAsync();
-                                await w.ShowMessageAsync("Hello!", "Exported successfully.", MessageDialogStyle.Affirmative, mySettings);
+                                MessageDialogResult result =  await w.ShowMessageAsync("Hello!", "The report has been generated. Would you like to open it?", MessageDialogStyle.AffirmativeAndNegative, mySettings2);
+
+                                if(result == MessageDialogResult.Affirmative)
+                                {
+                                    var excelApp = new Excel.Application();
+                                    excelApp.Visible = true;
+                                    Excel.Workbooks books = excelApp.Workbooks;
+                                    Excel.Workbook sheets = books.Open(this.FilePath);
+                                }
                                 
                                 DataProvider.Ins.DB.SaveChanges();
                                 LoadReportHistory();
