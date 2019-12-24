@@ -9,6 +9,8 @@ using MahApps.Metro.Controls.Dialogs;
 using System.Windows.Input;
 using System.Windows.Controls;
 using System.Windows;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace Rework.ViewModels
 {
@@ -17,7 +19,7 @@ namespace Rework.ViewModels
         private List<user> listUsers;
         private string username;
         private string password;
-        private string name;
+        private bool isValid;
 
         public static bool isLogin;
         public ICommand LogInCommand { get; set; }
@@ -51,7 +53,7 @@ namespace Rework.ViewModels
         public LogInViewModel()
         {
             isLogin = false;
-            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; }, (p) =>
+            PasswordChangedCommand = new RelayCommand<PasswordBox>((p) => { return true; },(p) =>
              {
                  password = p.Password;
              });
@@ -59,6 +61,7 @@ namespace Rework.ViewModels
                 async (p) =>
             {
                 var CurrentWindow = Application.Current.MainWindow as MetroWindow;
+                
                 var mySettings = new MetroDialogSettings()
                 {
                     AffirmativeButtonText = "Ok",
@@ -67,36 +70,44 @@ namespace Rework.ViewModels
                     ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
                 };
 
-                if(AuthUser(username, password))
-                {
-                    await CurrentWindow.ShowMessageAsync("Hello!", "Log in successfully.", MessageDialogStyle.Affirmative, mySettings);
-                    isLogin = true;
-                }
-                else
-                {
-                    await CurrentWindow.ShowMessageAsync("Hello!", "Wrong username or password.", MessageDialogStyle.Affirmative, mySettings);
-                }
+                await Task.Factory.StartNew(() => AuthUser(username, password, CurrentWindow, mySettings));
+                
+
             });
         }
 
 
-        private bool AuthUser(string username, string password)
+        private async void AuthUser(string username, string password, MetroWindow CurrentWindow, MetroDialogSettings mySettings)
         {
+
             int logInUser = DataProvider.Ins.DB.users.Where(x => x.username.Equals(username) && x.password.Equals(password)).ToArray().Count();
-            int idUser = DataProvider.Ins.DB.users.Where(x => x.username.Equals(username) && x.password.Equals(password)).ToArray()[0].id;
+            
             if (logInUser == 0)
             {
-                return false;
+                await Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Wrong username or password.", MessageDialogStyle.Affirmative, mySettings);
+                });
             }
             else if(logInUser == 1)
             {
-                MainViewModel.Ins.LoadUserName(idUser);
-                SettingViewModel.LoadData();
-                return true;
+                int idUser = DataProvider.Ins.DB.users.Where(x => x.username.Equals(username) && x.password.Equals(password)).ToArray()[0].id;
+                await Task.Factory.StartNew(() => { Console.WriteLine("Load Username"); MainViewModel.Ins.LoadUserName(idUser); });
+                await Task.Factory.StartNew( () => { Console.WriteLine("Load data"); SettingViewModel.LoadData(); });
+                await Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    Console.WriteLine("Loged in");
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Log in successfully.", MessageDialogStyle.Affirmative, mySettings);
+                    isLogin = true;
+                });
+                
             }
             else
             {
-                return false;
+                await Application.Current.Dispatcher.Invoke(async () =>
+                {
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Wrong username or password.", MessageDialogStyle.Affirmative, mySettings);
+                });
             }
         }
 

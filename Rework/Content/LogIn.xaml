@@ -48,7 +48,7 @@
                     </i:Interaction.Triggers>
                 </PasswordBox>
             </StackPanel>
-            <Button IsDefault="True" FontSize="15" Foreground="WhiteSmoke" BorderBrush="Transparent" BorderThickness="0" Grid.Row="4" Width="400" Height="50" Background="#FFFF842D" Content="Log in" Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=LogInUC}" />
+            <Button FontSize="15" Foreground="WhiteSmoke" BorderBrush="Transparent" BorderThickness="0" Grid.Row="4" Width="400" Height="50" Background="#FFFF842D" Content="Log in" Command="{Binding LogInCommand}" CommandParameter="{Binding ElementName=LogInUC}" Click="Button_Click" />
         </Grid>
     </Grid>
 </UserControl>

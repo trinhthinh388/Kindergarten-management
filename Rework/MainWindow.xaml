@@ -58,7 +58,7 @@
             <Button ToolTip="Settings" Cursor="Hand" Command="{Binding SettingsCommand}" CommandParameter="{Binding ElementName=MainTabControl}">
                 <materialDesign:PackIcon Kind="Settings"/>
             </Button>
-            <Button ToolTip="Log out" Cursor="Hand" Command="{Binding LogOutCommand}" CommandParameter="{Binding ElementName=MainTabControl}">
+            <Button ToolTip="Log out" Cursor="Hand" Command="{Binding LogOutCommand}" CommandParameter="{Binding ElementName=MainTabControl}" Click="Button_Click">
                 <materialDesign:PackIcon Kind="Logout"/>
             </Button>
         </Controls:WindowCommands>

@@ -86,6 +86,7 @@ namespace Rework.ViewModels
                 
                 newUser = new user();
                 newUser.id_teacher = DataProvider.Ins.DB.teachers.Add(newTeacher).id;
+                newUser.position = 1;
                 newUser.username = "admin";
                 newUser.password = "admin";
 

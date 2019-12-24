@@ -32,5 +32,21 @@ namespace Rework.Content
         {
             HamburgerMenuControl.Content = e.InvokedItem;
         }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            if(this.newPassBox.Password == this.confirmPassBox.Password && this.newPassBox.Password != "")
+            {
+                SettingViewModel.Ins.NewPassword = this.newPassBox.Password;
+                Console.WriteLine("match!");
+                this.newPassBox.Password = this.confirmPassBox.Password = "";
+            }
+            else
+            {
+                SettingViewModel.Ins.NewPassword = "The password is not match!! shit!!";
+            }
+        }
+
+
     }
 }
