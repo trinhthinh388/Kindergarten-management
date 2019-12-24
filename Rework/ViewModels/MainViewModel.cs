@@ -62,6 +62,7 @@ namespace Rework.ViewModels
 
         private MainViewModel()
         {
+            CreateAdminUser();
             SettingViewModel.Init();
             SettingsCommand = new RelayCommand<MetroAnimatedTabControl>((p)=> { return true; },
                 (p)=> 
@@ -73,6 +74,24 @@ namespace Rework.ViewModels
                 LogInViewModel.isLogin = false;
                 p.SelectedIndex = 0;
             });
+        }
+
+        private void CreateAdminUser()
+        {
+            user newUser = DataProvider.Ins.DB.users.Where(x => x.username == "admin").FirstOrDefault();
+            if (newUser == null)
+            {
+                teacher newTeacher = new teacher();
+                newTeacher.name = "admin";
+                
+                newUser = new user();
+                newUser.id_teacher = DataProvider.Ins.DB.teachers.Add(newTeacher).id;
+                newUser.username = "admin";
+                newUser.password = "admin";
+
+                DataProvider.Ins.DB.users.Add(newUser);
+                DataProvider.Ins.DB.SaveChanges();
+            }
         }
 
         public void LoadUserName(int idUser)

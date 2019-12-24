@@ -53,6 +53,7 @@ create table children(
 	birthdate datetime not null,
 	enrolldate datetime not null,
 	sex bit not null,
+	imageUrl nvarchar(1000),
 	id_condition int foreign key references condition(id),
 	id_parent int foreign key references parent(id) not null,
 	id_class int foreign key references class(id)
