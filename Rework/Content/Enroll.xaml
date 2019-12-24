@@ -175,18 +175,18 @@
                                     <Grid>
                                         <WrapPanel Width="400" HorizontalAlignment="Left">
                                             <TextBlock Text="Fullname: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="ChildrenTxtB" Text="{Binding ChildrenName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBox x:Name="ChildrenTxtB" Text="{Binding ChildrenName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Nickname: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="NickNameTxtB" Text="{Binding NickName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBox x:Name="NickNameTxtB" Text="{Binding NickName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Birthdate: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                            <DatePicker x:Name="BirthDatePicker" Focusable="False" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding BirthDate, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
-                                            <TextBlock Text="Sex: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                            <ComboBox Text="{Binding Sex, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0">
+                                            <DatePicker x:Name="BirthDatePicker" Focusable="True" SelectedDate="{x:Static sys:DateTime.Now}" Text="{Binding BirthDate, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBlock  Text="Sex: " Width="80" FontSize="16" VerticalAlignment="Center"/>
+                                            <ComboBox x:Name="SexCBB" Text="{Binding Sex, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0">
                                                 <ComboBoxItem Content="Male"/>
                                                 <ComboBoxItem Content="Female"/>
                                             </ComboBox>
                                             <TextBlock Text="Class: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                            <ComboBox ItemsSource="{Binding AvailableClasses}" x:Name="ClassCb" Text="{Binding ClassName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0"/>
+                                            <ComboBox x:Name="ClassNameCBB" ItemsSource="{Binding AvailableClasses}" Text="{Binding ClassName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0"/>
                                             <Button Command="" x:Uid="1" IsDefault="True" Width="100" Height="30" Margin="280 30 0 0" Content="Next" Style="{DynamicResource AccentedSquareButtonStyle}" Click="Button_Click"/>
                                         </WrapPanel>
                                     </Grid>
@@ -199,13 +199,13 @@
                                     <Grid>
                                         <WrapPanel Width="500" HorizontalAlignment="Left">
                                             <TextBlock Text="Mother's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Mothertxb" Text="{Binding MotherName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBox x:Name="Mothertxb" Text="{Binding MotherName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Father's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Fathertxb" Text="{Binding FatherName, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBox x:Name="Fathertxb" Text="{Binding FatherName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Address: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Addresstxb" Text="{Binding Address, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBox x:Name="Addresstxb" Text="{Binding Address, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <TextBlock Text="Phone number: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                            <TextBox x:Name="Phonetxb" Text="{Binding PhoneNumber, Mode=OneWayToSource}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                            <TextBox x:Name="Phonetxb" Text="{Binding PhoneNumber, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             <Button x:Uid="2" IsDefault="True" Width="100" Height="30" Margin="320 30 0 0" Content="Next" Style="{DynamicResource AccentedSquareButtonStyle}" Click="Button_Click"/>
                                         </WrapPanel>
                                     </Grid>
@@ -225,28 +225,28 @@
                                             <TextBlock Text="Children" FontWeight="DemiBold" HorizontalAlignment="Left" FontSize="20" Margin="0 5 0 5" Width="300"/>
                                             <WrapPanel Width="450" HorizontalAlignment="Left">
                                                 <TextBlock Text="Fullname: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding ChildrenName, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference ChildrenTxtB}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Nickname: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding NickName, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference NickNameTxtB}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Birthdate: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding BirthDate, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference BirthDatePicker}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Sex: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding Sex, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference SexCBB}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Class: " Width="80" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding ClassName, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference ClassNameCBB}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                             </WrapPanel>
                                         </StackPanel>
                                         <StackPanel Grid.Row="1">
                                             <TextBlock Text="Parent" FontWeight="DemiBold" HorizontalAlignment="Left" FontSize="20" Margin="0 5 0 5" Width="300"/>
                                             <WrapPanel Width="450" HorizontalAlignment="Left">
                                                 <TextBlock Text="Mother's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding MotherName, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference Mothertxb}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Father's name: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding FatherName, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference Fathertxb}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Address: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Foreground="GhostWhite" Text="{Binding Address, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Foreground="GhostWhite" Text="{Binding Source={x:Reference Addresstxb}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
                                                 <TextBlock Text="Phone number: " Width="120" FontSize="16" VerticalAlignment="Center"/>
-                                                <TextBlock Text="{Binding PhoneNumber, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>
+                                                <TextBlock Text="{Binding Source={x:Reference Phonetxb}, Path=Text, Mode=OneWay}" Margin="0 5 0 5" Width="300" FontSize="16" />
                                                 <Button x:Uid="3" IsDefault="True" Command="{Binding EnrollCommand}" CommandParameter="{Binding ElementName=EnrollUC}" Width="100" Height="30" Margin="320 30 0 0" Content="Enroll" Style="{DynamicResource AccentedSquareButtonStyle}"/>
                                             </WrapPanel>
                                         </StackPanel>

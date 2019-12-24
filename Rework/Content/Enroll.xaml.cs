@@ -25,6 +25,7 @@ namespace Rework.Content
     /// </summary>
     public partial class Enroll : UserControl
     {
+
         public Enroll()
         {
             InitializeComponent();
@@ -72,6 +73,19 @@ namespace Rework.Content
                 HamburgerMenuControl.SelectedIndex = 2;
                 HamburgerMenuControl.Content = FinishSection;
             }
+        }
+
+        public void ResetData()
+        {
+            ChildrenTxtB.Text = "";
+            NickNameTxtB.Text = "";
+            SexCBB.Text = "";
+            ClassNameCBB.Text = "";
+            Mothertxb.Text = "";
+            Fathertxb.Text = "";
+            Addresstxb.Text = "";
+            Phonetxb.Text = "";
+            BirthDatePicker.Text = DateTime.Now.ToString();
         }
     }
 }

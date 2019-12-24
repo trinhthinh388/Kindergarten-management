@@ -3,15 +3,11 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.IO;
 using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Threading;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
 using Rework.Models;
@@ -42,7 +38,7 @@ namespace Rework.ViewModels
         private bool _sex;
 
 
-        public String ChildrenName
+        public string ChildrenName
         {
             get
             {
@@ -50,12 +46,12 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _childrenName = value;
                 OnPropertyChange("ChildrenName");
             }
         }
-        public String NickName
+        public string NickName
         {
             get
             {
@@ -63,12 +59,12 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _nickName = value;
                 OnPropertyChange("NickName");
             }
         }
-        public String BirthDate
+        public string BirthDate
         {
             get
             {
@@ -76,12 +72,12 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
-                    _birthDate = Convert.ToDateTime(value);
+                if (!DateTime.TryParse(value, out _birthDate))
+                    return;
                 OnPropertyChange("BirthDate");
             }
         }
-        public String EnrollDate
+        public string EnrollDate
         {
             get
             {
@@ -89,12 +85,12 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _enrollDate = Convert.ToDateTime(value);
                 OnPropertyChange("EnrollDate");
             }
         }
-        public String Sex
+        public string Sex
         {
             get
             {
@@ -102,7 +98,7 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _sex = (value == "Male") ? true : false;
                 OnPropertyChange("Sex");
             }
@@ -126,7 +122,7 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _motherName = value;
                 OnPropertyChange("MotherName");
             }
@@ -139,7 +135,7 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _fatherName = value;
                 OnPropertyChange("FatherName");
             }
@@ -152,9 +148,9 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _address = value;
-                OnPropertyChange("Addresss");
+                OnPropertyChange("Address");
             }
         }
         public string PhoneNumber
@@ -165,7 +161,7 @@ namespace Rework.ViewModels
             }
             set
             {
-                if (value != "")
+                
                     _phoneNumber = value;
                 OnPropertyChange("PhoneNumber");
             }
@@ -188,6 +184,7 @@ namespace Rework.ViewModels
 
         public EnrollViewModel()
         {
+            this.BirthDate = DateTime.Now.ToString();
             LoadClasses();
             EnrollCommand = new RelayCommand<UserControl>((p) => { return true; },
                 async (p) =>
@@ -221,11 +218,27 @@ namespace Rework.ViewModels
                     if (_className == "")
                     {
                         await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blanks.", MessageDialogStyle.Affirmative, mySettings);
+                        
                         return;
                     }
 
                     await Task.Factory.StartNew(()=>CheckingAndAdding(addingParent, addingChild, CurrentWindow, mySettings));
+                    
+                    this.Address = null;
                 });
+        }
+
+        public void ResetData()
+        {
+            this.ChildrenName = "";
+            this.NickName = "";
+            this.BirthDate = DateTime.Now.ToString();
+            this.Sex = "Male";
+            this.ClassName = "";
+            this.MotherName = "";
+            this.FatherName = "";
+            this.Address = "";
+            this.PhoneNumber = "";
         }
 
 
@@ -265,6 +278,7 @@ namespace Rework.ViewModels
                     ManageChildrenViewModel.Ins.LoadData();
                     LoadClasses();
                     ParentViewModel.LoadData();
+                    this.ResetData();
                 });
             }
         }
