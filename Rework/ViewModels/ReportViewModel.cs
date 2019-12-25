@@ -121,7 +121,7 @@ namespace Rework.ViewModels
                         }
                     }
 
-                    await Task.Factory.StartNew(async ()=> 
+                    await Task.Factory.StartNew(async ()=>
                     {
                         var controller = await MainViewModel.Ins.dialogCoordinator.ShowProgressAsync(MainViewModel.Ins, "Processing", "Proceessing all the things, please wait.");
                         controller.SetIndeterminate();
@@ -132,7 +132,6 @@ namespace Rework.ViewModels
                                  where f.name == selectedClass
                                  select d
                                     ).ToList();
-
                         foreach (child c in query)
                         {
                             ChildrenReport temp = new ChildrenReport();

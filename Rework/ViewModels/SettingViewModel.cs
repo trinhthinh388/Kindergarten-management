@@ -29,8 +29,38 @@ namespace Rework.ViewModels
         private string _newPassword;
         private bool _userAccessible;
         private static SettingViewModel _ins;
+        private string selectedTeacher;
+        private List<string> _listTeacher;
+        private string _newUsername;
+        private string _newTeacherName;
+        private int _newPos;
         
 
+        public string SelectedTeacher
+        {
+            get
+            {
+                return this.selectedTeacher;
+            }
+            set
+            {
+                this.selectedTeacher = value;
+            }
+        }
+        public List<string> ListTeacher
+        {
+            get
+            {
+                return this._listTeacher;
+            }
+            set
+            {
+                if (_listTeacher == null)
+                    _listTeacher = new List<string>();
+                this._listTeacher = value;
+                OnPropertyChange("ListTeacher");
+            }
+        }
         public bool UserAccessible
         {
             get
@@ -94,12 +124,72 @@ namespace Rework.ViewModels
         public ICommand UpdateProfileCommand { get; set; }
         public ICommand EditFilePathCommand { get; set; }
         public ICommand EditConditionsCommand { get; set; }
+        public ICommand ResetPassCommand { get; set; }
+        public ICommand CreateAccountCommand { get; set; }
         public string FullName { get => _fullName; set { _fullName = value; OnPropertyChange("FullName"); } }
         public string Username { get => _username; set { _username = value; OnPropertyChange("Username"); } }
+
+        public string NewUsername { get => _newUsername; set { _newUsername = value; OnPropertyChange("NewUserName"); } }
+        public string NewTeacherName { get => _newTeacherName; set { _newTeacherName = value; OnPropertyChange("NewTeacherName"); }}
+        public int NewPos { get => _newPos; set { _newPos = value; OnPropertyChange("NewPos"); } }
 
         private SettingViewModel()
         {
             LoadData();
+            GetListTeacher();
+            CreateAccountCommand = new RelayCommand<UserControl>((p) => true,async (p) => {
+                var CurrentWindow = Application.Current.MainWindow as MetroWindow;
+                var mySettings = new MetroDialogSettings()
+                {
+                    AffirmativeButtonText = "Ok",
+                    NegativeButtonText = "No",
+                    FirstAuxiliaryButtonText = "Ok",
+                    ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
+                };
+                teacher newT = new teacher();
+                newT.name = this.NewTeacherName;
+
+                if (this.NewTeacherName == "" || this.NewTeacherName == null || this.NewUsername == "" || this.NewUsername == null)
+                {
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Please fill in every blank.", MessageDialogStyle.Affirmative, mySettings);
+                    return;
+                }
+
+                user newU = DataProvider.Ins.DB.users.Where(x => x.username == this.NewUsername).FirstOrDefault();
+                if(newU != null)
+                {
+                    await CurrentWindow.ShowMessageAsync("Hello!", "This username has been taken.", MessageDialogStyle.Affirmative, mySettings);
+                    return;
+                }
+
+                newU = new user();
+                newU.id_teacher = DataProvider.Ins.DB.teachers.Add(newT).id;
+                newU.username = this.NewUsername;
+                newU.password = "123";
+                newU.position = this.NewPos;
+                DataProvider.Ins.DB.users.Add(newU);
+                DataProvider.Ins.DB.SaveChanges();
+                await CurrentWindow.ShowMessageAsync("Hello!", "The new account has been created with the default password is 123.", MessageDialogStyle.Affirmative, mySettings);
+                this.NewTeacherName = "";
+                this.NewUsername = "";
+            });
+            ResetPassCommand = new RelayCommand<UserControl>((p) => true,async (p)=> {
+                var CurrentWindow = Application.Current.MainWindow as MetroWindow;
+                var mySettings = new MetroDialogSettings()
+                {
+                    AffirmativeButtonText = "Ok",
+                    NegativeButtonText = "No",
+                    FirstAuxiliaryButtonText = "Ok",
+                    ColorScheme = CurrentWindow.MetroDialogOptions.ColorScheme
+                };
+                user st = DataProvider.Ins.DB.users.Where(x => x.username == this.SelectedTeacher).FirstOrDefault();
+                if(st != null)
+                {
+                    st.password = "123";
+                    await DataProvider.Ins.DB.SaveChangesAsync();
+                    await CurrentWindow.ShowMessageAsync("Hello!", "The password has been reseted.", MessageDialogStyle.Affirmative, mySettings);
+                }
+            });
             UpdateProfileCommand = new RelayCommand<UserControl>((p) => true, 
                 async (p) => 
                 {
@@ -221,6 +311,18 @@ namespace Rework.ViewModels
             g.ValueInt = classSize;
             DataProvider.Ins.DB.SaveChanges();
             EnrollViewModel.LoadClasses();
+        }
+
+        public void GetListTeacher()
+        {
+            if (ListTeacher == null)
+                ListTeacher = new List<string>();
+            else
+                ListTeacher.Clear();
+            foreach(user t in DataProvider.Ins.DB.users.ToArray())
+            {
+                this.ListTeacher.Add(t.username);
+            }
         }
     }
 }

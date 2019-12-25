@@ -162,6 +162,7 @@
                                     ItemTemplate="{StaticResource MenuItemTemplate}"
                                     OptionsItemTemplate="{StaticResource MenuItemTemplate}"
                                     SelectedIndex="0"
+                                    Controls:ScrollViewerHelper.IsHorizontalScrollWheelEnabled="True"
                                     Style="{StaticResource HamburgerMenuCreatorsStyle}"
                                     VerticalScrollBarOnLeftSide="False">
                 <!--  Items  -->
@@ -206,6 +207,8 @@
                           GridLinesVisibility="Horizontal"
                           CanUserResizeColumns="False"
                           CanUserResizeRows="False"
+                                                      ScrollViewer.CanContentScroll="True"
+                                                      
                           HorizontalAlignment="Center"
                                                       IsReadOnly="True"
                           Style="{DynamicResource AzureDataGrid}"
