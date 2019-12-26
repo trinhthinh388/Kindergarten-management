@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Data;
 using System.Data.Entity;
+using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +14,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Rework.ViewModels
 {
@@ -53,7 +56,7 @@ namespace Rework.ViewModels
 
         public ManageChildrenViewModel()
         {
-            SearchCommand = new RelayCommand<String>((p)=> { return true; },
+            SearchCommand = new RelayCommand<string>((p)=> { return true; },
                 (p)=> 
                 {
                     if (p == null)
@@ -122,6 +125,7 @@ namespace Rework.ViewModels
                 x.ClassName = kid.@class.name;
                 x.FatherName = kid.parent.FatherName;
                 x.MotherName = kid.parent.Mothername;
+                x.ImageURL = kid.imageUrl;
                 this._listChildren.Add(x);
             }
         }
@@ -138,6 +142,7 @@ namespace Rework.ViewModels
                 x.ClassName = "HHH";
                 x.FatherName = kid.parent.FatherName;
                 x.MotherName = kid.parent.Mothername;
+                x.ImageURL = kid.imageUrl;
                 this._listChildren.Add(x);
             }
         }
@@ -146,12 +151,12 @@ namespace Rework.ViewModels
         {
 
             private int _id;
-            private String _name;
-            private String _sex;
-            private String _className;
-
-            private String _fatherName;
-            private String _motherName;
+            private string _name;
+            private string _sex;
+            private string _className;
+            private string _imageURl;
+            private string _fatherName;
+            private string _motherName;
 
             public int id
             {
@@ -165,7 +170,7 @@ namespace Rework.ViewModels
                     OnPropertyChange("id");
                 }
             }
-            public String Name
+            public string Name
             {
                 get
                 {
@@ -177,7 +182,7 @@ namespace Rework.ViewModels
                     OnPropertyChange("Name");
                 }
             }
-            public String Sex
+            public string Sex
             {
                 get
                 {
@@ -189,7 +194,7 @@ namespace Rework.ViewModels
                     OnPropertyChange("Sex");
                 }
             }
-            public String ClassName
+            public string ClassName
             {
                 get
                 {
@@ -201,7 +206,7 @@ namespace Rework.ViewModels
                     OnPropertyChange("ClassName");
                 }
             }
-            public String FatherName
+            public string FatherName
             {
                 get
                 {
@@ -213,7 +218,7 @@ namespace Rework.ViewModels
                     OnPropertyChange("FatherName");
                 }
             }
-            public String MotherName
+            public string MotherName
             {
                 get
                 {
@@ -225,8 +230,21 @@ namespace Rework.ViewModels
                     OnPropertyChange("MotherName");
                 }
             }
+            public string ImageURL
+            {
+                get
+                {
+                    return this._imageURl;
+                }
+                set
+                {
+                    this._imageURl = value;
+                    OnPropertyChange("ImageURL");
+                }
+            }
             public ChildrenData()
-            {}
+            { 
+            }
         }
     }
 }

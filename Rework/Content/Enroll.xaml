@@ -187,6 +187,9 @@
                                             </ComboBox>
                                             <TextBlock Text="Class: " Width="80" FontSize="16" VerticalAlignment="Center"/>
                                             <ComboBox x:Name="ClassNameCBB" ItemsSource="{Binding AvailableClasses}" Text="{Binding ClassName, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="300" FontSize="16" SelectedIndex="0"/>
+                                            <TextBlock Text="Picture: " Width="80" FontSize="16" VerticalAlignment="Center"/>
+                                            <TextBox x:Name="ImageURLTxtB" Text="{Binding ImageURL, UpdateSourceTrigger=PropertyChanged}" Margin="0 5 0 5" Width="240" FontSize="16"/>
+                                            <Button Command="{Binding BrowseCommand}" CommandParameter="{Binding ElementName=EnrollUC}" x:Uid="1" Width="60" Height="29" Content="Browse" Style="{DynamicResource AccentedSquareButtonStyle}"/>
                                             <Button Command="" x:Uid="1" IsDefault="True" Width="100" Height="30" Margin="280 30 0 0" Content="Next" Style="{DynamicResource AccentedSquareButtonStyle}" Click="Button_Click"/>
                                         </WrapPanel>
                                     </Grid>

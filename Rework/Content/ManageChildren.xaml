@@ -101,6 +101,7 @@
                 BorderBrush="{DynamicResource GrayBrush7}"
                 BorderThickness="1">
             <StackPanel Orientation="Vertical">
+                
                 <TextBlock Text="Manage Children" HorizontalAlignment="Left" FontSize="35" Margin="10 0 0 0" FontWeight="Light"/>
                 <TextBox Margin="0 20 0 20"
                          Width="500"
@@ -127,7 +128,7 @@
                 </TextBox>
 
                 <DataGrid x:Name="MetroDataGrid"
-                          Width="800"
+                          Width="900"
                           FontSize="15"
                           IsReadOnly="True"
                           HeadersVisibility="Column"
@@ -156,6 +157,13 @@
                                         <Button Content="Edit" Margin="10 5 10 5" Click="Button_Click" Tag="{Binding id}"/>
                                         <Button Content="Delete" Background="#FFEB2F2F" Margin="10 5 10 5" Command="{Binding Path=DataContext.DeleteCommand, RelativeSource= {RelativeSource FindAncestor, AncestorType={x:Type DataGrid}}}" CommandParameter="{Binding id}"/>
                                     </StackPanel>
+                                </DataTemplate>
+                            </DataGridTemplateColumn.CellTemplate>
+                        </DataGridTemplateColumn>
+                        <DataGridTemplateColumn x:Name="ImageTemplate" Width="80">
+                            <DataGridTemplateColumn.CellTemplate>
+                                <DataTemplate>
+                                    <Image Width="50" Height="50" Source="{Binding ImageURL}"/>
                                 </DataTemplate>
                             </DataGridTemplateColumn.CellTemplate>
                         </DataGridTemplateColumn>

@@ -10,6 +10,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Rework.Models;
 
 namespace Rework.ViewModels
@@ -17,6 +19,7 @@ namespace Rework.ViewModels
     public class EnrollViewModel : BaseViewModel
     {
         public ICommand EnrollCommand { get; set; }
+        public ICommand BrowseCommand { get; set; }
         private static ObservableCollection<string> _classes;
 
         public static ObservableCollection<string> AvailableClasses
@@ -35,9 +38,21 @@ namespace Rework.ViewModels
         private string _nickName;
         private DateTime _birthDate;
         private DateTime _enrollDate;
+        private string _imageURL;
         private bool _sex;
 
-
+        public string ImageURL
+        {
+            get
+            {
+                return this._imageURL;
+            }
+            set
+            {
+                this._imageURL = value;
+                OnPropertyChange("ImageURL");
+            }
+        }
         public string ChildrenName
         {
             get
@@ -186,6 +201,20 @@ namespace Rework.ViewModels
         {
             this.BirthDate = DateTime.Now.ToString();
             LoadClasses();
+            BrowseCommand = new RelayCommand<UserControl>((p) => true, (p) =>
+            {
+                var dlg = new OpenFileDialog();
+                dlg.Title = "Choose profile picture";
+                dlg.InitialDirectory = "";
+                dlg.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+        "Portable Network Graphic (*.png)|*.png";
+                dlg.Multiselect = false;
+                if (dlg.ShowDialog() == true)
+                {
+                    this.ImageURL = dlg.FileName;
+                }
+            });
             EnrollCommand = new RelayCommand<UserControl>((p) => { return true; },
                 async (p) =>
                 {
@@ -206,6 +235,7 @@ namespace Rework.ViewModels
                     addingChild.name = this._childrenName;
                     addingChild.nickname = this._nickName;
                     addingChild.sex = this._sex;
+                    addingChild.imageUrl = this.ImageURL;
                     addingChild.birthdate = this._birthDate;
                     addingChild.enrolldate = DateTime.Now;
 
@@ -235,6 +265,7 @@ namespace Rework.ViewModels
             this.BirthDate = DateTime.Now.ToString();
             this.Sex = "Male";
             this.ClassName = "";
+            this.ImageURL = "";
             this.MotherName = "";
             this.FatherName = "";
             this.Address = "";
@@ -274,7 +305,7 @@ namespace Rework.ViewModels
                 await Application.Current.Dispatcher.Invoke(async () =>
                 {
                     await controller.CloseAsync();
-                    await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled Successfully.", MessageDialogStyle.Affirmative, mySettings);
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Enrolled success.", MessageDialogStyle.Affirmative, mySettings);
                     ManageChildrenViewModel.Ins.LoadData();
                     LoadClasses();
                     ParentViewModel.LoadData();

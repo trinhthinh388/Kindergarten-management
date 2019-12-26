@@ -1,5 +1,7 @@
 ﻿using MahApps.Metro.Controls;
 using MahApps.Metro.Controls.Dialogs;
+using Microsoft.Win32;
+using Microsoft.WindowsAPICodePack.Dialogs;
 using Rework.Models;
 using System;
 using System.Collections.Generic;
@@ -51,7 +53,21 @@ namespace Rework.ViewModels
         private bool _sex;
         private string selectedClass;
         private string selectedCondition;
+        private string _imageURL;
 
+
+        public string ImageURL
+        {
+            get
+            {
+                return this._imageURL;
+            }
+            set
+            {
+                this._imageURL = value;
+                OnPropertyChange("ImageURL");
+            }
+        }
         public string SelectedClass
         {
             get
@@ -205,6 +221,7 @@ namespace Rework.ViewModels
         #endregion 
 
         public ICommand SaveCommand { get; set; }
+        public ICommand UploadImageCommand { get; set; }
 
         private EditChildren Window;
 
@@ -212,6 +229,20 @@ namespace Rework.ViewModels
         {
             LoadClasses();
             LoadConditions();
+            UploadImageCommand = new RelayCommand<object>((p)=>true, (p)=>
+            {
+                var dlg = new OpenFileDialog();
+                dlg.Title = "Choose profile picture";
+                dlg.InitialDirectory = "";
+                dlg.Filter = "All supported graphics|*.jpg;*.jpeg;*.png|" +
+        "JPEG (*.jpg;*.jpeg)|*.jpg;*.jpeg|" +
+        "Portable Network Graphic (*.png)|*.png";
+                dlg.Multiselect = false;
+                if (dlg.ShowDialog() == true)
+                {
+                    this.ImageURL = dlg.FileName;
+                }
+            });
             SaveCommand = new RelayCommand<object>((p)=> { return true; },
                 async (p)=> 
                 {
@@ -226,12 +257,14 @@ namespace Rework.ViewModels
                     Child.sex = this._sex;
                     Child.birthdate = this._birthDate;
                     Child.nickname = this._nickName;
+                    Child.imageUrl = this.ImageURL;
                     Child.id_class = DataProvider.Ins.DB.classes.Where(x => x.name == selectedClass).ToArray()[0].id;
-                    Child.id_condition = DataProvider.Ins.DB.conditions.Where(x => x.name == selectedCondition).ToArray()[0].id;
+                    if(DataProvider.Ins.DB.conditions.Where(x => x.name == selectedCondition).FirstOrDefault() != null)
+                        Child.id_condition = DataProvider.Ins.DB.conditions.Where(x => x.name == selectedCondition).FirstOrDefault().id;
                     DataProvider.Ins.DB.SaveChanges();
                     ManageChildrenViewModel.Ins.LoadData();
                     EnrollViewModel.LoadClasses();
-                    await Window.ShowMessageAsync("Hello!", "Saved changes successfully.", MessageDialogStyle.Affirmative, mySettings);
+                    await Window.ShowMessageAsync("Hello!", "Save changes success.", MessageDialogStyle.Affirmative, mySettings);
                     Window.Close();
                 });
 
@@ -254,6 +287,7 @@ namespace Rework.ViewModels
             this._nickName = Child.nickname;
             this._birthDate = Child.birthdate;
             this._sex = Child.sex;
+            this.ImageURL = Child.imageUrl;
             this._motherName = Child.parent.Mothername;
             this._fatherName = Child.parent.FatherName;
             if(DataProvider.Ins.DB.conditions.Where(x => x.id == Child.id_condition).Count() > 0)

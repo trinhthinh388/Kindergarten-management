@@ -23,6 +23,7 @@ namespace Rework.Models
         public Nullable<int> id_condition { get; set; }
         public int id_parent { get; set; }
         public Nullable<int> id_class { get; set; }
+        public string imageUrl { get; set; }
     
         public virtual @class @class { get; set; }
         public virtual condition condition { get; set; }

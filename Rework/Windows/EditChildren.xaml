@@ -12,7 +12,7 @@
         WindowStartupLocation="CenterScreen"
         ResizeMode="NoResize"
         mc:Ignorable="d"
-        Height="500" Width="500">
+        Height="600" Width="500">
     <Controls:MetroWindow.IconTemplate>
         <DataTemplate>
             <materialDesign:PackIcon Width="{TemplateBinding Width}"
@@ -30,6 +30,22 @@
         </Grid.RowDefinitions>
         <StackPanel Grid.Row="0">
             <TextBlock Text="Children" FontWeight="DemiBold" FontSize="20"/>
+            <Button Command="{Binding UploadImageCommand}" CommandParameter="{Binding ElementName=EditChildrenWindow}" Margin="20" Width="100" Height="100" Background="Transparent">
+                <Image ToolTip="Click to edit the profile picture" Width="100" Height="100" Source="{Binding ImageURL}">
+                    <Image.Style>
+                        <Style TargetType="Image">
+                            <Setter Property="Opacity" Value="1"/>
+                            <Style.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Opacity" Value=".3"/>
+                                    <Setter Property="Cursor" Value="Hand"/>
+                                </Trigger>
+                            </Style.Triggers>
+                        </Style>
+                    </Image.Style>
+                </Image>
+            </Button>
+            
             <WrapPanel Width="500" HorizontalAlignment="Left">
                 <TextBlock Text="Fullname: " Width="120" FontSize="16" VerticalAlignment="Center"/>
                 <TextBox x:Name="ChildrenTxtB" Text="{Binding ChildrenName, Mode=TwoWay}" Margin="0 5 0 5" Width="300" FontSize="16"/>

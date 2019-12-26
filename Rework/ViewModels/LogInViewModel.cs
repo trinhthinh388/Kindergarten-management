@@ -97,7 +97,7 @@ namespace Rework.ViewModels
                 await Application.Current.Dispatcher.Invoke(async () =>
                 {
                     Console.WriteLine("Loged in");
-                    await CurrentWindow.ShowMessageAsync("Hello!", "Log in successfully.", MessageDialogStyle.Affirmative, mySettings);
+                    await CurrentWindow.ShowMessageAsync("Hello!", "Log in success.", MessageDialogStyle.Affirmative, mySettings);
                     isLogin = true;
                 });
                 
