@@ -123,9 +123,20 @@ namespace Rework.ViewModels
 
                     await Task.Factory.StartNew(async ()=>
                     {
+                        if (DataProvider.Ins.DB.classes.Where(x => x.name == selectedClass).FirstOrDefault() == null)
+                        {
+                            await Application.Current.Dispatcher.Invoke( async () =>
+                            {
+                                await w.ShowMessageAsync("Hello!", "The class doesn't exist.", MessageDialogStyle.Affirmative, mySettings);
+                            });
+                            return;
+                        }
+
+
                         var controller = await MainViewModel.Ins.dialogCoordinator.ShowProgressAsync(MainViewModel.Ins, "Processing", "Proceessing all the things, please wait.");
                         controller.SetIndeterminate();
-                        int Id_class = DataProvider.Ins.DB.classes.Where(x => x.name == selectedClass).ToArray()[0].id;
+                        
+                        int Id_class = DataProvider.Ins.DB.classes.Where(x => x.name == selectedClass).FirstOrDefault().id;
                         query = (from d in DataProvider.Ins.DB.children
                                  join s in DataProvider.Ins.DB.conditions on d.id_condition equals s.id
                                  join f in DataProvider.Ins.DB.classes on d.id_class equals f.id
@@ -162,8 +173,10 @@ namespace Rework.ViewModels
 
                                 if(result == MessageDialogResult.Affirmative)
                                 {
-                                    var excelApp = new Excel.Application();
-                                    excelApp.Visible = true;
+                                    var excelApp = new Excel.Application
+                                    {
+                                        Visible = true
+                                    };
                                     Excel.Workbooks books = excelApp.Workbooks;
                                     Excel.Workbook sheets = books.Open(this.FilePath);
                                 }
