@@ -89,8 +89,13 @@ namespace Rework.ViewModels
                     @class EditingClass = DataProvider.Ins.DB.classes.Where(x => x.id == w.Id).ToArray()[0];
                     EditingClass.name = _className;
                     EditingClass.id_grade = DataProvider.Ins.DB.grades.Where(x => x.name == _gradeName).ToArray()[0].id;
+                    if(DataProvider.Ins.DB.classes.Where(x => x.name == EditingClass.name && x.id_grade == EditingClass.id_grade).FirstOrDefault() != null)
+                    {
+                        await w.ShowMessageAsync("Hello!", "The class is exist.", MessageDialogStyle.Affirmative, mySettings);
+                        return;
+                    }
                     DataProvider.Ins.DB.SaveChanges();
-                    await w.ShowMessageAsync("Hello!", "Saved successfully.", MessageDialogStyle.Affirmative, mySettings);
+                    await w.ShowMessageAsync("Hello!", "Saved success.", MessageDialogStyle.Affirmative, mySettings);
                     LoadData();
                     EnrollViewModel.LoadClasses();
                     w.Close();
