@@ -172,6 +172,7 @@ namespace Rework.ViewModels
                 await CurrentWindow.ShowMessageAsync("Hello!", "The new account has been created with the default password is 123.", MessageDialogStyle.Affirmative, mySettings);
                 this.NewTeacherName = "";
                 this.NewUsername = "";
+                this.GetListTeacher();
             });
             ResetPassCommand = new RelayCommand<UserControl>((p) => true,async (p)=> {
                 var CurrentWindow = Application.Current.MainWindow as MetroWindow;

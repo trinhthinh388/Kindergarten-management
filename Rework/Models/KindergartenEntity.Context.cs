@@ -34,5 +34,6 @@ namespace Rework.Models
         public virtual DbSet<report> reports { get; set; }
         public virtual DbSet<teacher> teachers { get; set; }
         public virtual DbSet<user> users { get; set; }
+        public virtual DbSet<sysdiagram> sysdiagrams { get; set; }
     }
 }

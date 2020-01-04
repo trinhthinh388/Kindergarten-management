@@ -36,7 +36,7 @@ namespace Rework.Content
             ColumnTemplate.DisplayIndex = grid.Columns.Count - 1;
             grid.Columns[1].DisplayIndex = 1;
             grid.Columns[1].Header = "Picture";
-            grid.Columns[3].Width = 70;
+            grid.Columns[3].Width = 150;
             grid.Columns[4].Width = 100;
             grid.Columns[8].Visibility = Visibility.Collapsed;
         }

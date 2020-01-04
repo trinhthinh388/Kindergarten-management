@@ -199,6 +199,9 @@
     <Compile Include="Models\report.cs">
       <DependentUpon>KindergartenEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\sysdiagram.cs">
+      <DependentUpon>KindergartenEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\teacher.cs">
       <DependentUpon>KindergartenEntity.tt</DependentUpon>
     </Compile>

@@ -21,6 +21,7 @@
         <EntityTypeShape EntityType="kindergartenModel.user" Width="1.5" PointX="11.625" PointY="4.25" />
         <AssociationConnector Association="kindergartenModel.FK__users__id_teache__4BAC3F29" />
         <AssociationConnector Association="kindergartenModel.FK__class__id_teache__403A8C7D" />
+        <EntityTypeShape EntityType="kindergartenModel.sysdiagram" Width="1.5" PointX="3.375" PointY="0.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
